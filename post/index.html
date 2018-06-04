@@ -5,7 +5,10 @@
   <meta charset="utf-8" />
 
   
-  <title>aliasmee Blog</title>
+  <title>
+  Posts
+   | aliasmee Blog
+</title>
 
   
   
@@ -16,20 +19,22 @@
 
   
   <meta name="author" content="aliasmee" />
-  <meta name="description" content="Simple,Hard,Life" />
+  <meta name="description" content="" />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@aliasmeee" />
-  <meta name="twitter:title" content="aliasmee Blog" />
-  <meta name="twitter:description" content="Simple,Hard,Life" />
-  <meta name="twitter:image" content="http://aliasmee.github.io/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="Posts" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image" content="http://aliasmee.github.io/img/avatar.jpg" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="aliasmee Blog" />
-  <meta property="og:description" content="Simple,Hard,Life" />
-  <meta property="og:url" content="http://aliasmee.github.io/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Posts" />
+  <meta property="og:description" content="" />
+  <meta property="og:url" content="http://aliasmee.github.io/post/" />
   <meta property="og:image" content="http://aliasmee.github.io/img/avatar.jpg" />
 
 
@@ -38,7 +43,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="http://aliasmee.github.io/" />
+<link rel="canonical" href="http://aliasmee.github.io/post/" />
 <link rel="alternative" href="http://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
 
 
@@ -73,6 +78,8 @@
 
 
 
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
 <link rel="stylesheet" href="http://aliasmee.github.io/css/bundle.ff02473a9a.css" />
 
 
@@ -106,7 +113,7 @@
   <header class="site-header">
   <img class="avatar" src="http://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
   
-  <h1 class="title">aliasmee&#39;s blog </h1>
+  <h2 class="title">aliasmee&#39;s blog </h2>
   
   <p class="subtitle">~ Stay Hungry,Stay Foolish. ~</p>
   <button class="menu-toggle" type="button">
@@ -121,9 +128,9 @@
       
         <li class="menu-item
             
+            
+            
               is-active
-            
-            
             ">
             <a href="http://aliasmee.github.io/">文字</a>
           </li>
@@ -214,7 +221,7 @@
 
   <section class="main post-list">
     <header class="list-header offscreen">
-      <h2 class="list-label">All Posts</h2>
+      <h2 class="list-label">Posts List</h2>
     </header>
     
     
@@ -243,6 +250,30 @@
 </footer>
 
 
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
 
 <script src="http://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
 
