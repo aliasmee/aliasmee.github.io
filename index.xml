@@ -7,19 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Fri, 01 Jun 2018 11:48:17 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 01 Jun 2018 11:46:40 +0800</lastBuildDate>
     
 	<atom:link href="https://aliasmee.github.io/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Hello World</title>
-      <link>https://aliasmee.github.io/post/helloworld/</link>
-      <pubDate>Fri, 01 Jun 2018 11:48:17 +0800</pubDate>
-      
-      <guid>https://aliasmee.github.io/post/helloworld/</guid>
-      <description>&lt;p&gt;hi,这是我新的博客哈，转了一圈，我又要开始记录一些日常的东西了，为什么是又呢？哈哈，因为我之前也有写过博客，都是一些学习笔记啥的。又很渣。而且最近发现自己的脑子不够用啦。总是丢三落四，记忆力也有点低下，大概是老了吧。😭&lt;/p&gt;</description>
-    </item>
     
     <item>
       <title>About</title>
@@ -27,7 +18,39 @@
       <pubDate>Fri, 01 Jun 2018 11:46:40 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/about/</guid>
+      <description>Just Do It.</description>
+    </item>
+    
+    <item>
+      <title>Links</title>
+      <link>https://aliasmee.github.io/links/</link>
+      <pubDate>Wed, 06 Jun 2018 21:33:39 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/links/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Jenkins Bearychat Notify Plugin</title>
+      <link>https://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/</link>
+      <pubDate>Tue, 05 Jun 2018 22:55:51 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/</guid>
+      <description>&lt;p&gt;这段时间在测试kubernetes的CI、CD，使用了业内很出名的工具&amp;ndash;Jenkins。之前有接触过，但都是在自己
+玩，以及公司很小的项目中使用过。jenkins 可谓是持续集成和持续交付工具中的佼佼者。
+而且前段时间jenkins 官方还发布了JenkinsX(受苹果启发么？哈哈)。本文主要介绍如何
+使用Bearychat 与 Jenkins集成。后续会分享整个持续集成、部署架构。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hello World</title>
+      <link>https://aliasmee.github.io/post/helloworld/</link>
+      <pubDate>Fri, 01 Jun 2018 11:48:17 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/helloworld/</guid>
+      <description>&lt;p&gt;hi,这里以后就是我的新博客了哈，不写文章已经快有一年的时间了，最近我又要开始记录一些日常的东西了，为什么是又？哈哈，最近发现自己的脑子不够用啦。总是丢三落四的，记忆力不好了，大概是老了吧。😭&lt;/p&gt;</description>
     </item>
     
   </channel>

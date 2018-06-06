@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on aliasmee&#39;s blog </title>
-    <link>https://aliasmee.github.io/post/</link>
-    <description>Recent content in Posts on aliasmee&#39;s blog </description>
+    <title>Jenkins on aliasmee&#39;s blog </title>
+    <link>https://aliasmee.github.io/tags/jenkins/</link>
+    <description>Recent content in Jenkins on aliasmee&#39;s blog </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
     <lastBuildDate>Tue, 05 Jun 2018 22:55:51 +0800</lastBuildDate>
     
-	<atom:link href="https://aliasmee.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://aliasmee.github.io/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -24,15 +24,6 @@
 使用Bearychat 与 Jenkins集成。后续会分享整个持续集成、部署架构。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hello World</title>
-      <link>https://aliasmee.github.io/post/helloworld/</link>
-      <pubDate>Fri, 01 Jun 2018 11:48:17 +0800</pubDate>
-      
-      <guid>https://aliasmee.github.io/post/helloworld/</guid>
-      <description>&lt;p&gt;hi,这里以后就是我的新博客了哈，不写文章已经快有一年的时间了，最近我又要开始记录一些日常的东西了，为什么是又？哈哈，最近发现自己的脑子不够用啦。总是丢三落四的，记忆力不好了，大概是老了吧。😭&lt;/p&gt;</description>
     </item>
     
   </channel>

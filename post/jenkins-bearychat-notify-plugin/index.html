@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Jenkins Bearychat Notify Plugin</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="这段时间在测试kubernetes的CI、CD，使用了业内很出名的工具&amp;ndash;Jenkins。之前有接触过，但都是在自己 玩，以及公司很小的项目中使用过。jenkins 可谓是持续集成和持续交付工具中的佼佼者。 而且前段时间jenkins 官方还发布了JenkinsX(受苹果启发么？哈哈)。本文主要介绍如何 使用Bearychat 与 Jenkins集成。后续会分享整个持续集成、部署架构。
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="Jenkins Bearychat Notify Plugin" />
+    <meta name="twitter:description" content="这段时间在测试kubernetes的CI、CD，使用了业内很出名的工具&amp;ndash;Jenkins。之前有接触过，但都是在自己 玩，以及公司很小的项目中使用过。jenkins 可谓是持续集成和持续交付工具中的佼佼者。 而且前段时间jenkins 官方还发布了JenkinsX(受苹果启发么？哈哈)。本文主要介绍如何 使用Bearychat 与 Jenkins集成。后续会分享整个持续集成、部署架构。
+
+" />
+    <meta name="twitter:image" content="https://aliasmee.github.io/img/avatar.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Jenkins Bearychat Notify Plugin" />
+  <meta property="og:description" content="这段时间在测试kubernetes的CI、CD，使用了业内很出名的工具&amp;ndash;Jenkins。之前有接触过，但都是在自己 玩，以及公司很小的项目中使用过。jenkins 可谓是持续集成和持续交付工具中的佼佼者。 而且前段时间jenkins 官方还发布了JenkinsX(受苹果启发么？哈哈)。本文主要介绍如何 使用Bearychat 与 Jenkins集成。后续会分享整个持续集成、部署架构。
+
+" />
+  <meta property="og:url" content="https://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/" />
+  <meta property="og:image" content="https://aliasmee.github.io/img/avatar.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/" />
+<link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">~ Stay Hungry,Stay Foolish. ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="//weibo.com/weibo_username" title="Weibo"><span class="icon icon-weibo"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Jenkins Bearychat Notify Plugin</h1>
+      <p class="post-meta">@aliasmee · Jun 5, 2018 · 1 min read</p>
+    </header>
+    <article class="post-content"><p>这段时间在测试kubernetes的CI、CD，使用了业内很出名的工具&ndash;Jenkins。之前有接触过，但都是在自己
+玩，以及公司很小的项目中使用过。jenkins 可谓是持续集成和持续交付工具中的佼佼者。
+而且前段时间jenkins 官方还发布了JenkinsX(受苹果启发么？哈哈)。本文主要介绍如何
+使用Bearychat 与 Jenkins集成。后续会分享整个持续集成、部署架构。</p>
+
+<p></p>
+
+<h3 id="bearychat介绍">Bearychat介绍</h3>
+
+<p>官方介绍：倍洽是我们在 2015 年推出的团队内部沟通工具倍洽不仅提供了更适合工作场景
+的团队内部 IM，在此之上通过丰富的第三方集服务集成、自由定制的开放接口等方式将重要
+的信息快速汇集，再通过信息整理、全局搜索等方式来帮助团队重新梳理信息流。</p>
+
+<p>通俗的说，就是国内版的slack。不但有微信的聊天功能，而且集成很多第三方的工具，
+如SCM方面有著名的Github、Gitlab、Gogs等,集成部署类有Jenkins、Travis、CircleCi等。
+还有一些其它功能的集成服务。在团队协作中，这种类slack团队IM工具, 使用上手了，可以极大的
+提供团队的开发交通效率。</p>
+
+<p>不说了，感觉我就是来打广告的。下面介绍下除了bearychat之外，还有哪些工具可以作为
+jenkins 通知的方式吧。</p>
+
+<h3 id="jenkins-通知插件">Jenkins 通知插件</h3>
+
+<ul>
+<li>Email Extension</li>
+<li>Slack Notification</li>
+<li>HipChat</li>
+<li>Telegram Bot</li>
+<li>Skyper</li>
+<li>Bearychat</li>
+</ul>
+
+<p>其它插件及具体说明可以访问<a href="https://plugins.jenkins.io/">jenkins plugin market</a>查看，
+email 的方式有点传统，不过也是最简单的。因为每个公司基本有内部的邮箱系统，员工
+都有自己的邮箱，而且设置的话，也相对小白。</p>
+
+<p>但是如果使用slack，或者bearychat这种现代化IM工具的话，更为方便实时，就像我们平常
+使用Wechat、QQ聊天一样。而且不止Jenkins 可以用得到，也可以绑定github，jira等工具。
+将消息都集中到一个工具上，而不是这个服务用一套通知，那个服务用另外一个通知，能
+合在一起尽量不要分开。因为这又不是分布式。😄</p>
+
+<h3 id="bearychat-与jenkins集成配置">Bearychat 与jenkins集成配置</h3>
+
+<p>首先呢，我们先要在Jenkins web ui里进行安装插件工作，Manage system -&gt; Manage plugins，
+在可选插件里，即可找到bearychat，然后点击<code>直接安装</code>，稍等片刻即可安装完成。</p>
+
+<p>然后，去 Configure System里，在全局配置里找到BearyChat通知，在本文发表时，只需要
+配置3个值。</p>
+
+<ul>
+<li><code>webhook URL:</code> Bearychat 添加机器人时会有一个webhook url</li>
+<li><code>讨论组:</code> Bearychat 内部讨论组，用于接收消息的用户群体</li>
+<li><code>构建服务器URL:</code> 当前jenkins服务器的访问域名</li>
+</ul>
+
+<h3 id="定制bearychat-消息格式">定制Bearychat 消息格式</h3>
+
+<p>由于在Jenkins里面，我们的项目大多使用的是Jenkins multibranch pipeline，所以，这里通过在jenkinsfile
+里定义好的流程，根据结果判断，添加相应通知即可,以下列表内容是custom bearychat
+notify 的消息格式：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy"><span style="color:#75715e">// BearychatSend notify
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bearychat_notify_start</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  bearychatSend color: <span style="color:#e6db74">&#34;#00FFFF&#34;</span><span style="color:#f92672">,</span> attachmentText: <span style="color:#e6db74">&#34;Started Pipeline [${env.JOB_NAME} #${env.BUILD_NUMBER}](${env.BUILD_URL})&#34;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e">// build image success or failed notify
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bearychat_notify_successful</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  bearychatSend title: <span style="color:#e6db74">&#34;构建成功: ${env.JOB_NAME} ${env.BUILD_NUMBER}&#34;</span><span style="color:#f92672">,</span> url: <span style="color:#e6db74">&#34;${env.BUILD_URL}&#34;</span>
+  bearychatSend message: <span style="color:#e6db74">&#34; Job ${env.JOB_NAME} 已经执行完成&#34;</span><span style="color:#f92672">,</span> color: <span style="color:#e6db74">&#34;#00ff00&#34;</span><span style="color:#f92672">,</span> attachmentText: <span style="color:#e6db74">&#34;Project: ${env.JOB_BASE_NAME}, 状态: 镜像构建成功, 镜像名字: ${env.IMAGE_NAME}&#34;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bearychat_notify_failed</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  bearychatSend message: <span style="color:#e6db74">&#34;构建失败: [${env.JOB_NAME} 执行中断, 请点击这里检查原因！](${env.BUILD_URL})&#34;</span><span style="color:#f92672">,</span> color: <span style="color:#e6db74">&#34;#ff0000&#34;</span><span style="color:#f92672">,</span> attachmentText: <span style="color:#e6db74">&#34;状态: 镜像构建失败&#34;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e">// deploy namespace notify (default namespace: staging)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bearychat_notify_deploy_successful</span><span style="color:#f92672">(</span>namespace<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;staging&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  bearychatSend title: <span style="color:#e6db74">&#34;Successful Deploy to ${namespace}, Click here to check!&#34;</span><span style="color:#f92672">,</span> url: <span style="color:#e6db74">&#34;${env.KUBERNETES_UI}=${namespace}&#34;</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>在相应需要消息通知的stage中，添加对应的notify 函数即可。另外也可以在优化下，在函
+数里进行判断，这样可以减少定义函数的数量。</p>
+
+<h3 id="验证">验证</h3>
+
+<p>附上一张消息通知的截图.</p>
+
+<p><img src="https://aliasmee.github.io/media/posts/jenkins-bearychat-notify-plugin/01.jpg" width="70%" title="hello world"></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://aliasmee.github.io/tags/jenkins"><span class="tag">Jenkins</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/bearychat"><span class="tag">Bearychat</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-XXXXXXXX-X', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>
