@@ -22,6 +22,18 @@
     </item>
     
     <item>
+      <title>Questions about proxy_connect_timeout on nginx</title>
+      <link>https://aliasmee.github.io/post/questions_about_proxy_connect_timeout_on_nginx/</link>
+      <pubDate>Tue, 19 Jun 2018 19:02:23 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/questions_about_proxy_connect_timeout_on_nginx/</guid>
+      <description>&lt;p&gt;你是如何理解&lt;code&gt;proxy_connect_timeout&lt;/code&gt;、&lt;code&gt;proxy_read_timeout&lt;/code&gt;和&lt;code&gt;proxy_send_timeout&lt;/code&gt;
+的，这几个参数在nginx 作为proxy时，与后端的 real server通信连接起到什么作用？&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Links</title>
       <link>https://aliasmee.github.io/links/</link>
       <pubDate>Wed, 06 Jun 2018 21:33:39 +0800</pubDate>

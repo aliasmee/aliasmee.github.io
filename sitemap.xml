@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/post/questions_about_proxy_connect_timeout_on_nginx/</loc>
+    <lastmod>2018-06-19T19:02:23+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/links/</loc>
     <lastmod>2018-06-06T21:33:39+08:00</lastmod>
   </url>
@@ -23,6 +28,12 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/tags/504/</loc>
+    <lastmod>2018-06-19T19:02:23+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/tags/bearychat/</loc>
     <lastmod>2018-06-05T22:55:51+08:00</lastmod>
     <priority>0</priority>
@@ -34,20 +45,44 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/tags/gateway/</loc>
+    <lastmod>2018-06-19T19:02:23+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/tags/jenkins/</loc>
     <lastmod>2018-06-05T22:55:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/tags/load-blancer/</loc>
+    <lastmod>2018-06-19T19:02:23+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/nginx/</loc>
+    <lastmod>2018-06-19T19:02:23+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/post/</loc>
-    <lastmod>2018-06-05T22:55:51+08:00</lastmod>
+    <lastmod>2018-06-19T19:02:23+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/proxy_connect_timeout/</loc>
+    <lastmod>2018-06-19T19:02:23+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://aliasmee.github.io/tags/</loc>
-    <lastmod>2018-06-05T22:55:51+08:00</lastmod>
+    <lastmod>2018-06-19T19:02:23+08:00</lastmod>
     <priority>0</priority>
   </url>
   
