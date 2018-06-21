@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Play_with_raspberry_pi</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="经过了一番思考,我终于鼓足勇气买下了raspberry pi，哈哈。不是据说很多人的树莓派都在吃灰么？我怕买来后，我的pi 也逃不过这样的命运。不过还是下单了 谁让它那么有吸引力呢。😄. 这篇文章介绍了从购买到连上Wi-Fi 正常运行，无需屏幕和键盘等外设.
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="Play_with_raspberry_pi" />
+    <meta name="twitter:description" content="经过了一番思考,我终于鼓足勇气买下了raspberry pi，哈哈。不是据说很多人的树莓派都在吃灰么？我怕买来后，我的pi 也逃不过这样的命运。不过还是下单了 谁让它那么有吸引力呢。😄. 这篇文章介绍了从购买到连上Wi-Fi 正常运行，无需屏幕和键盘等外设.
+
+" />
+    <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/play_with_raspberry_pi/01.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Play_with_raspberry_pi" />
+  <meta property="og:description" content="经过了一番思考,我终于鼓足勇气买下了raspberry pi，哈哈。不是据说很多人的树莓派都在吃灰么？我怕买来后，我的pi 也逃不过这样的命运。不过还是下单了 谁让它那么有吸引力呢。😄. 这篇文章介绍了从购买到连上Wi-Fi 正常运行，无需屏幕和键盘等外设.
+
+" />
+  <meta property="og:url" content="https://aliasmee.github.io/post/play_with_raspberry_pi/" />
+  <meta property="og:image" content="https://aliasmee.github.io/media/posts/play_with_raspberry_pi/01.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://aliasmee.github.io/post/play_with_raspberry_pi/" />
+<link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">~ Stay Hungry,Stay Foolish. ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Play_with_raspberry_pi</h1>
+      <p class="post-meta">@aliasmee · Jun 21, 2018 · 2 min read</p>
+    </header>
+    <article class="post-content"><p>经过了一番思考,我终于鼓足勇气买下了raspberry pi，哈哈。不是据说很多人的树莓派都在吃灰么？我怕买来后，我的pi 也逃不过这样的命运。不过还是下单了
+谁让它那么有吸引力呢。😄. 这篇文章介绍了从购买到连上Wi-Fi 正常运行，无需屏幕和键盘等外设.</p>
+
+<p></p>
+
+<h3 id="收货啦">收货啦</h3>
+
+<p>昨天发的货，今天早上就到了。商家在同城多么重要，而且价格还相对某东，便宜了快100大洋。差价够买一个高速存储卡啦。哈哈。
+开箱图：
+
+<figure>
+    
+        <img src="https://aliasmee.github.io/media/posts/play_with_raspberry_pi/02.png" alt="来个45度" width="350" />
+    
+    
+    <figcaption>
+        <h4>来个45度自拍</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+
+<figure>
+    
+        <img src="https://aliasmee.github.io/media/posts/play_with_raspberry_pi/04.png" alt="背面再来张" width="450" />
+    
+    
+    <figcaption>
+        <h4>背面</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+
+<figure>
+    
+        <img src="https://aliasmee.github.io/media/posts/play_with_raspberry_pi/01.png" alt="侧面照" width="450" />
+    
+    
+    <figcaption>
+        <h4>侧面的电源接口</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+
+<figure>
+    
+        <img src="https://aliasmee.github.io/media/posts/play_with_raspberry_pi/05.png" alt="后买的sd卡" width="350" />
+    
+    
+    <figcaption>
+        <h4>后买的三星sd卡</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>另外看了商家介绍，因为新的3B+ 的CPU 出厂已经自带散热片了，所以不需要单独买了，d不过还是需要给另外2个东东买了散热器，一个是
+HUB芯片（四口USB旁边的芯片)，另外一个是内存芯片（主板背面芯片）. 我已经安装上去了，安装也很简单，擦干净，然后把散热器胶带撕掉，
+对着芯片，轻轻按下去就行了.从上面几张图里就能发现我已经装上了散热器.</p>
+
+<h3 id="准备工具">准备工具</h3>
+
+<p>下面是运行及安装系统所用到的工具列表:</p>
+
+<ul>
+<li>电源：iPad 电源头(5.1V / 2.1A）,官方是要求(5V/2.5A)</li>
+<li>电源线： Android 手机充电线</li>
+<li>内存卡：Sandisk 8G c4 (以前手机淘汰下来的，刷机时我才知道c4的读写速度那么渣渣:-D，我记得在12、13年那时还是很流行的呀😂)</li>
+<li>联网电脑1台（废话）</li>
+<li>Wi-Fi 提供（又一句废话，谁家现在还没有Wi-Fi？）</li>
+<li>Win32 Disk Imager (备用)</li>
+<li><a href="https://www.raspberrypi.org/downloads/raspbian/">RASPBIAN STRETCH LITE without desktop image</a></li>
+</ul>
+
+<p>这里注意的是，我在网上只买了一个裸主板，而电源是用了并不是官方要求的功率大小的。建议大家还是买成套的吧，特别是电源这块在之前我查资料说的，
+很多树莓派在运行时各种奇奇怪怪的问题，如外接显示器显示不正常，键盘输入慢，无故关机等。当然如果你像我一样，不接外设，只远程使用的话，也是可以的。
+远程方式可以ssh、vnc啊什么的。
+下面开始刷系统吧.</p>
+
+<h3 id="刷入系统">刷入系统</h3>
+
+<p>系统这块我选择了无桌面版本的,跑个服务器，放桌面版有点耗资源，毕竟这块板子的配置还是很低的，能省就省.哈哈
+一开始我是看这里选择了<a href="https://elinux.org/RPi_Easy_SD_Card_Setup#Using_command_line_tools_.281.29">dd</a>的方式,很不幸，虽然写入成功了，
+但是每次重新插入电脑，就报卡异常，可能是写入速度太低了，写坏了..坏了！！放下Mac终端命令：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 插入你的tf卡，在电脑上找下盘符，一般是/dev/disk3s1
+</span><span style="color:#75715e"></span>df -H
+/dev/disk3s1                          <span style="color:#ae81ff">8</span>.0G   <span style="color:#ae81ff">2</span>.6M   <span style="color:#ae81ff">8</span>.0G     <span style="color:#ae81ff">1</span>%      <span style="color:#ae81ff">78</span>     <span style="color:#ae81ff">243057</span>    <span style="color:#ae81ff">0</span>%   /Volumes/raspbian-os
+
+<span style="color:#75715e"># 卸载sd，以便写入镜像
+</span><span style="color:#75715e"></span>sudo diskutil unmount /dev/disk3s1
+
+<span style="color:#75715e"># 写入数据到sd
+</span><span style="color:#75715e"></span>sudo time dd bs<span style="color:#f92672">=</span>1m <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2018</span>-04-18-raspbian-stretch-lite.img of<span style="color:#f92672">=</span>/dev/disk3s1 
+
+<span style="color:#ae81ff">444</span>+0 records in
+<span style="color:#ae81ff">444</span>+0 records out
+<span style="color:#ae81ff">1862270976</span> bytes transferred in <span style="color:#ae81ff">1938</span>.628141 secs <span style="color:#f92672">(</span><span style="color:#ae81ff">960613</span> bytes/sec<span style="color:#f92672">)</span>
+     <span style="color:#ae81ff">1938</span>.72 real         <span style="color:#ae81ff">0</span>.00 user        <span style="color:#ae81ff">28</span>.77 sys</code></pre></div>
+<p>这速度真的很感人.</p>
+
+<p>无奈，还是用备用方案吧，找了台windows电脑，用win32 disk imager，一次写入成功哈。难道是dd速度太快啦？有可能。建议你还是买c10的卡吧。
+windows 上就很好操作了，下载win32 disk imager，插入sd到电脑，选择raspberry image，点击写入。Done.</p>
+
+<h3 id="设置网络和启用ssh">设置网络和启用ssh</h3>
+
+<p>OK，现在系统已经刷到sd卡了，现在插入raspberry pi 里已经可以正常运行了，但是我电脑没有网线口啊，突然想想，我的pi 不是有Wi-Fi功能的。
+在网上找到一篇关于这个开机自动设置Wi-Fi的帖子。下面是文件内容:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /Volumes/raspbian-os
+
+<span style="color:#75715e"># 启用ssh
+</span><span style="color:#75715e"></span>touch ssh
+
+# touch wpa_supplicant.conf</code></pre></div>
+<p>wifi 文件内容：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-basN" data-lang="basN">country=CN
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+ 
+network={
+ssid=&#34;wifi name&#34;
+psk=&#34;wifi connect password&#34;
+key_mgmt=WPA-PSK
+priority=1
+}
+
+
+network={
+ssid=&#34;wifi name&#34;
+psk=&#34;wifi connect password&#34;
+key_mgmt=WPA-PSK
+priority=2
+}</code></pre></div>
+<p>当系统启动时，会自动的把<code>wpa_supplicant.conf</code>文件移动到/etc/wpa_supplicant/ 目录下。priority这个是每次
+开机时主动连接哪一个Wi-Fi网络，数字越小，优先级越高。另外,启用ssh 远程服务时，也是只需要新建1个ssh 文
+件，没有任何扩展名。</p>
+
+<p>如果你是在windows下，插入sd卡，类似的操作，新建文本文档，写入同样数据，不过最后记得把后缀名.txt去掉.</p>
+
+<h3 id="插卡开机并更新系统源">插卡开机并更新系统源</h3>
+
+<p>现在万事俱备，就差插卡通电了。插入sd卡到 pi 的卡槽里。然后接通电源。稍微等待下,这里由于我们并不知道树莓派会分配什么IP地址，所以不另寻招数了。
+我这里在本机用了nmap:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo nmap -sS -P0 -sV -O <span style="color:#ae81ff">192</span>.168.1.0/24
+
+Nmap scan report <span style="color:#66d9ef">for</span> localhost <span style="color:#f92672">(</span><span style="color:#ae81ff">192</span>.168.1.22<span style="color:#f92672">)</span>
+Host is up <span style="color:#f92672">(</span><span style="color:#ae81ff">0</span>.031s latency<span style="color:#f92672">)</span>.
+Not shown: <span style="color:#ae81ff">999</span> closed ports
+PORT   STATE SERVICE VERSION
+<span style="color:#ae81ff">22</span>/tcp open  ssh     <span style="color:#f92672">(</span>protocol <span style="color:#ae81ff">2</span>.0<span style="color:#f92672">)</span>
+<span style="color:#ae81ff">1</span> service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port22-TCP:V<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>.49BETA5%I<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>%D<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>/22%Time<span style="color:#f92672">=</span>5B2BD4B0%P<span style="color:#f92672">=</span>x86_64-apple-darwin13
+SF:.4.0%r<span style="color:#f92672">(</span>NULL,29,<span style="color:#e6db74">&#34;SSH-2\.0-OpenSSH_7\.4p1\x20Raspbian-10\+deb9u3\n&#34;</span><span style="color:#f92672">)</span>;
+MAC Address: xx:xx:xx:xx:xx:69 <span style="color:#f92672">(</span>Raspberry Pi Foundation<span style="color:#f92672">)</span>
+Device type: general purpose
+Running: Linux <span style="color:#ae81ff">3</span>.X
+OS CPE: cpe:/o:linux:linux_kernel:3
+OS details: Linux <span style="color:#ae81ff">3</span>.2 - <span style="color:#ae81ff">3</span>.19
+Network Distance: <span style="color:#ae81ff">1</span> hop</code></pre></div>
+<p><code>Note: 192.168.1.0 是你和pi 所在的网段</code>.</p>
+
+<p>这里就已经可以看到pi 的地址，说明已经成功加入Wi-Fi网络了，ssh 登录上去吧。</p>
+
+<p><code>ssh pi@192.168.1.22, 默认密码是raspberr</code></p>
+
+<p>进入系统后，先设置修改国内源.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp /etc/apt/sources.list /etc/apt/sources.list.bak
+
+cat <span style="color:#e6db74">&lt;&lt; EOF &gt; /etc/apt/sources.list
+</span><span style="color:#e6db74">&gt; deb http://mirrors.shu.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi
+</span><span style="color:#e6db74">&gt; EOF</span></code></pre></div>
+<p>更新系统软件包信息</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update <span style="color:#f92672">&amp;&amp;</span> sudo apt-get -y dist-upgrade <span style="color:#f92672">&amp;&amp;</span> sudo apt-get update</code></pre></div>
+<h3 id="开始装docker">开始装docker</h3>
+
+<p>目前docker 官方已经支持树莓派版本的docker。可以使用docker提供的一键安装脚本进行安装。如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -fsSL https://get.docker.com | sh</code></pre></div>
+<p>运行helloworld，哈哈</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run hello-world
+...
+...
+Hello from Docker!
+This message shows that your installation appears to be working correctly.</code></pre></div>
+<p>ok,开始想想下一步让pi做什么吧， 发挥价值，别让它一个机器寂寞。呵呵。</p>
+
+<h3 id="参考">参考</h3>
+
+<ul>
+<li><a href="https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/">给树莓派装上docker</a></li>
+<li><a href="https://www.raspberrypi.org/forums/viewtopic.php?p=1313594">给pi 系统换上海大学软件源</a></li>
+<li><a href="https://howchoo.com/g/ndy1zte2yjn/how-to-set-up-wifi-on-your-raspberry-pi-without-ethernet">直接修改sd卡内容设置Wi-Fi链接，无需外设</a></li>
+<li><a href="https://www.raspberrypi.org/documentation/remote-access/ssh/">启用树莓派的ssh服务</a></li>
+</ul></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://aliasmee.github.io/tags/raspberry-pi"><span class="tag">Raspberry Pi</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE"><span class="tag">树莓派</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/install-docker-on-raspberry"><span class="tag">Install Docker on Raspberry</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BC%80%E7%AE%B1"><span class="tag">树莓派开箱</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/docker"><span class="tag">Docker</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

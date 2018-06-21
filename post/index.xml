@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Tue, 19 Jun 2018 19:02:23 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 21 Jun 2018 06:53:15 +0800</lastBuildDate>
     
 	<atom:link href="https://aliasmee.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Play_with_raspberry_pi</title>
+      <link>https://aliasmee.github.io/post/play_with_raspberry_pi/</link>
+      <pubDate>Thu, 21 Jun 2018 06:53:15 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/play_with_raspberry_pi/</guid>
+      <description>&lt;p&gt;经过了一番思考,我终于鼓足勇气买下了raspberry pi，哈哈。不是据说很多人的树莓派都在吃灰么？我怕买来后，我的pi 也逃不过这样的命运。不过还是下单了
+谁让它那么有吸引力呢。😄. 这篇文章介绍了从购买到连上Wi-Fi 正常运行，无需屏幕和键盘等外设.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Questions about proxy_connect_timeout on nginx</title>
