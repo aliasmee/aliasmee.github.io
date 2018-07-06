@@ -22,11 +22,35 @@
     </item>
     
     <item>
-      <title>Play_with_raspberry_pi</title>
-      <link>https://aliasmee.github.io/post/play_with_raspberry_pi/</link>
+      <title>为什么我的网站响应速度时快时慢？</title>
+      <link>https://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/</link>
+      <pubDate>Sun, 24 Jun 2018 21:48:11 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/</guid>
+      <description>&lt;p&gt;平常工作生活中，不知你有没有遇到这种情况，有时访问网站异常的快，有时却要等待10多秒才会有响应，
+这种情况下，我们一般不会太多的停留在网站，因为影响了用户体验。今天就分享记录下，我工作中遇到的
+一个问题。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>我的新玩伴-树莓派2</title>
+      <link>https://aliasmee.github.io/post/play-with-raspberry-pi-2/</link>
+      <pubDate>Sun, 24 Jun 2018 08:20:08 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/play-with-raspberry-pi-2/</guid>
+      <description>&lt;p&gt;接着上篇的，本篇介绍了桌面版本的安装，并设置vnc ，用于远程桌面连接。另外给大家看自己动手给树莓派盖的屋子。哈哈&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>我的新玩伴-树莓派</title>
+      <link>https://aliasmee.github.io/post/play-with-raspberry-pi/</link>
       <pubDate>Thu, 21 Jun 2018 06:53:15 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/play_with_raspberry_pi/</guid>
+      <guid>https://aliasmee.github.io/post/play-with-raspberry-pi/</guid>
       <description>&lt;p&gt;经过了一番思考,我终于鼓足勇气买下了raspberry pi，哈哈。不是据说很多人的树莓派都在吃灰么？我怕买来后，我的pi 也逃不过这样的命运。不过还是下单了
 谁让它那么有吸引力呢。😄. 这篇文章介绍了从购买到连上Wi-Fi 正常运行，无需屏幕和键盘等外设.&lt;/p&gt;
 
@@ -34,11 +58,11 @@
     </item>
     
     <item>
-      <title>Questions about proxy_connect_timeout on nginx</title>
-      <link>https://aliasmee.github.io/post/questions_about_proxy_connect_timeout_on_nginx/</link>
+      <title>关于Nginx proxy_connect_timeout 的问题</title>
+      <link>https://aliasmee.github.io/post/questions-about-proxy-connect-timeout-on-nginx/</link>
       <pubDate>Tue, 19 Jun 2018 19:02:23 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/questions_about_proxy_connect_timeout_on_nginx/</guid>
+      <guid>https://aliasmee.github.io/post/questions-about-proxy-connect-timeout-on-nginx/</guid>
       <description>&lt;p&gt;你是如何理解&lt;code&gt;proxy_connect_timeout&lt;/code&gt;、&lt;code&gt;proxy_read_timeout&lt;/code&gt;和&lt;code&gt;proxy_send_timeout&lt;/code&gt;
 的，这几个参数在nginx 作为proxy时，与后端的 real server通信连接起到什么作用？&lt;/p&gt;
 

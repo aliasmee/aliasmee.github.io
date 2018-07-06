@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>为什么我的网站响应速度时快时慢？</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="平常工作生活中，不知你有没有遇到这种情况，有时访问网站异常的快，有时却要等待10多秒才会有响应， 这种情况下，我们一般不会太多的停留在网站，因为影响了用户体验。今天就分享记录下，我工作中遇到的 一个问题。
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="为什么我的网站响应速度时快时慢？" />
+    <meta name="twitter:description" content="平常工作生活中，不知你有没有遇到这种情况，有时访问网站异常的快，有时却要等待10多秒才会有响应， 这种情况下，我们一般不会太多的停留在网站，因为影响了用户体验。今天就分享记录下，我工作中遇到的 一个问题。
+
+" />
+    <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/is-my-website-response-time-so-why-slow/cover.jpg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="为什么我的网站响应速度时快时慢？" />
+  <meta property="og:description" content="平常工作生活中，不知你有没有遇到这种情况，有时访问网站异常的快，有时却要等待10多秒才会有响应， 这种情况下，我们一般不会太多的停留在网站，因为影响了用户体验。今天就分享记录下，我工作中遇到的 一个问题。
+
+" />
+  <meta property="og:url" content="https://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/" />
+  <meta property="og:image" content="https://aliasmee.github.io/media/posts/is-my-website-response-time-so-why-slow/cover.jpg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/" />
+<link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">~ Stay Hungry,Stay Foolish. ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">为什么我的网站响应速度时快时慢？</h1>
+      <p class="post-meta">@aliasmee · Jun 24, 2018 · 6 min read</p>
+    </header>
+    <article class="post-content"><p>平常工作生活中，不知你有没有遇到这种情况，有时访问网站异常的快，有时却要等待10多秒才会有响应，
+这种情况下，我们一般不会太多的停留在网站，因为影响了用户体验。今天就分享记录下，我工作中遇到的
+一个问题。</p>
+
+<p></p>
+
+<h3 id="问题现象">问题现象</h3>
+
+<p>第一次发现这个问题，应该是在很早之前，我本地用浏览器访问我们公司的业务网站，发现有时很快，有时达到8、9秒以上，
+但是也没有太在意，以为是偶尔一次的。另外我用手机4G网络也测试访问了下，速度挺快的。</p>
+
+<p>然而当站点可用性监控系统刚上线运营的时候，就经常收到报警的通知，因为设置了探测
+超时时间，我设置的是5秒。当时觉得可能就这一个站点误报，我单独把这个站点的超时设置了10s，但过了几天后，报警还是会误报，
+终于忍不住了。</p>
+
+<p><em>这里要自我检讨下，发现问题时，我投机取巧的去掩盖问题，而没有去正视这个问题。这种态度是要不得的。不然问题会像滚雪球一样可怕!!!</em></p>
+
+<p><code>现象总结</code>：公司某个网站监控得到的响应时间，延迟大，非常不稳定, 导致站点可用性监控经常误报警</p>
+
+<h3 id="环境介绍分析及测试">环境介绍分析及测试</h3>
+
+<h5 id="环境介绍">环境介绍</h5>
+
+<p>这里我介绍下整体的大致环境，这几台业务主机上，每台主机都有一个nginx，用于处理虚拟主机。然后最上面有一个公网LB（负载均衡器）。
+它负责接收外部的流量，终止ssl，均衡的分发请求到每个主机的nginx上。</p>
+
+<p>还有一点需要介绍下，我们线上还有一个公网LB，也是转发流量到这几台主机nginx上。这俩LB的区别只是加载的域名ssl证书不一样，其它配置一摸一样(让我一直在纠结是LB配置的原因)。
+最后就是监控系统是部署在容器集群里的（很大程度的迷惑了自己，我曾以为是容器网络出现了延时问题&hellip;）。</p>
+
+<h5 id="分析">分析</h5>
+
+<p>当时想了以下几个点:</p>
+
+<ul>
+<li>公网LB 配置错误</li>
+<li>某台应用主机处理请求时间过长</li>
+<li>监控系统部署所在集群的网络问题</li>
+<li>应用主机系统参数有问题（最后追加上去的，我还真没想到这块）</li>
+</ul>
+
+<h5 id="测试">测试</h5>
+
+<p><code>公网LB 配置错误</code></p>
+
+<p>针对这个问题，检查了LB的的配置的超时时间，缓存等选项，都没有啥结果，后来想到了日志，在haproxy的日子里，经常看到这样的消息。下面是截取的其中一条记录:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Jun <span style="color:#ae81ff">15</span> <span style="color:#ae81ff">16</span>:45:29 <span style="color:#ae81ff">18</span>.19.1.12 haproxy<span style="color:#f92672">[</span><span style="color:#ae81ff">30952</span><span style="color:#f92672">]</span>: <span style="color:#ae81ff">139</span>.1.2.3:61653 <span style="color:#f92672">[</span><span style="color:#ae81ff">15</span>/Jun/2018:16:45:08.784<span style="color:#f92672">]</span> lbl-ckv7ynro~ lbl-ckv7ynro_default/lbb-izjpmxrh <span style="color:#ae81ff">327</span>/15003/-1/-1/20331 <span style="color:#ae81ff">503</span> <span style="color:#ae81ff">213</span> - - sCNN <span style="color:#ae81ff">4</span>/3/0/0/+3 <span style="color:#ae81ff">0</span>/0 <span style="color:#e6db74">&#34;HEAD /sessions/auth?return_to=%2F HTTP/1.1&#34;</span></code></pre></div>
+<p>以前没咋看过haproxy 日志，nginx日志倒是都明白，这一看傻眼了。查查文档吧。下面是对每段的解释:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Jun <span style="color:#ae81ff">15</span> <span style="color:#ae81ff">16</span>:45:29                       <span style="color:#75715e"># 时间
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">18</span>.19.1.12                            <span style="color:#75715e"># haproxy ip
+</span><span style="color:#75715e"></span>haproxy<span style="color:#f92672">[</span><span style="color:#ae81ff">30952</span><span style="color:#f92672">]</span>:                       <span style="color:#75715e"># 进程ID
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">139</span>.1.2.3:61653                       <span style="color:#75715e">#client_ip+port
+</span><span style="color:#75715e"></span><span style="color:#f92672">[</span><span style="color:#ae81ff">15</span>/Jun/2018:16:45:08.784<span style="color:#f92672">]</span>            <span style="color:#75715e">#通过haproxy接收到连接的确切日期时间
+</span><span style="color:#75715e"></span>lbl-ckv7ynro~                         <span style="color:#75715e">#前端监听器name
+</span><span style="color:#75715e"></span>lbl-ckv7ynro_default/lbb-izjpmxrh     <span style="color:#75715e">#管理与服务器连接的后端/ 命中的 真实server主机
+</span><span style="color:#75715e"></span>
+<span style="color:#ae81ff">327</span>/15003/-1/-1/20331   
+<span style="color:#75715e">#327 是在接收到第一个字节后等待来自客户端（不包括正文）的完整HTTP请求花费的总时间（毫秒）
+</span><span style="color:#75715e">#15003 是在各种队列中等待的总时间（毫秒）。如果连接在到达队列之前中止，则可以为“-1”。
+</span><span style="color:#75715e">#-1 是等待连接建立到最终服务器的总时间（以毫秒为单位），包括重试次数。 如果请求在建立连接之前被中止，它可以是“-1”。
+</span><span style="color:#75715e">#-1 是等待服务器发送完整HTTP响应的总时间（毫秒），不计算数据。 如果在接收到完整的响应之前请求被中止，它可以是“-1”。 它通常与服务器的请求处理时间相匹配，尽管它可能会被客户端发送到服务器的数据量所改变。 “GET”请求的大部分时间通常表示重载的服务器。
+</span><span style="color:#75715e">#20331 是请求在haproxy中保持活动的时间，这是在接收到的请求的第一个字节和发送的最后一个字节之间经过的总时间（以毫秒为单位）。 它涵盖所有可能的处理，除了握手（见Th）和空闲时间（参见Ti）
+</span><span style="color:#75715e"></span>
+<span style="color:#ae81ff">503</span>      <span style="color:#75715e">#http状态码
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">213</span>      <span style="color:#75715e">#是发送日志时发送到客户端的总字节数
+</span><span style="color:#75715e"></span>
+-   <span style="color:#75715e">#是一个可选的“name = value”条目，指示客户端在请求中具有此cookie。 未设置 -表示
+</span><span style="color:#75715e"></span>-   <span style="color:#75715e">#是一个可选的“name = value”条目，表示服务器已经返回了一个具有响应的cookie。 
+</span><span style="color:#75715e"></span>sCNN                                  <span style="color:#75715e">#http格式下，会话状态，结束时会话的条件：（timeout, error）
+</span><span style="color:#75715e">#s 在等待服务器发送或接收数据时，服务器端超时已过期
+</span><span style="color:#75715e">#C 代理正在等待CONNECTION在服务器上建立。 服务器最多可能已经注意到连接尝试。
+</span><span style="color:#75715e">#N client没有提供cookie。这通常是新的访客，第一次访问的情况,所以计算在日志中这个标志的出现次数,通常表示站点被频繁访问的有效趋势。
+</span><span style="color:#75715e">#N 服务器没有提供cookie，也没有插入任何cookie。
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">4</span>/3/0/0/+3
+
+<span style="color:#75715e">#4 是会话记录时进程上的并发连接总数
+</span><span style="color:#75715e">#3 是会话记录时前端上的并发连接总数
+</span><span style="color:#75715e">#0 是会话记录时由后端处理的并发连接的总数
+</span><span style="color:#75715e">#0 是在会话记录时服务器上仍然处于活动状态的并发连接总数
+</span><span style="color:#75715e">#+3 是尝试连接到服务器时此会话遇到的连接重试次数
+</span><span style="color:#75715e"></span><span style="color:#ae81ff">0</span>/0   <span style="color:#75715e"># 前一个数字0 是在服务器队列中之前处理的请求的总数，后一个数字0是是在服务器队列中之前处理的请求的总数
+</span><span style="color:#75715e"></span><span style="color:#e6db74">&#34;HEAD /sessions/auth?return_to=%2F HTTP/1.1&#34;</span>    #是完整的HTTP请求行，包括方法，请求和HTTP版本字符串。</code></pre></div>
+<p>上面的日志分析中，有很多有价值的信息，值得关注的有 <code>4/3/0/0/+3</code>, <code>sCNN</code>. 但是当时我只关注了超时这一点，以为是网络原因导致的客户端连接后端服务器的超时，然后就继续排查了。这里其实差不多已经
+说明了出问题的点：lb 和 后端服务器之间的故障(后话，我忽略了这一点)。</p>
+
+<p><code>某台应用主机处理请求时间过长</code></p>
+
+<p>针对这个的测试，我准备在夜间流量低峰时，暂时禁用掉其它的LB后端，只保留1台后端主机进行对外服务。很快的我发现这也行不通。问题依旧会出现。逐个的去替换，这一个测试没效果。</p>
+
+<p><code>监控系统部署所在集群的网络问题</code></p>
+
+<p>做这个测试时，我还请了外援。让别人在他们公司内部帮忙用ab 访问下。分别是外部联通、外部电信、Google云主机、VPC内部。
+下面是ab针对域名访问的结果。
+LB1: lb1.example.com
+LB2: lb2.example.com</p>
+
+<p>LB1 的ab 测试结果:</p>
+
+<pre><code>联通测试：
+Server Software:        nginx
+Server Hostname:        lb1.example.com
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES256-GCM-SHA384,2048,256
+Document Path:          /favicon_128.ico/
+Document Length:        2406 bytes
+Concurrency Level:      1
+Time taken for tests:   17.629 seconds
+Complete requests:      100
+Failed requests:        0
+Write errors:           0
+Non-2xx responses:      100
+Total transferred:      276000 bytes
+HTML transferred:       240600 bytes
+Requests per second:    5.67 [#/sec] (mean)
+Time per request:       176.291 [ms] (mean)
+Time per request:       176.291 [ms] (mean, across all concurrent requests)
+Transfer rate:          15.29 [Kbytes/sec] received
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       16  121 157.1     20     653
+Processing:     8   55 104.7     11     633
+Waiting:        8   53  99.1     11     633
+Total:         26  176 188.5     36     668
+Percentage of the requests served within a certain time (ms)
+  50%     36
+  66%    241
+  75%    245
+  80%    248
+  90%    452
+  95%    658
+  98%    663
+  99%    668
+ 100%    668 (longest request)
+
+电信测试：
+Server Software:        nginx
+Server Hostname:        lb1.example.com
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES256-GCM-SHA384,2048,256
+Document Path:          /favicon_128.ico/
+Document Length:        2406 bytes
+Concurrency Level:      1
+Time taken for tests:   69.515 seconds
+Complete requests:      100
+Failed requests:        0
+Write errors:           0
+Non-2xx responses:      100
+Total transferred:      276000 bytes
+HTML transferred:       240600 bytes
+Requests per second:    1.44 [#/sec] (mean)
+Time per request:       695.151 [ms] (mean)
+Time per request:       695.151 [ms] (mean, across all concurrent requests)
+Transfer rate:          3.88 [Kbytes/sec] received
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:      108  120   5.7    121     132
+Processing:    40  575 1527.9     45    5049
+Waiting:       40  575 1527.9     45    5049
+Total:        148  695 1527.5    166    5175
+Percentage of the requests served within a certain time (ms)
+  50%    166
+  66%    171
+  75%    173
+  80%    174
+  90%   5154
+  95%   5167
+  98%   5173
+  99%   5175
+ 100%   5175 (longest request)
+</code></pre>
+
+<p>LB2 的ab 测试结果：</p>
+
+<pre><code>联通测试：
+Server Software:        nginx
+Server Hostname:        lb2.example.com
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES256-GCM-SHA384,2048,256
+Document Path:          /favicon_128.ico/
+Document Length:        2406 bytes
+Concurrency Level:      1
+Time taken for tests:   17.168 seconds
+Complete requests:      100
+Failed requests:        0
+Write errors:           0
+Non-2xx responses:      100
+Total transferred:      276000 bytes
+HTML transferred:       240600 bytes
+Requests per second:    5.82 [#/sec] (mean)
+Time per request:       171.675 [ms] (mean)
+Time per request:       171.675 [ms] (mean, across all concurrent requests)
+Transfer rate:          15.70 [Kbytes/sec] received
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       16  139 161.6     20     840
+Processing:     8   32  87.1     10     641
+Waiting:        8   32  87.1     10     641
+Total:         25  171 176.9    235     852
+Percentage of the requests served within a certain time (ms)
+  50%    235
+  66%    241
+  75%    245
+  80%    248
+  90%    255
+  95%    655
+  98%    667
+  99%    852
+ 100%    852 (longest request) 
+
+电信测试：
+Server Software:        nginx
+Server Hostname:        lb2.example.com
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES256-GCM-SHA384,2048,256
+Document Path:          /favicon_128.ico/
+Document Length:        2406 bytes
+Concurrency Level:      1
+Time taken for tests:   16.714 seconds
+Complete requests:      100
+Failed requests:        0
+Write errors:           0
+Non-2xx responses:      100
+Total transferred:      276000 bytes
+HTML transferred:       240600 bytes
+Requests per second:    5.98 [#/sec] (mean)
+Time per request:       167.144 [ms] (mean)
+Time per request:       167.144 [ms] (mean, across all concurrent requests)
+Transfer rate:          16.13 [Kbytes/sec] received
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:      110  122   4.9    122     136
+Processing:    40   45   5.8     45     100
+Waiting:       40   45   5.8     45      99
+Total:        150  167   8.8    166     225
+Percentage of the requests served within a certain time (ms)
+  50%    166
+  66%    170
+  75%    171
+  80%    172
+  90%    175
+  95%    176
+  98%    183
+  99%    225
+ 100%    225 (longest request)
+</code></pre>
+
+<p>VPC 内部测试（统一出口）:</p>
+
+<pre><code>LB1 的测试结果:
+Server Software:        nginx
+Server Hostname:        lb1.example.com
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES256-GCM-SHA384,2048,256
+Document Path:          /favicon_128.ico/
+Document Length:        2406 bytes
+Concurrency Level:      1
+Time taken for tests:   513.333 seconds
+Complete requests:      100
+Failed requests:        1
+   (Connect: 0, Receive: 0, Length: 1, Exceptions: 0)
+Non-2xx responses:      100
+Total transferred:      273453 bytes
+HTML transferred:       238302 bytes
+Requests per second:    0.19 [#/sec] (mean)
+Time per request:       5133.329 [ms] (mean)
+Time per request:       5133.329 [ms] (mean, across all concurrent requests)
+Transfer rate:          0.52 [Kbytes/sec] received
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        4    5   2.3      4      21
+Processing:     4 5128 4147.8   5007   20006
+Waiting:        4 5128 4147.8   5007   20006
+Total:          9 5133 4147.6   5012   20011
+
+LB2 的测试结果:
+Server Software:        nginx
+Server Hostname:        lb2.example.com
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES256-GCM-SHA384,2048,256
+Document Path:          /favicon_128.ico/
+Document Length:        2406 bytes
+Concurrency Level:      1
+Time taken for tests:   1.099 seconds
+Complete requests:      100
+Failed requests:        0
+Non-2xx responses:      100
+Total transferred:      276000 bytes
+HTML transferred:       240600 bytes
+Requests per second:    91.00 [#/sec] (mean)
+Time per request:       10.990 [ms] (mean)
+Time per request:       10.990 [ms] (mean, across all concurrent requests)
+Transfer rate:          245.26 [Kbytes/sec] received
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        4    5   1.7      4      16
+Processing:     4    6   2.4      5      22
+Waiting:        4    6   2.4      5      22
+Total:          8   11   2.9     10      26
+Percentage of the requests served within a certain time (ms)
+  50%     10
+  66%     11
+  75%     11
+  80%     12
+  90%     14
+  95%     17
+  98%     24
+  99%     26
+ 100%     26 (longest request)
+</code></pre>
+
+<p>google 的测试结果没有放上来，相比国内访问是慢了点。这里主要关注了在VPC内部测试时，LB1的结果很不理想。
+但是LB2的结果又很正常。看到之前的环境介绍，再配合这个结果，又把我拉回了原来的思路上，即LB 和vpc内部网络有问题。头大&hellip;.
+哦，忘记说了一件事，我也在nginx主机上和vpc 内部其它主机上通过修改请求header，直接访问内部IP请求资源，这里是没有问题的，响应特别快。这又能证明主机上服务运行良好。网络也可以排除。这。。。悲剧了。</p>
+
+<p><code>应用主机系统参数有问题</code>
+后来请教别人，最后告诉我看看内核参数recycle。然后我又去网上查了下，看看有没有类似的问题，但是不好查啊，环境都不一样。但是最后查到一条关于nat环境下，
+在应用服务器上设置内核参数时，启用了<code>net.ipv4.tcp_tw_recycle</code> 和 <code>net.ipv4.tcp_tw_reuse</code>. 按照这个思路
+导致有些客户端连接服务器失败，根据这个我去看了下服务器的配置，果不其然，有这个参数的优化。</p>
+
+<h3 id="验证结果">验证结果</h3>
+
+<p>在手动的执行下面这条命令后：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sysctl -w net.ipv4.tcp_tw_recycle</code></pre></div>
+<p>继续在vpc网络内部测试，发现对该lb的ab测试全部都正常了。。。。。
+真是应了那句话，差不多一切的问题不是网络问题就是配置问题。。
+下面是修改前后的监控对比图：
+
+<figure>
+    
+        <img src="https://aliasmee.github.io/media/posts/is-my-website-response-time-so-why-slow/01.jpg" alt="prometheus monitor url" width="800" />
+    
+    
+    <figcaption>
+        <h4>图1:URL监控响应时间图</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<h3 id="分析根本原因">分析根本原因</h3>
+
+<p>这里提出了2个问题，便于理解记忆全文。</p>
+
+<ul>
+<li>为什么启用这个tcp recycle？</li>
+<li>为什么启用tcp recycle之后，会阻塞部分用户的连接请求？</li>
+</ul>
+
+<h5 id="为什么启用这个tcp-recycle">为什么启用这个tcp recycle？</h5>
+
+<p>这个是之前在部署应用主机系统时，修改优化了部分内核参数，当时想的是为了增大主机对tcp的连接性能，防止遇到并发用户的连接，导致tcp 连接不能快速释放，从而引发服务器
+出现性能上的瓶颈(会导致服务器内存和CPU的暴增)。因为client 与server 建立链接传输完数据后，会断开链接，而服务器这边还会有2MSL的 time_wait 时间，超过这个时间之后，正常情况下，该socket才会被释放，
+然后才可以接收其它client的请求。因为server 的端口是有固定范围的，不是说65535个全部都用来建立连接( 可参看系统内核配置：net.ipv4.ip_local_port_range)。</p>
+
+<p>另外关于time_wait具体的可以参考tcp 的4次断开后的状态。
+所以为了快速回收和重新使用，才开启了 tcp的reuse 和 recycle。但没想到这个会引起这么大的问题。
+并且这个参数之前确实也在前公司用过。但没有发现这个类似的问题（也可能是当时的监控不到位，没有发现也不代表该问题不存在。）。
+这里是官方内核文档对这俩参数的解释：</p>
+
+<p><code>net.ipv4.tcp_tw_recycle</code>:
+<em>Enable fast recycling TIME-WAIT sockets. Default value is 0. It should not be changed without advice/request of technical experts.</em></p>
+
+<p><code>net.ipv4.tcp_tw_reuse</code>:
+<em>Allow to reuse TIME-WAIT sockets for new connections when it is safe from protocol viewpoint. Default value is 0. It should not be changed without advice/request of technical experts.</em></p>
+
+<p>而<code>TIME-WAIT</code>时间为2MSL的作用就是为了以确保属于未来连接的数据包不会被误认为是旧连接的延迟数据包。<code>tcp_tw_reuse</code> 可以在<code>TIME_WAIT</code>状态到期之前使用套接字，内核将尝试确保没有关于TCP序列号的冲突。
+如果启用tcp_timestamps（默认是开启的，也就是PAWS，用于保护包装序列号），它将确保不会发生这些冲突。</p>
+
+<h5 id="为什么会阻塞客户端-nat-环境-请求">为什么会阻塞客户端（Nat 环境）请求？</h5>
+
+<p>上面说了为什么启用它，现在在讨论下，为什么启用它后，会导致部分用户的链接，而不是全部？
+看了一些文档及别人提到的解释:</p>
+
+<p><em>当启用tcp_tw_recycle时，内核变得更具攻击性，并将对远程的client建立连接请求时使用的时间戳进行假设。它将跟踪具有TIME_WAIT状态连接的每个远程的client使用的最后时间戳，
+并允许在时间戳正确增加时重新使用套接字。但是，如果主机使用的时间戳发生更改（即server 上记录time_wait中有A 客户端的上一个请求的时间戳是111112，现在又出现一了一个A 客户端的数据请求，并且序列号是111111.），
+则SYN数据包将以静默的方式丢弃，并且连接将无法建立（将看到类似于“connect timeout”的错误）。</em></p>
+
+<p>为什么我看不到关于connect timeout 的错误呢？ 因为在这个环境下，client 相当于是最前面的LB，即haproxy，从这里也很好的解释了，为什么haproxy 的日志有很多连接重试的记录！
+因为在NAT（网络地址转换） 环境下，有很多的client，流量进出都是通过一个公网IP出去的。但当多个NAT 网络环境下的用户同时或者短时间内去访问server 端的话，
+因为对于server来说，此时我只知道有一个IP（client的公网IP）与我建立连接，
+并且这里启用了<code>tcp_tw_recycle</code>，Server主机内核将认为有一部分连接请求的时间戳不是递增的，那么内核将判断该请求是无效的，就会丢失该请求。</p>
+
+<p><em>To keep the same guarantees the TIME-WAIT state was providing, while reducing the expiration timer, when a connection enters the TIME-WAIT state, the latest timestamp is remembered in a dedicated structure containing various metrics for previous known destinations. Then, Linux will drop any segment from the remote host whose timestamp is not strictly bigger than the latest recorded timestamp, unless the TIME-WAIT state would have expired</em></p>
+
+<h3 id="总结">总结</h3>
+
+<p>不要开启<code>tcp_tw_recycle</code>！！！ .重要的话说三遍。
+一定要有配置管理！可以方便在系统出问题时，检查对主机所做的历史记录。考虑问题不能光从
+软件程序、网络上，还要加入对主机系统的分析。tcpdump、ss、还有log等。</p>
+
+<p>另外，针对web 应用服务系统几个优化建议:</p>
+
+<ul>
+<li>设置 <code>net.ipv4.ip_local_port_range</code> 合理的范围（10000~63000）</li>
+<li>给LB设置更多的client IP。</li>
+<li>配置LB 有多个外网IP。</li>
+</ul>
+
+<p>引自：<a href="https://vincent.bernat.im/en/blog/2014-tcp-time-wait-state-linux">Vincent Bernat</a></p>
+
+<h3 id="参考">参考</h3>
+
+<p><a href="https://vincent.bernat.im/en/blog/2014-tcp-time-wait-state-linux">Coping with the TCP TIME-WAIT state on busy Linux servers</a></p>
+
+<p><a href="http://www.cnxct.com/coping-with-the-tcp-time_wait-state-on-busy-linux-servers-in-chinese-and-dont-enable-tcp_tw_recycle/">Vincent Bernat 的翻译中文版</a></p>
+
+<p><a href="https://stackoverflow.com/questions/8893888/dropping-of-connections-with-tcp-tw-recycle">StackOverflow-Dropping of connections with tcp_tw_recycle</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://aliasmee.github.io/tags/respones-slow"><span class="tag">Respones Slow</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/request-timeout"><span class="tag">Request Timeout</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/curl-timeout"><span class="tag">Curl Timeout</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/%E8%B6%85%E6%97%B6"><span class="tag">超时</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/%E8%AE%BF%E9%97%AE%E5%93%8D%E5%BA%94%E6%85%A2"><span class="tag">访问响应慢</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>
