@@ -85,6 +85,15 @@
     </item>
     
     <item>
+      <title>Kubernetes</title>
+      <link>https://aliasmee.github.io/tags/kubernetes/</link>
+      <pubDate>Mon, 09 Jul 2018 18:35:47 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Load Blancer</title>
       <link>https://aliasmee.github.io/tags/load-blancer/</link>
       <pubDate>Tue, 19 Jun 2018 19:02:23 +0800</pubDate>
@@ -99,6 +108,24 @@
       <pubDate>Tue, 19 Jun 2018 19:02:23 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Node Affinity</title>
+      <link>https://aliasmee.github.io/tags/node-affinity/</link>
+      <pubDate>Mon, 09 Jul 2018 18:35:47 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/node-affinity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Node Selectors</title>
+      <link>https://aliasmee.github.io/tags/node-selectors/</link>
+      <pubDate>Mon, 09 Jul 2018 18:35:47 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/node-selectors/</guid>
       <description></description>
     </item>
     
@@ -139,11 +166,29 @@
     </item>
     
     <item>
+      <title>Taint Tolerations</title>
+      <link>https://aliasmee.github.io/tags/taint-tolerations/</link>
+      <pubDate>Mon, 09 Jul 2018 18:35:47 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/taint-tolerations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Vnc</title>
       <link>https://aliasmee.github.io/tags/vnc/</link>
       <pubDate>Sun, 24 Jun 2018 08:20:08 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/vnc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>专用node</title>
+      <link>https://aliasmee.github.io/tags/%E4%B8%93%E7%94%A8node/</link>
+      <pubDate>Mon, 09 Jul 2018 18:35:47 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/%E4%B8%93%E7%94%A8node/</guid>
       <description></description>
     </item>
     

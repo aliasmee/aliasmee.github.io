@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>在kubernetes中，让某个node成为专属节点</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="如何让node 去选择谁能部署到自身上面？看了下现有的Node Selectors、Node Affinity、Node Taints, 经过比对，发现Node Taints 更适合这种情况，下面是分享一下具体的内容.
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="在kubernetes中，让某个node成为专属节点" />
+    <meta name="twitter:description" content="如何让node 去选择谁能部署到自身上面？看了下现有的Node Selectors、Node Affinity、Node Taints, 经过比对，发现Node Taints 更适合这种情况，下面是分享一下具体的内容.
+
+" />
+    <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/let-node-choose-pod-on-kubernetes/cover.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="在kubernetes中，让某个node成为专属节点" />
+  <meta property="og:description" content="如何让node 去选择谁能部署到自身上面？看了下现有的Node Selectors、Node Affinity、Node Taints, 经过比对，发现Node Taints 更适合这种情况，下面是分享一下具体的内容.
+
+" />
+  <meta property="og:url" content="https://aliasmee.github.io/post/let-node-choose-pod-on-kubernetes/" />
+  <meta property="og:image" content="https://aliasmee.github.io/media/posts/let-node-choose-pod-on-kubernetes/cover.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://aliasmee.github.io/post/let-node-choose-pod-on-kubernetes/" />
+<link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">~ Stay Hungry,Stay Foolish. ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">在kubernetes中，让某个node成为专属节点</h1>
+      <p class="post-meta">@aliasmee · Jul 9, 2018 · 2 min read</p>
+    </header>
+    <article class="post-content"><p>如何让node 去选择谁能部署到自身上面？看了下现有的<code>Node Selectors</code>、<code>Node Affinity</code>、<code>Node Taints</code>, 经过比对，发现<code>Node Taints</code> 更适合这种情况，下面是分享一下具体的内容.</p>
+
+<p></p>
+
+<h3 id="需求">需求</h3>
+
+<p>前几天新建了几个namespace，其中包括有test环境，现在有个需求就是想要给这个test 命名空间加入一台专有主机。并且其它的pod调度不能被指派到上面去。使这个pod成为专属主机，只允许有特殊标志的pod被调度到上面去。</p>
+
+<h3 id="分析及确定方案">分析及确定方案</h3>
+
+<p>第一个想到的就是node selectors，先给node 设置label，然后让pod 去根据label选择要部署到哪台主机上.
+给node 设置label：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl label nodes node_name work_env<span style="color:#f92672">=</span>test</code></pre></div>
+<p>创建pod时， 在spec段落里，指定nodeselector的值，如下:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">spec:
+  containers: 
+  - name: ...
+    image: ...
+  nodeSelector:
+    work_env: test</code></pre></div>
+<p>这样虽然保证了pod一定会被调度到这个带有<code>work_env=test</code> label的主机上, 但是其它没有加label的pod也有可能被调度到该节点去。并且官方表示 node-selectors 在未来可能会被 node affinity 替代。</p>
+
+<p>第二个就是 affinity，affinity 这块包含有node 的affinity，以及Inter-pod affinity，这俩对应的都有 anti-affinity，这些相比node selectors来说，更加的灵活，方便。前者是根据node 上的label 指定调度策略，后者是根据node 上已有pod的label 来指定调度策略。</p>
+
+<p>当前有2种node affinity:</p>
+
+<ul>
+<li>requiredDuringSchedulingIgnoredDuringExecution</li>
+<li>preferredDuringSchedulingIgnoredDuringExecution</li>
+</ul>
+
+<p>其中两者的区别在于一个是强制要求，一个是非强制的软要求。就像node selector 一样根据条件去调度. 但不同的是，判断的语法表达式很丰富。目前支持的操作有：<code>In</code>, <code>NotIn</code>, <code>Exists</code>, <code>DoesNotExist</code>, <code>Gt</code>, <code>Lt</code>.
+看到官方介绍说，未来可能会增加新的选项：<code>requiredDuringSchedulingRequiredDuringExecution</code>，这个功能是当你的pod 在运行时，Node上的label发生了改变，将会驱逐该节点上与现有label不匹配的pod.</p>
+
+<p><code>Note：目前affinity 还属于beta，但是已经可以使用.</code></p>
+
+<p>以上两种看似都是根据pod 来选择node，那样的话，要在所有要部署的资源上指定相关的label调度策略。这样我觉得又有点稍微麻烦了。然后就发现还有一种方式可以满足，让node去选择pod。</p>
+
+<p>第三个是 <code>Taints and Tolerations</code>, 通俗的来说，对应node是 污染(taints)，对应pod是能容忍的（tolerations）, 就像情侣一样，虽然他有缺点，但你能容忍，这样这两人就幸福的在一起生活了。😂</p>
+
+<p>官方介绍:</p>
+
+<p><em>Taints and tolerations are a flexible way to steer pods away from nodes or evict pods that shouldn’t be running.</em>
+并且官方给了几个适用的案例：</p>
+
+<ul>
+<li>专用Node</li>
+<li>具有特殊硬件配置的Node</li>
+<li>基于taint对pod进行驱逐</li>
+</ul>
+
+<p>另外官方还说了从 kubernetes 1.6 版本引入了自动taint Node 的功能，这时所有不指定Tolerations的pod，即默认的pod将不会被调度到该Node上，以下是内置的：</p>
+
+<ul>
+<li>node.kubernetes.io/not-ready: 节点尚未就绪</li>
+<li>node.kubernetes.io/unreachable: 节点不可达，和master活着api控制器失去通信，或其它问题导致无法连接</li>
+<li>node.kubernetes.io/out-of-disk: 磁盘不足</li>
+<li>node.kubernetes.io/memory-pressure： 内存有压力 &lt; 100Mi</li>
+<li>node.kubernetes.io/disk-pressure: 磁盘有压力 &lt; 10%</li>
+<li>node.kubernetes.io/network-unavailable： 节点的网络不可用</li>
+<li>node.kubernetes.io/unschedulable: 节点不可调度</li>
+<li>node.cloudprovider.kubernetes.io/uninitialized: 当使用“外部”云提供程序启动kubelet时，会在节点上设置此taint以将其标记为不可用</li>
+</ul>
+
+<p>下面我们就来看看第三种是如何设置的。</p>
+
+<h3 id="验证">验证</h3>
+
+<p>第一步：我们要给不同作用的Node 设置不同label，这样方便后期管理。这也是做这些事情的前提。这里我们用了 taint 和 tolerations，下面是给主机设置taint：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl taint node i-i3i8c9y9 dedicated<span style="color:#f92672">=</span>test:NoSchedule</code></pre></div>
+<p>其中 <code>NoSchedule</code> 意味着，如果没有符合<em>dedicated=test</em> 的污点的容忍，那么所有的pod都不会被调度到该Node 上面。</p>
+
+<p>第二步：我们编辑<code>test-taint-pod.yaml</code>，在pod 的PodSpec 中指定tolerations，如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">spec:
+  containers:
+  - name: test-taint
+    image: ubuntu:latest
+    command: <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;sleep&#34;</span><span style="color:#f92672">]</span>
+    args: <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;300&#34;</span><span style="color:#f92672">]</span>
+  tolerations:
+    - key: <span style="color:#e6db74">&#34;dedicated&#34;</span>
+      operator: <span style="color:#e6db74">&#34;Equal&#34;</span>
+      value: <span style="color:#e6db74">&#34;test&#34;</span>
+      effect: <span style="color:#e6db74">&#34;NoSchedule&#34;</span></code></pre></div>
+<p>另外<code>operator</code> 也可以指定为 <em>Exists</em> ，如果使用了 <em>Exists</em> ，<code>value</code> 那行可以去掉。还有，如果<code>operator</code> 不指定的话，默认是<em>Equal</em></p>
+
+<p>第三步：创建测试pod</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f test-taint-pod.yaml
+
+<span style="color:#75715e"># 然后检查一下
+</span><span style="color:#75715e"></span>kubectl get po -o wide</code></pre></div>
+<p>通过检查，我们可以发现，设置了<code>Toleration</code> 的 pod总是被调到对应有taint 的Node上。</p>
+
+<p><code>Tips:</code> 这里是如何移除Node 上的taint操作</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl taint nodes i-i3i8c9y9 key:NoSchedule-</code></pre></div>
+<h3 id="总结">总结</h3>
+
+<p>回顾一下，有三种方式可以设置node 和pod 的调度关系。</p>
+
+<ul>
+<li>Node Selectors: 符合Pod指定带有label的主机，将会被调度。但无法避免其它Pod在上面。</li>
+<li>Affinty: Node 亲和性，有Node selectors 的所有功能，语法更灵活。但一样，也无法避免其它Pod。</li>
+<li>Taint &amp; Toleration: 只有设置了 Toleration 的主机才可以被调度到上面去。主要用途是设置为专用主机，或其它专有用途的主机。</li>
+</ul>
+
+<h3 id="参考">参考</h3>
+
+<p><a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/#example-use-cases">官方介绍Taints使用案例</a></p>
+
+<p><a href="https://github.com/kubernetes/kubernetes/blob/0949cefd7b3d9dee314bc8b8e33f9e1d13ce9b40/pkg/scheduler/algorithm/well_known_labels.go">Taints label</a></p>
+
+<p><a href="https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#eviction-policy">驱逐策略</a></p>
+
+<p><a href="https://embano1.github.io/post/podnodesel/">Understanding and using the Kubernetes PodNodeSelector Admission Controller</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://aliasmee.github.io/tags/kubernetes"><span class="tag">Kubernetes</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/node-selectors"><span class="tag">Node Selectors</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/taint-tolerations"><span class="tag">Taint Tolerations</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/node-affinity"><span class="tag">Node Affinity</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/%E4%B8%93%E7%94%A8node"><span class="tag">专用Node</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>
