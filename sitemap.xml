@@ -3,230 +3,230 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://aliasmee.github.io/about/</loc>
+    <loc>https://aliasmee.github.io/about/</loc>
     <lastmod>2018-06-01T11:46:40+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/post/install-configuration-jenkins/</loc>
+    <loc>https://aliasmee.github.io/post/install-configuration-jenkins/</loc>
     <lastmod>2018-08-11T14:14:07+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/post/let-node-choose-pod-on-kubernetes/</loc>
+    <loc>https://aliasmee.github.io/post/let-node-choose-pod-on-kubernetes/</loc>
     <lastmod>2018-07-09T18:35:47+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/</loc>
+    <loc>https://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/</loc>
     <lastmod>2018-06-24T21:48:11+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/post/play-with-raspberry-pi-2/</loc>
+    <loc>https://aliasmee.github.io/post/play-with-raspberry-pi-2/</loc>
     <lastmod>2018-06-24T08:20:08+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/post/play-with-raspberry-pi/</loc>
+    <loc>https://aliasmee.github.io/post/play-with-raspberry-pi/</loc>
     <lastmod>2018-06-21T06:53:15+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/post/questions-about-proxy-connect-timeout-on-nginx/</loc>
+    <loc>https://aliasmee.github.io/post/questions-about-proxy-connect-timeout-on-nginx/</loc>
     <lastmod>2018-06-19T19:02:23+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/links/</loc>
+    <loc>https://aliasmee.github.io/links/</loc>
     <lastmod>2018-06-06T21:33:39+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/</loc>
+    <loc>https://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/</loc>
     <lastmod>2018-06-05T22:55:51+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/post/helloworld/</loc>
+    <loc>https://aliasmee.github.io/post/helloworld/</loc>
     <lastmod>2018-06-01T11:48:17+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/504/</loc>
+    <loc>https://aliasmee.github.io/tags/504/</loc>
     <lastmod>2018-06-19T19:02:23+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/bearychat/</loc>
+    <loc>https://aliasmee.github.io/tags/bearychat/</loc>
     <lastmod>2018-06-05T22:55:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/categories/</loc>
+    <loc>https://aliasmee.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/csrf/</loc>
+    <loc>https://aliasmee.github.io/tags/csrf/</loc>
     <lastmod>2018-08-11T14:14:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/curl-timeout/</loc>
+    <loc>https://aliasmee.github.io/tags/curl-timeout/</loc>
     <lastmod>2018-06-24T21:48:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/docker/</loc>
+    <loc>https://aliasmee.github.io/tags/docker/</loc>
     <lastmod>2018-06-21T06:53:15+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/gateway/</loc>
+    <loc>https://aliasmee.github.io/tags/gateway/</loc>
     <lastmod>2018-06-19T19:02:23+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/https/</loc>
+    <loc>https://aliasmee.github.io/tags/https/</loc>
     <lastmod>2018-08-11T14:14:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/install-docker-on-raspberry/</loc>
+    <loc>https://aliasmee.github.io/tags/install-docker-on-raspberry/</loc>
     <lastmod>2018-06-21T06:53:15+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/install-vnc-on-raspberry/</loc>
+    <loc>https://aliasmee.github.io/tags/install-vnc-on-raspberry/</loc>
     <lastmod>2018-06-24T08:20:08+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/jenkins/</loc>
+    <loc>https://aliasmee.github.io/tags/jenkins/</loc>
     <lastmod>2018-08-11T14:14:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/kubernetes/</loc>
+    <loc>https://aliasmee.github.io/tags/kubernetes/</loc>
     <lastmod>2018-07-09T18:35:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/load-blancer/</loc>
+    <loc>https://aliasmee.github.io/tags/load-blancer/</loc>
     <lastmod>2018-06-19T19:02:23+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/nginx/</loc>
+    <loc>https://aliasmee.github.io/tags/nginx/</loc>
     <lastmod>2018-08-11T14:14:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/node-affinity/</loc>
+    <loc>https://aliasmee.github.io/tags/node-affinity/</loc>
     <lastmod>2018-07-09T18:35:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/node-selectors/</loc>
+    <loc>https://aliasmee.github.io/tags/node-selectors/</loc>
     <lastmod>2018-07-09T18:35:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/post/</loc>
+    <loc>https://aliasmee.github.io/post/</loc>
     <lastmod>2018-08-11T14:14:07+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/proxy_connect_timeout/</loc>
+    <loc>https://aliasmee.github.io/tags/proxy_connect_timeout/</loc>
     <lastmod>2018-06-19T19:02:23+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/raspberry-pi/</loc>
+    <loc>https://aliasmee.github.io/tags/raspberry-pi/</loc>
     <lastmod>2018-06-24T08:20:08+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/request-timeout/</loc>
+    <loc>https://aliasmee.github.io/tags/request-timeout/</loc>
     <lastmod>2018-06-24T21:48:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/respones-slow/</loc>
+    <loc>https://aliasmee.github.io/tags/respones-slow/</loc>
     <lastmod>2018-06-24T21:48:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/</loc>
+    <loc>https://aliasmee.github.io/tags/</loc>
     <lastmod>2018-06-19T19:02:23+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/taint-tolerations/</loc>
+    <loc>https://aliasmee.github.io/tags/taint-tolerations/</loc>
     <lastmod>2018-07-09T18:35:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/vnc/</loc>
+    <loc>https://aliasmee.github.io/tags/vnc/</loc>
     <lastmod>2018-06-24T08:20:08+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/</loc>
+    <loc>https://aliasmee.github.io/</loc>
     <lastmod>2018-06-01T11:46:40+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/%E4%B8%93%E7%94%A8node/</loc>
+    <loc>https://aliasmee.github.io/tags/%E4%B8%93%E7%94%A8node/</loc>
     <lastmod>2018-07-09T18:35:47+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</loc>
+    <loc>https://aliasmee.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/</loc>
     <lastmod>2018-06-24T08:20:08+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BC%80%E7%AE%B1/</loc>
+    <loc>https://aliasmee.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BC%80%E7%AE%B1/</loc>
     <lastmod>2018-06-24T08:20:08+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/%E8%AE%BF%E9%97%AE%E5%93%8D%E5%BA%94%E6%85%A2/</loc>
+    <loc>https://aliasmee.github.io/tags/%E8%AE%BF%E9%97%AE%E5%93%8D%E5%BA%94%E6%85%A2/</loc>
     <lastmod>2018-06-24T21:48:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://aliasmee.github.io/tags/%E8%B6%85%E6%97%B6/</loc>
+    <loc>https://aliasmee.github.io/tags/%E8%B6%85%E6%97%B6/</loc>
     <lastmod>2018-06-24T21:48:11+08:00</lastmod>
     <priority>0</priority>
   </url>
