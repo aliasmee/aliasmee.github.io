@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>400 on aliasmee&#39;s blog </title>
+    <link>https://aliasmee.github.io/tags/400/</link>
+    <description>Recent content in 400 on aliasmee&#39;s blog </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Tue, 14 Aug 2018 07:02:28 +0800</lastBuildDate>
+    
+	<atom:link href="https://aliasmee.github.io/tags/400/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>elasticsearch 索引出现值冲突，客户端报400错误</title>
+      <link>https://aliasmee.github.io/post/resolve-a-conflict-on-elasticsearch/</link>
+      <pubDate>Tue, 14 Aug 2018 07:02:28 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/resolve-a-conflict-on-elasticsearch/</guid>
+      <description>&lt;p&gt;解决elasticsearch索引里面的值的类型冲突，导致新提交的值与预期的key 类型不一致.引发了日志会丢失的情况。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

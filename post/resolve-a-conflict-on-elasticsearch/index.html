@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>elasticsearch 索引出现值冲突，客户端报400错误</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="解决elasticsearch索引里面的值的类型冲突，导致新提交的值与预期的key 类型不一致.引发了日志会丢失的情况。
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="elasticsearch 索引出现值冲突，客户端报400错误" />
+    <meta name="twitter:description" content="解决elasticsearch索引里面的值的类型冲突，导致新提交的值与预期的key 类型不一致.引发了日志会丢失的情况。
+
+" />
+    <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/resolve-a-conflict-on-elasticsearch/cover.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="elasticsearch 索引出现值冲突，客户端报400错误" />
+  <meta property="og:description" content="解决elasticsearch索引里面的值的类型冲突，导致新提交的值与预期的key 类型不一致.引发了日志会丢失的情况。
+
+" />
+  <meta property="og:url" content="https://aliasmee.github.io/post/resolve-a-conflict-on-elasticsearch/" />
+  <meta property="og:image" content="https://aliasmee.github.io/media/posts/resolve-a-conflict-on-elasticsearch/cover.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://aliasmee.github.io/post/resolve-a-conflict-on-elasticsearch/" />
+<link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">~ Stay Hungry,Stay Foolish. ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">elasticsearch 索引出现值冲突，客户端报400错误</h1>
+      <p class="post-meta">@aliasmee · Aug 14, 2018 · 1 min read</p>
+    </header>
+    <article class="post-content"><p>解决elasticsearch索引里面的值的类型冲突，导致新提交的值与预期的key 类型不一致.引发了日志会丢失的情况。</p>
+
+<p></p>
+
+<h3 id="问题">问题</h3>
+
+<p>最近在使用kibana时，发现管理索引那里，某个索引下面有字段冲突的提示，然后去查看fluentd客户端的运行情况，发现在fluent程序自己的日志里，偶尔会出现几条错误信息：&rsquo;ElasticsearchError error=&ldquo;400 - Rejected by Elasticsearch&rdquo;&rsquo;
+, 这是怎么回事呢？下面是错误的日志：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-log" data-lang="log">2018-08-13 18:02:55 +0800 [warn]: #0 dump an error event: error_class=Fluent::Plugin::ElasticsearchErrorHandler::ElasticsearchError error=&#34;400 - Rejected by Elasticsearch&#34; location=nil tag=&#34;athena&#34; time=2018-08-13 18:01:51.000000000 +0800 record={&#34;method&#34;=&gt;&#34;GET&#34;, &#34;path&#34;=&gt;&#34;/&#34;, &#34;format&#34;=&gt;&#34;html&#34;, &#34;controller&#34;=&gt;&#34;HomeController&#34;, &#34;action&#34;=&gt;&#34;home&#34;, &#34;status&#34;=&gt;302, &#34;duration&#34;=&gt;26.69, &#34;view&#34;=&gt;0.0, &#34;db&#34;=&gt;10.06, &#34;location&#34;=&gt;&#34;https://x.x.com/x/xxoo&#34;, &#34;params&#34;=&gt;&#34;{}&#34;, &#34;referrer&#34;=&gt;&#34;https://x.o.com/x/ooooo/166888&#34;, &#34;user_id&#34;=&gt;101010101010, &#34;session_id&#34;=&gt;&#34;199000000000000&#34;}  </code></pre></div>
+<h3 id="分析">分析</h3>
+
+<p>在kibana 那里，对提示conflict 的<code>location</code>字段进行编辑，发现页面最下方有些重要提示，如图1所示：</p>
+
+
+<figure>
+    
+        <img src="https://aliasmee.github.io/media/posts/resolve-a-conflict-on-elasticsearch/01.jpg" alt="kibana" width="450" />
+    
+    
+    <figcaption>
+        <h4>kibana 冲突提示</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>从上面提示可以看出，location 字段在不同索引里的类型发生了变化，之前是<code>text</code> 类型，后来变成了<code>geo_point</code>. 为了确认这点，我们可以通过es客户端，或者直接用curl，对es的mapping进行查看。</p>
+
+<h3 id="验证">验证</h3>
+
+<p>我这里使用curl方式，先查看为text类型的索引。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X GET <span style="color:#e6db74">&#34;localhost:9200/logs-app-athena-2018.08.10/_mapping/&#34;</span> -H <span style="color:#e6db74">&#39;Content-Type: application/json&#39;</span> | jq <span style="color:#e6db74">&#39;.&#39;</span></code></pre></div>
+<p>这是location字段的定义:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#e6db74">&#34;location&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+  <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;text&#34;</span>,
+  <span style="color:#f92672">&#34;fields&#34;</span>: {
+    <span style="color:#f92672">&#34;keyword&#34;</span>: {
+      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>,
+      <span style="color:#f92672">&#34;ignore_above&#34;</span>: <span style="color:#ae81ff">256</span>
+    }
+  }
+}<span style="color:#960050;background-color:#1e0010">,</span></code></pre></div>
+<p>然后再去看下提示location 为geo_point 类型的索引看下。还是用上面的命令，只是改下索引的名字。得到的结果如预期一样。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#e6db74">&#34;location&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+  <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;geo_point&#34;</span>
+}<span style="color:#960050;background-color:#1e0010">,</span></code></pre></div>
+<p>但为什么从12号开始的索引里，这个值的类型就变成<code>geo_ip</code>了呢？仔细想了想，我11号好像做了一点操作。就是在<code>logs-app-nginx*</code> 索引模版里都添加了一个<code>_default_</code>，但为什么这个会影响到logs-app-athena 的索引呢？这个问题一直没想明白。这个是我当时做的操作：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X GET <span style="color:#e6db74">&#34;localhost:9200/_template/logs-app-nginx-* -d &#39;{&#34;</span>order<span style="color:#e6db74">&#34;:0,&#34;</span>template<span style="color:#e6db74">&#34;:&#34;</span>*<span style="color:#e6db74">&#34;,&#34;</span>settings<span style="color:#e6db74">&#34;:{},&#34;</span>mappings<span style="color:#e6db74">&#34;:{&#34;</span>_default_<span style="color:#e6db74">&#34;:{&#34;</span>properties<span style="color:#e6db74">&#34;:{&#34;</span>location<span style="color:#e6db74">&#34;:{&#34;</span>type<span style="color:#e6db74">&#34;:&#34;</span>geo_point<span style="color:#e6db74">&#34;}}}}}&#39;</span></code></pre></div>
+<h3 id="解决方案">解决方案</h3>
+
+<ul>
+<li>修改logs-app-athena系列索引的<code>_default_</code>值中的location类型为text</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -X PUT <span style="color:#e6db74">&#34;localhost:9200/logs-app-athena-*/_mappings/&#34;</span>  -H <span style="color:#e6db74">&#39;Content-Type: application/json&#39;</span> -d<span style="color:#960050;background-color:#1e0010">&#39;</span>
+<span style="color:#f92672">{</span>
+  <span style="color:#e6db74">&#34;_default_&#34;</span>: <span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;properties&#34;</span>: <span style="color:#f92672">{</span>
+      <span style="color:#e6db74">&#34;location&#34;</span>: <span style="color:#f92672">{</span>
+        <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;text&#34;</span>
+      <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p><code>Note: 在elasticsearch 6.0以后默认不在使用_default_ mappings.</code><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.x/default-mapping.html">default mapping</a></p>
+
+<h3 id="总结">总结</h3>
+
+<p>这次问题的出现，对es又多了一点点了解，还要多看看官方文档发布的更新日志，可能某些功能在相应的版本里就不推荐使用了。</p>
+
+<p>另外做这次改动的根本原因是nginx日志都在<code>logs-app-nginx-*</code> 索引里,而location 字段没有被自动解析成<code>geo_point</code>类型。后来不得已，换成了<code>logstash-*</code> 为前缀的索引后，类型才自动变成了<code>geo_point</code>。不知道还有没有其它方法可以实现。</p>
+
+<h3 id="参考">参考</h3>
+
+<p><a href="https://discuss.elastic.co/t/changing-lat-lon-from-float-to-geo-point/116067">change lat lon from float to geo_point</a></p>
+
+<p><a href="https://stackoverflow.com/questions/37792826/geo-point-for-all-indexs-template-mappings">geo point for all indexs template-mappings</a></p>
+
+<p><a href="https://www.elastic.co/blog/logstash_lesson_elasticsearch_mapping">logstash lesson elasticsearch mapping</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://aliasmee.github.io/tags/elasticsearch"><span class="tag">Elasticsearch</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/fluentd"><span class="tag">Fluentd</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/400"><span class="tag">400</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/key-conflict"><span class="tag">Key Conflict</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/400---rejected-by-elasticsearch"><span class="tag">400 - Rejected by Elasticsearch</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

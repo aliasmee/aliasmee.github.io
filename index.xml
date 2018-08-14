@@ -22,6 +22,17 @@
     </item>
     
     <item>
+      <title>elasticsearch 索引出现值冲突，客户端报400错误</title>
+      <link>https://aliasmee.github.io/post/resolve-a-conflict-on-elasticsearch/</link>
+      <pubDate>Tue, 14 Aug 2018 07:02:28 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/resolve-a-conflict-on-elasticsearch/</guid>
+      <description>&lt;p&gt;解决elasticsearch索引里面的值的类型冲突，导致新提交的值与预期的key 类型不一致.引发了日志会丢失的情况。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>安装Jenkins及使用Nginx反向代理Jenkins配置</title>
       <link>https://aliasmee.github.io/post/install-configuration-jenkins/</link>
       <pubDate>Sat, 11 Aug 2018 14:14:07 +0800</pubDate>
