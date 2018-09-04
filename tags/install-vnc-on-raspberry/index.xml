@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Install Vnc on Raspberry on aliasmee&#39;s blog </title>
-    <link>https://aliasmee.github.io/tags/install-vnc-on-raspberry/</link>
+    <link>http://aliasmee.github.io/tags/install-vnc-on-raspberry/</link>
     <description>Recent content in Install Vnc on Raspberry on aliasmee&#39;s blog </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
     <lastBuildDate>Sun, 24 Jun 2018 08:20:08 +0800</lastBuildDate>
     
-	<atom:link href="https://aliasmee.github.io/tags/install-vnc-on-raspberry/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://aliasmee.github.io/tags/install-vnc-on-raspberry/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>我的新玩伴-树莓派2</title>
-      <link>https://aliasmee.github.io/post/play-with-raspberry-pi-2/</link>
+      <link>http://aliasmee.github.io/post/play-with-raspberry-pi-2/</link>
       <pubDate>Sun, 24 Jun 2018 08:20:08 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/play-with-raspberry-pi-2/</guid>
+      <guid>http://aliasmee.github.io/post/play-with-raspberry-pi-2/</guid>
       <description>&lt;p&gt;接着上篇的，本篇介绍了桌面版本的安装，并设置vnc ，用于远程桌面连接。另外给大家看自己动手给树莓派盖的屋子。哈哈&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

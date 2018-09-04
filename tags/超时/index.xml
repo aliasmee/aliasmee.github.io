@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>超时 on aliasmee&#39;s blog </title>
-    <link>https://aliasmee.github.io/tags/%E8%B6%85%E6%97%B6/</link>
+    <link>http://aliasmee.github.io/tags/%E8%B6%85%E6%97%B6/</link>
     <description>Recent content in 超时 on aliasmee&#39;s blog </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
     <lastBuildDate>Sun, 24 Jun 2018 21:48:11 +0800</lastBuildDate>
     
-	<atom:link href="https://aliasmee.github.io/tags/%E8%B6%85%E6%97%B6/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://aliasmee.github.io/tags/%E8%B6%85%E6%97%B6/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>为什么我的网站响应速度时快时慢？</title>
-      <link>https://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/</link>
+      <link>http://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/</link>
       <pubDate>Sun, 24 Jun 2018 21:48:11 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/</guid>
+      <guid>http://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/</guid>
       <description>&lt;p&gt;平常工作生活中，不知你有没有遇到这种情况，有时访问网站异常的快，有时却要等待10多秒才会有响应，
 这种情况下，我们一般不会太多的停留在网站，因为影响了用户体验。今天就分享记录下，我工作中遇到的
 一个问题。&lt;/p&gt;
