@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>利用开源软件strongSwan实现支持IKEv2的企业级IPsec VPN，并结合FreeRadius实现AAA协议(上篇)</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="序言:
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="利用开源软件strongSwan实现支持IKEv2的企业级IPsec VPN，并结合FreeRadius实现AAA协议(上篇)" />
+    <meta name="twitter:description" content="序言:
+
+" />
+    <meta name="twitter:image" content="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/cover.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="利用开源软件strongSwan实现支持IKEv2的企业级IPsec VPN，并结合FreeRadius实现AAA协议(上篇)" />
+  <meta property="og:description" content="序言:
+
+" />
+  <meta property="og:url" content="http://aliasmee.github.io/post/ikev2-vpn-part1/" />
+  <meta property="og:image" content="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/cover.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="http://aliasmee.github.io/post/ikev2-vpn-part1/" />
+<link rel="alternative" href="http://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="http://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="http://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="http://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="http://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="http://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="http://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="http://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="http://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">~ Stay Hungry,Stay Foolish. ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="http://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="http://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="http://aliasmee.github.io/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="http://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="http://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">利用开源软件strongSwan实现支持IKEv2的企业级IPsec VPN，并结合FreeRadius实现AAA协议(上篇)</h1>
+      <p class="post-meta">@aliasmee · Dec 9, 2016 · 5 min read</p>
+    </header>
+    <article class="post-content"><p>序言:</p>
+
+<p></p>
+
+<h3 id="故事是这样开始的">故事是这样开始的</h3>
+
+<p>　前段时间，给Mac升级了系统的，恰巧在平常办公还需用到拨VPN的用户，想必也知道新的Mac系统里已经不再支持PPTP了。而是只支持l2tp,ikev2,ipsc这些协议详情可以点击这里：官方建议。巧的是我们的vpn就是pptp的&hellip;,而且领导们也都升级了系统，悲剧了吧。想想升级方案吧。本来是准备使用l2tp+ipsec的，但后来在搭建好后，用客户端进行测试时却一直出现809错误。此刻，有种香菇的感觉&hellip;</p>
+
+<p>　不过想到了mac上面还有个IKEv2的vpn类型，当时是病急乱投医的感觉，其它方案都不可用，试试这个吧，于是GG搜了相关资料，也看了官方介绍，以及前辈大牛们的搭建文章，就像是郑和发现新大陆一样的心情。这个了不得呀，而且完全不用安装特殊客户端啊，多好的服务呀。好吧，少一点真诚，多一点套路。在整个学习搭建到后期实现，测试整套方案的过程，便有了这篇文章。如果有需要改正的，请一定留言告诉我哈。</p>
+
+<h3 id="strongswan自述">strongSwan自述</h3>
+
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/01.png" alt="strongSwan" width="450" />
+    
+    
+    <figcaption>
+        <h4>strongSwan</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>　strongSwan是一个开源的IPsec实现项目。它最初是基于停产的FreeS / WAN项目(这里有介绍)，我们开发了X.509补丁。为了有一个稳定的IPsec平台，立足于X.509能力的扩展，我们决定在2005年启动strongSwan项目。</p>
+
+<p>　至此，新的IKE守护程序使用现代化面向对象的编码风格编写，使当前的代码已经不在和它的祖先共享。最初的守护进程仅支持IKEv2协议，而IKEv1则是由被FreeS / WAN的 pluto 守护程序的扩展版本处理。但是，由于其他厂商依然长期采用IKEv2协议，后来在strongSwan 5.0.0版本时，便增加了IKEv1的支持，加入到新的守护程序。</p>
+
+<p>strongSwan最初设计用于Linux上，现在已经被移植到Android，FreeBSD，Mac OS X，Windows等平台上。</p>
+
+<p>strongSwan的特点：</p>
+
+<ul>
+<li>配置简单</li>
+<li>强大的加密和身份验证方法</li>
+<li>强大的IPsec策略，支持大型和复杂的VPN网络</li>
+<li>模块化设计，极大的扩展性</li>
+<li>支持MOBIKE，对于移动端，如手机，支持特别好，据说是即时在网络很差的情况下，也不会掉线</li>
+<li>StrongSwan项目的维护者：Andreas Steffen.</li>
+</ul>
+
+<p>支持的客户端：</p>
+
+<ul>
+<li>Linux: 命令行客户端就是 strongSwan 本身，因此完美兼容，支持 ikev1/ikev2 和所有加密方法的连接。</li>
+<li>Android: 只支持 ikev1(没有最新andriod手机，可能已经支持ikev2)。</li>
+<li>iOS/Mac OS X:IOS 9 Mac OS X 、macOS Sierra支持ikev2.</li>
+<li>Windows: Windows 7 以后都支持ikev2</li>
+</ul>
+
+<h3 id="开始动刀吧">开始动刀吧</h3>
+
+<ol>
+<li>环境架构：可参考下图
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/02.png" alt="Topology" width="700" />
+    
+    
+    <figcaption>
+        <h4>arch Topology</h4>
+        
+    </figcaption>
+    
+</figure>
+</li>
+</ol>
+
+<blockquote>
+<p>系统：Centos7.0 minimal</p>
+
+<p>公网IP: 192.168.30.57（根据实际更改）</p>
+
+<p>使用IKEv2协议，客户端认证方式使用 用户名+密码 + 证书 结合的方式。</p>
+</blockquote>
+
+<ol>
+<li><p>安装前配置系统</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed -i <span style="color:#e6db74">&#39;s/SELINUX=enforcing/SELINUX=disabled/g&#39;</span> /etc/selinux/config
+setenforce <span style="color:#ae81ff">0</span></code></pre></div></li>
+
+<li><p>更新系统并安装需要的软件环境</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum update -y
+yum install pam-devel openssl-devel make gcc curl tcpdump -y</code></pre></div></li>
+
+<li><p>安装最新版strongSwan软件</p></li>
+</ol>
+
+<p>下载解压</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget -c https://download.strongswan.org/strongswan-5.5.1.tar.gz
+tar -xf strongswan-5.5.1.tar.gz <span style="color:#f92672">&amp;&amp;</span> cd strongswan-5.5.1</code></pre></div>
+<p>编译前的configure参数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./configure  --enable-eap-identity --enable-eap-md5 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--enable-eap-mschapv2 --enable-eap-tls --enable-eap-ttls --enable-eap-peap <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--enable-eap-tnc --enable-eap-dynamic --enable-eap-radius --enable-xauth-eap <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--enable-xauth-pam  --enable-dhcp  --enable-openssl  --enable-addrblock --enable-unity <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--enable-certexpire --enable-radattr --enable-swanctl --enable-openssl --disable-gmp</code></pre></div>
+<p><code>备注：--enable-eap-radius 是为了后期与radius 结合时模块，如果你的radius 和ipsec不能一起工作，可检查编译安装时有没有开启这个模块。</code></p>
+
+<p>编译安装</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make <span style="color:#f92672">&amp;&amp;</span> make install</code></pre></div>
+<ol>
+<li><p>生成相关证书文件（使用ipsec pki命令）</p>
+
+<ul>
+<li>创建证书存放目录
+<code>bash
+mkdir key_files &amp;&amp; cd key_files　　　　
+</code></li>
+
+<li><p>生成一个新的私钥，并用新私钥生成一个自签名的CA证书，有效期为10年</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ipsec pki --gen --outform pem &gt; ca.pem
+ipsec pki --self --in ca.pem --dn <span style="color:#e6db74">&#34;C=cn, O=ilove, CN=VPN CA&#34;</span> --ca --lifetime <span style="color:#ae81ff">3650</span> --outform pem &gt;ca.cert.pem</code></pre></div>
+<p>备注：C 表示国家，O 表示组织名，如guge。CN 为通用名。（在整个部署过程中要保持一致）</p></li>
+
+<li><p>生成一个新的私钥，创建服务器证书时需要。然后从刚生成的私钥中提取公钥，使用上一步自签名的CA证书文件，颁发一个服务器证书</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ipsec pki --gen --outform pem &gt; server.pem
+ipsec pki --pub --in server.pem | ipsec pki --issue --lifetime <span style="color:#ae81ff">1200</span> --cacert ca.cert.pem --cakey ca.pem --dn <span style="color:#e6db74">&#34;C=cn, O=ilove, CN=192.168.30.57&#34;</span> --san<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;192.168.30.57&#34;</span> --flag serverAuth --flag ikeIntermediate --outform pem &gt; server.cert.pem</code></pre></div>
+<p><code>备注：--CN=192.168.30.57 --san=192.168.30.57   可以替换成你的公网ip</code></p></li>
+
+<li><p>生成一个新的私钥，并用上一步自签名的CA证书颁发一个客户端证书</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ipsec pki --gen --outform pem &gt; client.pem
+ipsec pki --pub --in client.pem | ipsec pki --issue --cacert ca.cert.pem --cakey ca.pem --dn <span style="color:#e6db74">&#34;C=cn, O=ilove, CN=VPN Client&#34;</span> --outform pem &gt; client.cert.pem</code></pre></div>
+<p><code>备注：这里客户端的证书可以和ca 证书不一样。</code></p></li>
+</ul></li>
+
+<li><p>将生成的证书文件拷贝到strongswan程序中的相关目录中</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp ca.cert.pem /usr/local/etc/ipsec.d/cacerts/
+cp server.cert.pem /usr/local/etc/ipsec.d/certs/
+cp server.pem /usr/local/etc/ipsec.d/private/
+cp client.cert.pem /usr/local/etc/ipsec.d/certs/
+cp client.pem  /usr/local/etc/ipsec.d/private/</code></pre></div></li>
+
+<li><p>配置strongSwan IPsec服务</p>
+
+<ul>
+<li>配置ipsec，文件在/usr/local/etc/ipsec.conf,内容如下</li>
+</ul></li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># cat /usr/local/etc/ipsec.conf
+</span><span style="color:#75715e"></span>config setup
+    uniqueids<span style="color:#f92672">=</span>never 
+
+conn iOS_cert
+    keyexchange<span style="color:#f92672">=</span>ikev1
+    fragmentation<span style="color:#f92672">=</span>yes
+    left<span style="color:#f92672">=</span>%defaultroute
+    leftauth<span style="color:#f92672">=</span>pubkey
+    leftsubnet<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>.0.0.0/0
+    leftcert<span style="color:#f92672">=</span>server.cert.pem
+    right<span style="color:#f92672">=</span>%any
+    rightauth<span style="color:#f92672">=</span>pubkey
+    rightauth2<span style="color:#f92672">=</span>xauth
+    rightsourceip<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>.31.0.0/24
+    rightcert<span style="color:#f92672">=</span>client.cert.pem
+    auto<span style="color:#f92672">=</span>add
+
+conn android_xauth_psk
+    keyexchange<span style="color:#f92672">=</span>ikev1
+    left<span style="color:#f92672">=</span>%defaultroute
+    leftauth<span style="color:#f92672">=</span>psk
+    leftsubnet<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>.0.0.0/0
+    right<span style="color:#f92672">=</span>%any
+    rightauth<span style="color:#f92672">=</span>psk
+    rightauth2<span style="color:#f92672">=</span>xauth
+    rightsourceip<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>.31.1.0/24
+    auto<span style="color:#f92672">=</span>add
+
+conn networkmanager-strongswan
+    keyexchange<span style="color:#f92672">=</span>ikev2
+    left<span style="color:#f92672">=</span>%defaultroute
+    leftauth<span style="color:#f92672">=</span>pubkey
+    leftsubnet<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>.0.0.0/0
+    leftcert<span style="color:#f92672">=</span>server.cert.pem
+    right<span style="color:#f92672">=</span>%any
+    rightauth<span style="color:#f92672">=</span>pubkey
+    rightsourceip<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>.31.2.0/24
+    rightcert<span style="color:#f92672">=</span>client.cert.pem
+    auto<span style="color:#f92672">=</span>add
+
+conn ios_ikev2
+    keyexchange<span style="color:#f92672">=</span>ikev2
+    ike<span style="color:#f92672">=</span>aes256-sha256-modp2048,3des-sha1-modp2048,aes256-sha1-modp2048!
+    esp<span style="color:#f92672">=</span>aes256-sha256,3des-sha1,aes256-sha1!
+    rekey<span style="color:#f92672">=</span>no
+    left<span style="color:#f92672">=</span>%defaultroute
+    leftid<span style="color:#f92672">=</span><span style="color:#ae81ff">192</span>.168.30.57
+    leftsendcert<span style="color:#f92672">=</span>always
+    leftsubnet<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>.0.0.0/0
+    leftcert<span style="color:#f92672">=</span>server.cert.pem
+    right<span style="color:#f92672">=</span>%any
+    rightauth<span style="color:#f92672">=</span>eap-mschapv2
+    rightsourceip<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>.31.2.0/24
+    rightsendcert<span style="color:#f92672">=</span>never
+    eap_identity<span style="color:#f92672">=</span>%any
+    dpdaction<span style="color:#f92672">=</span>clear
+    fragmentation<span style="color:#f92672">=</span>yes
+    auto<span style="color:#f92672">=</span>add
+
+conn windows7
+    keyexchange<span style="color:#f92672">=</span>ikev2
+    ike<span style="color:#f92672">=</span>aes256-sha1-modp1024!
+    rekey<span style="color:#f92672">=</span>no
+    left<span style="color:#f92672">=</span>%defaultroute
+    leftauth<span style="color:#f92672">=</span>pubkey
+    leftsubnet<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>.0.0.0/0
+    leftcert<span style="color:#f92672">=</span>server.cert.pem
+    right<span style="color:#f92672">=</span>%any
+    rightauth<span style="color:#f92672">=</span>eap-mschapv2
+    rightsourceip<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>.31.2.0/24
+    rightsendcert<span style="color:#f92672">=</span>never
+    eap_identity<span style="color:#f92672">=</span>%any
+    auto<span style="color:#f92672">=</span>add</code></pre></div>
+<p><code>备注：　注意：leftid 要改为你自己的公网IP，切记。</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">config setup 所有项目共用配置项
+uniqueids<span style="color:#f92672">=</span>never 允许多个客户端使用同一证书，即多设备同时在线
+conn ios_ikev2 定义一个连接标识，用于ipsec status 查看连接时有所区别
+left<span style="color:#f92672">=</span>%any     服务器端标识,%any表示任意
+leftsubnet<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>.0.0.0/0 服务器端虚拟ip, <span style="color:#ae81ff">0</span>.0.0.0/0表示通配.
+right<span style="color:#f92672">=</span>%any   客户端标识,%any表示任意
+leftcert<span style="color:#f92672">=</span>server.cert.pem   服务器端证书
+rightsourceip<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>.31.2.0/24     分配给客户端的虚拟ip段
+leftid<span style="color:#f92672">=</span><span style="color:#ae81ff">192</span>.168.30.57  这里选择你的ip地址。必须和证书里填写的一致。
+ike 密钥交换算法</code></pre></div>
+<p>详细的ipsec.conf 请参考官网</p>
+
+<ul>
+<li>配置strongSwan 配置文件，路径在/usr/local/etc/strongswan.conf，文件内容:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /usr/local/etc/strongswan.conf
+charon <span style="color:#f92672">{</span>
+        load_modular <span style="color:#f92672">=</span> yes
+        duplicheck.enable <span style="color:#f92672">=</span> no
+        compress <span style="color:#f92672">=</span> yes
+        plugins <span style="color:#f92672">{</span>
+                include strongswan.d/charon/*.conf
+        <span style="color:#f92672">}</span>
+        dns1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">114</span>.114.114.114
+        dns2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>.8.8.8
+        nbns1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>.8.8.8
+        nbns2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>.8.4.4
+<span style="color:#f92672">}</span>
+include strongswan.d/*.conf</code></pre></div>
+<p><code>备注：</code></p>
+
+<pre><code>Duplicheck.enable = no    关闭冗余检查，同时连接多个设备
+plugins strongswan 支持的插件配置，不建议在此文件里配置，应去charon目录下。
+</code></pre>
+
+<ul>
+<li>配置vpn认证密码文件ipsec.secrets,，路径/usr/local/etc/ipsec.secrets，内容如下</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /usr/local/etc/ipsec.secrets
+: RSA server.pem
+: PSK <span style="color:#e6db74">&#34;iloveworld&#34;</span>
+: XAUTH <span style="color:#e6db74">&#34;iloveworldPass&#34;</span>
+testUserOne %any : EAP <span style="color:#e6db74">&#34;testOnePass&#34;</span></code></pre></div>
+<p><code>备注：</code></p>
+
+<pre><code>RSA  服务器的私钥
+PSK  共享密钥（可用于ios 10上直接使用Cisco的 IPSec连接）
+testUserOne 是用户名， testOnePass 是用户名密码，可填写多行，添加多个用户时，需要重启ipsec
+</code></pre>
+
+<ol>
+<li>配置linux系统内核开启转发功能，并配置iptables规则</li>
+</ol>
+
+<p>8.1 开启内核转发，暂时生效：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sysctl -w net.ipv4.ip_forward<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span></code></pre></div>
+<p>或者让其永久生效：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;net.ipv4.ip_forward = 1&#34;</span> &gt;&gt; /etc/sysctl.conf
+sysctl -p</code></pre></div>
+<p>8.2 添加iptables 规则</p>
+
+<p>先清除原有规则（线上的话建议先备份，并保证22端口可连接，此步骤可不做。）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">iptables -F
+iptables -X</code></pre></div>
+<p>转发规则</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -s <span style="color:#ae81ff">10</span>.31.0.0/24  -j ACCEPT
+iptables -A FORWARD -s <span style="color:#ae81ff">10</span>.31.1.0/24  -j ACCEPT
+iptables -A FORWARD -s <span style="color:#ae81ff">10</span>.31.2.0/24  -j ACCEPT</code></pre></div>
+<p>入站规则（注意：-i 你的网卡名称）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">iptables -A INPUT -i eno16777984 -p esp -j ACCEPT
+iptables -A INPUT -i eno16777984 -p udp -m state --state NEW --dport <span style="color:#ae81ff">500</span> -j ACCEPT
+iptables -A INPUT -i eno16777984 -p udp -m state --state NEW --dport <span style="color:#ae81ff">4500</span> -j ACCEPT
+iptables -A INPUT -i eno16777984 -p udp -m state --state NEW --dport <span style="color:#ae81ff">1701</span> -j ACCEPT
+iptables -A INPUT -i eno16777984 -p tcp -m state --state NEW --dport <span style="color:#ae81ff">1723</span> -j ACCEPT</code></pre></div>
+<p>Nat规则</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">iptables -t nat -A POSTROUTING -s <span style="color:#ae81ff">10</span>.31.0.0/24 -o eno16777984 -j MASQUERADE
+iptables -t nat -A POSTROUTING -s <span style="color:#ae81ff">10</span>.31.1.0/24 -o eno16777984 -j MASQUERADE
+iptables -t nat -A POSTROUTING -s <span style="color:#ae81ff">10</span>.31.2.0/24 -o eno16777984 -j MASQUERADE</code></pre></div>
+<p>保存iptables规则</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">service iptables save</code></pre></div>
+<p>备注：在这个环境里，我是卸载了7的 firewalld程序，并安装了iptables-services程序。注意：-i 网卡名称（填写你自己的网卡名称，7以前的是ethxx）</p>
+
+<p>这里完整的iptables 规则，可以参考：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /etc/sysconfig/iptables
+*filter
+:INPUT ACCEPT <span style="color:#f92672">[</span><span style="color:#ae81ff">0</span>:0<span style="color:#f92672">]</span>
+:FORWARD ACCEPT <span style="color:#f92672">[</span><span style="color:#ae81ff">0</span>:0<span style="color:#f92672">]</span>
+:OUTPUT ACCEPT <span style="color:#f92672">[</span><span style="color:#ae81ff">342</span>:64390<span style="color:#f92672">]</span>
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport <span style="color:#ae81ff">22</span> -j ACCEPT
+-A INPUT -i eno16777984 -p esp -j ACCEPT
+-A INPUT -i eno16777984 -p udp -m udp --dport <span style="color:#ae81ff">500</span> -j ACCEPT
+-A INPUT -i eno16777984 -p udp -m udp --dport <span style="color:#ae81ff">4500</span> -j ACCEPT
+-A INPUT -i eno16777984 -p udp -m udp --dport <span style="color:#ae81ff">1701</span> -j ACCEPT
+-A INPUT -i eno16777984 -p tcp -m tcp --dport <span style="color:#ae81ff">1723</span> -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -s <span style="color:#ae81ff">10</span>.31.0.0/24 -j ACCEPT
+-A FORWARD -s <span style="color:#ae81ff">10</span>.31.1.0/24 -j ACCEPT
+-A FORWARD -s <span style="color:#ae81ff">10</span>.31.2.0/24 -j ACCEPT
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+*nat
+:PREROUTING ACCEPT <span style="color:#f92672">[</span><span style="color:#ae81ff">24</span>:10065<span style="color:#f92672">]</span>
+:INPUT ACCEPT <span style="color:#f92672">[</span><span style="color:#ae81ff">5</span>:241<span style="color:#f92672">]</span>
+:OUTPUT ACCEPT <span style="color:#f92672">[</span><span style="color:#ae81ff">18</span>:1422<span style="color:#f92672">]</span>
+:POSTROUTING ACCEPT <span style="color:#f92672">[</span><span style="color:#ae81ff">18</span>:1422<span style="color:#f92672">]</span>
+-A POSTROUTING -s <span style="color:#ae81ff">10</span>.31.0.0/24 -o eno16777984 -j MASQUERADE
+-A POSTROUTING -s <span style="color:#ae81ff">10</span>.31.1.0/24 -o eno16777984 -j MASQUERADE
+-A POSTROUTING -s <span style="color:#ae81ff">10</span>.31.2.0/24 -o eno16777984 -j MASQUERADE
+COMMIT</code></pre></div>
+<p>9.启动ipsec程序</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ipsec start
+Starting strongSwan <span style="color:#ae81ff">5</span>.5.1 IPsec <span style="color:#f92672">[</span>starter<span style="color:#f92672">]</span>...</code></pre></div>
+<p>其它一些可用命令：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ipsec start   <span style="color:#75715e">#启动服务
+</span><span style="color:#75715e"></span>ipsec stop    <span style="color:#75715e">#关闭服务
+</span><span style="color:#75715e"></span>ipsec restart <span style="color:#75715e">#重启服务
+</span><span style="color:#75715e"></span>ipsec reload  <span style="color:#75715e">#重新读取
+</span><span style="color:#75715e"></span>ipsec status  <span style="color:#75715e">#查看状态
+</span><span style="color:#75715e"></span>ipsec --help  #查看帮助</code></pre></div>
+<ol>
+<li>服务器安装配置完的基本信息</li>
+</ol>
+
+<pre><code>VPN服务器：192.168.30.57
+VPN用户：testUserOne
+VPN密码：testOnePass
+PSK:       iloveworld
+</code></pre>
+
+<p>客户端使用ca证书：ca.cert.pem（可修改为.cer结尾，发送给每个vpn用户进行证书安装，后面有安装步骤）</p>
+
+<h3 id="现在让用户验证吧">现在让用户验证吧</h3>
+
+<ol>
+<li>Windows 用户安装测试</li>
+</ol>
+
+<p>将ca.cert.pem证书修改后缀为.cer，然后拷贝到windows系统中，并命令行里打开mmc，添加证书管理单元，选择计算机账户，之后点击导入该证书，如下图：
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/03.png" alt="证书" width="700" />
+    
+    
+    <figcaption>
+        <h4>Windows 导入证书示例</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<p>打开网络共享中心面板，新建一个VPN连接，如下图：
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/04.png" alt="new vpn" width="700" />
+    
+    
+    <figcaption>
+        <h4>控制面板</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<p>创建新连接
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/05.png" alt="new vpn" width="700" />
+    
+    
+    <figcaption>
+        <h4>创建新连接</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<p>使用我的Internet连接</p>
+
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/06.png" alt="new vpn" width="700" />
+    
+    
+    <figcaption>
+        <h4>使用新连接</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>这里选择稍后连接，因为还要配置下安全选项。</p>
+
+<p>输入用户名和密码
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/08.png" alt="new vpn" width="700" />
+    
+    
+    <figcaption>
+        <h4>用户名和密码</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<p>点击创建，之后点击关闭，然后去右键该连接的属性。点击安全，修改vpn类型为IKEv2如下图：
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/09.png" alt="new vpn" width="700" />
+    
+    
+    <figcaption>
+        <h4>安全属性</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<p>设置完成后就可以连接啦。连接完成检查下vpn连接状态，如下：</p>
+
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/10.png" alt="new vpn" width="700" />
+    
+    
+    <figcaption>
+        <h4>链接状态</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<ol>
+<li>Mac OS 用户测试</li>
+</ol>
+
+<p>先将证书拷贝到mac系统内，双击打开。如下：
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/11.png" alt="new vpn" width="700" />
+    
+    
+    <figcaption>
+        <h4>安装证书</h4>
+        
+    </figcaption>
+    
+</figure>
+
+<code>此处注意 修改使用此证书时: 始终信任。 可能需要输入系统管理员的密码！</code></p>
+
+<p>之后，打开网络偏好设置，添加VPN，如下图：类型选择IKEv2
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/13.png" alt="new vpn" width="700" />
+    
+    
+    <figcaption>
+        <h4>VPN类型</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<p>再之后输入vpn信息，服务器地址和远程ID均输入VPN服务器公网ip，点击鉴定设置，输入用户名和密码。点击连接即可
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/14.png" alt="new vpn" width="700" />
+    
+    
+    <figcaption>
+        <h4>VPN 用户名和密码</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<p>最后查看本机ip配置，类似下图，已经获得ip，并且可以正常上网。
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/15.png" alt="new vpn" width="700" />
+    
+    
+    <figcaption>
+        <h4>链接状态</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<ol>
+<li>iOS客户端</li>
+</ol>
+
+<p>证书安装:</p>
+
+<p>将证书放置在手机浏览器可以访问下载的地方（我是直接在这个vpn服务器开个80，让手机去下载的证书），用safari访问，打开，之后输入手机密码进行证书的安装。添加VPN方法和mac类似。不在叙述 注: ios 手机端可以选择IKEv2，也可以选择IPSec。
+IPSec配置方式如下:
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/ikev2-vpn-part1/16.png" alt="new vpn" width="700" />
+    
+    
+    <figcaption>
+        <h4>手机配置ipsec</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<p>这里的密钥就是 PSK，在密码认证文件里，这里的PSK密钥为 iloveworld（推荐设置复杂高强度）OK，上面就是记录整个strongSwan安装到使用的过程。想着既然vpn升级了，本身就是大工程，那何不做完善点？</p>
+
+<p>于是便有了这个 <em>利用开源软件strongSwan实现支持IKEv2的企业级IPsec VPN，并结合FreeRadius实现AAA协议(下篇)</em>, 我擦，这名字真长，真不知道我是怎么想出来的 💣&hellip;.</p>
+
+<p>下篇文章的内容，记录的主要是利用freeradius 软件来实现radius的 3A（即认证、授权、计费）功能，并结合DaloRadius进行web管理。（daloradius 的web界面有几处与centos7 系统算是不兼容吧，我对php的个别页面进行了修改）。过几天发下篇吧。到时大家再细看吧。</p>
+
+<h3 id="参考">参考</h3>
+
+<p><a href="https://www.strongswan.org/blog/2016/10/21/strongswan-5.5.1-released.html">https://www.strongswan.org/blog/2016/10/21/strongswan-5.5.1-released.html</a></p>
+
+<p><a href="https://wiki.strongswan.org/projects/strongswan/wiki/IpsecPKI">https://wiki.strongswan.org/projects/strongswan/wiki/IpsecPKI</a></p>
+
+<p><a href="https://www.lowendtalk.com/discussion/44964/vpn-everywhere-ipsec-without-l2tp-with-strongswan-even-in-openvz">https://www.lowendtalk.com/discussion/44964/vpn-everywhere-ipsec-without-l2tp-with-strongswan-even-in-openvz</a></p>
+
+<p><a href="https://libreswan.org/">https://libreswan.org/</a></p>
+
+<p><a href="https://wiki.strongswan.org/projects/strongswan/wiki/Win7Certs">https://wiki.strongswan.org/projects/strongswan/wiki/Win7Certs</a></p>
+
+<p><a href="https://wiki.strongswan.org/projects/strongswan/wiki/Win7Config">https://wiki.strongswan.org/projects/strongswan/wiki/Win7Config</a></p>
+
+<p><a href="https://wiki.strongswan.org/projects/strongswan/wiki/Win7Connect">https://wiki.strongswan.org/projects/strongswan/wiki/Win7Connect</a></p>
+
+<p><a href="https://wiki.strongswan.org/projects/strongswan/wiki/WindowsVista">https://wiki.strongswan.org/projects/strongswan/wiki/WindowsVista</a></p>
+
+<p><a href="https://wiki.strongswan.org/projects/strongswan/wiki/AppleClients#iOS-client-configuration">https://wiki.strongswan.org/projects/strongswan/wiki/AppleClients#iOS-client-configuration</a></p>
+
+<p><a href="https://zh.wikipedia.org/wiki/IPsec">https://zh.wikipedia.org/wiki/IPsec</a></p>
+
+<p><a href="https://blogs.technet.microsoft.com/ianhamer/2007/02/20/an-ipsec-is-an-ipsec-is-an-ipsec-redux/">https://blogs.technet.microsoft.com/ianhamer/2007/02/20/an-ipsec-is-an-ipsec-is-an-ipsec-redux/</a></p>
+
+<p><a href="https://zh.wikipedia.org/wiki/RADIUS">https://zh.wikipedia.org/wiki/RADIUS</a></p>
+
+<p><a href="http://freeradius.org/">http://freeradius.org/</a></p>
+
+<p><a href="https://wiki.archlinux.org/index.php/StrongSwan_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87">https://wiki.archlinux.org/index.php/StrongSwan_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87</a>)</p>
+
+<p><a href="https://zh.opensuse.org/SDB:Setup_Ipsec_VPN_with_Strongswan">https://zh.opensuse.org/SDB:Setup_Ipsec_VPN_with_Strongswan</a></p>
+
+<p><a href="https://www.kiritostudio.com/running-a-strongswan-server-with-radius-on-your-vps/">https://www.kiritostudio.com/running-a-strongswan-server-with-radius-on-your-vps/</a></p>
+
+<p><a href="http://bao3.blogspot.com/2013/05/racoonstrongswanvpn.html">http://bao3.blogspot.com/2013/05/racoonstrongswanvpn.html</a></p>
+
+<p><a href="https://zh.opensuse.org/index.php?title=SDB:Setup_Ipsec_VPN_with_Strongswan&amp;variant=zh">https://zh.opensuse.org/index.php?title=SDB:Setup_Ipsec_VPN_with_Strongswan&amp;variant=zh</a></p>
+
+<p><a href="https://www.gitbook.com/book/akagi201/freeradius-beginners-guide/details">https://www.gitbook.com/book/akagi201/freeradius-beginners-guide/details</a></p>
+
+<p><a href="https://wiki.strongswan.org/projects/strongswan/wiki/AppleClients">https://wiki.strongswan.org/projects/strongswan/wiki/AppleClients</a></p>
+
+<p><a href="https://github.com/quericy/one-key-ikev2-vpn/issues/36#issuecomment-240609434">https://github.com/quericy/one-key-ikev2-vpn/issues/36#issuecomment-240609434</a></p>
+
+<p><a href="https://sourceforge.net/p/daloradius/discussion/684101/">https://sourceforge.net/p/daloradius/discussion/684101/</a></p>
+
+<p><a href="http://pig.made-it.com/AAA.html">http://pig.made-it.com/AAA.html</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="http://aliasmee.github.io/tags/ikev2"><span class="tag">Ikev2</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/vpn"><span class="tag">Vpn</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/strongswan"><span class="tag">Strongswan</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/ipsec"><span class="tag">Ipsec</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/freeradius"><span class="tag">Freeradius</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>635</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2018 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="http://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>
