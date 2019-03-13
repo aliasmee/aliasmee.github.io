@@ -5,11 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tag → 容器日志收集
-  
-   | aliasmee blog (飞走不可)
-</title>
+  <title>基于Grarylog的容器日志收集方案</title>
 
   
   
@@ -20,21 +16,29 @@
 
   
   <meta name="author" content="aliasmee" />
-  <meta name="description" content="Simple,Hard,Life" />
+  <meta name="description" content="最近做了一下公司容器集群日志的收集方案架构&amp;hellip;
+
+" />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@aliasmeee" />
-  <meta name="twitter:title" content="aliasmee blog (飞走不可)" />
-  <meta name="twitter:description" content="Simple,Hard,Life" />
-  <meta name="twitter:image" content="https://aliasmee.github.io/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="基于Grarylog的容器日志收集方案" />
+    <meta name="twitter:description" content="最近做了一下公司容器集群日志的收集方案架构&amp;hellip;
+
+" />
+    <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/graylog-log-system-architecture/cover.png" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="aliasmee blog (飞走不可)" />
-  <meta property="og:description" content="Simple,Hard,Life" />
-  <meta property="og:url" content="https://aliasmee.github.io/tags/%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/" />
-  <meta property="og:image" content="https://aliasmee.github.io/img/avatar.jpg" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="基于Grarylog的容器日志收集方案" />
+  <meta property="og:description" content="最近做了一下公司容器集群日志的收集方案架构&amp;hellip;
+
+" />
+  <meta property="og:url" content="https://aliasmee.github.io/post/log-center-arch/" />
+  <meta property="og:image" content="https://aliasmee.github.io/media/posts/graylog-log-system-architecture/cover.png" />
 
 
 
@@ -42,7 +46,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://aliasmee.github.io/tags/%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/" />
+<link rel="canonical" href="https://aliasmee.github.io/post/log-center-arch/" />
 <link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
 
 
@@ -106,6 +110,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -128,6 +136,8 @@
         <li class="menu-item
             
             
+            
+              is-active
             ">
             <a href="https://aliasmee.github.io/">文字</a>
           </li>
@@ -221,48 +231,127 @@
   </nav>
 </header>
 
-  <section class="main post-list">
-    <header class="list-header offscreen">
-      <h2 class="list-label">Posts List</h2>
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">基于Grarylog的容器日志收集方案</h1>
+      <p class="post-meta">@aliasmee · Jul 28, 2017 · 1 min read</p>
     </header>
+    <article class="post-content"><p>最近做了一下公司容器集群日志的收集方案架构&hellip;</p>
+
+<p></p>
+
+<h3 id="一-初步架构图">一、初步架构图</h3>
+
+
+<figure>
+    
+        <img src="https://aliasmee.github.io/media/posts/log-center-arch/arch.png" alt="初步架构" width="700" />
     
     
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://aliasmee.github.io/post/log-center-arch/" class="post-link">基于Grarylog的容器日志收集方案</a></h3>
-    <p class="post-meta">@aliasmee · Jul 28, 2017 · 1 min read</p>
-  </header>
-  
-    <img class="post-cover" src="https://aliasmee.github.io/media/posts/graylog-log-system-architecture/cover.png" alt="基于Grarylog的容器日志收集方案">
-  
-  <p class="post-summary">最近做了一下公司容器集群日志的收集方案架构…
-
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://aliasmee.github.io/post/log-center-arch/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://aliasmee.github.io/post/graylog-log-system-architecture/" class="post-link">Graylog 日志系统架构</a></h3>
-    <p class="post-meta">@aliasmee · Jul 28, 2017 · 1 min read</p>
-  </header>
-  
-    <img class="post-cover" src="https://aliasmee.github.io/media/posts/graylog-log-system-architecture/cover.png" alt="Graylog 日志系统架构">
-  
-  <p class="post-summary">一说起日志系统，大家一定想到了ELK（efk）那一套，，其实还有一个叫Graylog的…
-
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://aliasmee.github.io/post/graylog-log-system-architecture/">Read More →</a>
-  </footer>
-</article>
-
-      
+    <figcaption>
+        <h4>容器日志系统</h4>
+        
+    </figcaption>
     
+</figure>
+
+
+<ul>
+<li>docker 日志通过docker的日志驱动GELK，将日志输出到LB处。</li>
+<li>LB 可以用haproxy、nginx。用于负载Graylog server集群。</li>
+<li>Gaylog cluster 用于接收消息的输入、通过Grok 表达式来对日志进行分段。并将数据存入es中。</li>
+<li>Mongdb Cluster只存储元数据：所有项目的用户，设置和配置数据：流，仪表板，提取器等其它配置的一切内容。如果Mongo宕机挂掉了，Graylog将继续运行。</li>
+<li>Elasticsearch Cluster 用于存储消息。</li>
+</ul>
+
+<h3 id="二-预期目标">二、预期目标</h3>
+
+<ul>
+<li>收集每个docker 容器的应用日志</li>
+<li>对日志进行聚合分析</li>
+<li>可以满足后期对主机系统日志、操作审计日志的收集需要</li>
+</ul>
+
+<h3 id="三-待改进">三、待改进</h3>
+
+<p><code>支持Kafka 消息缓冲的架构</code></p>
+
+
+<figure>
+    
+        <img src="https://aliasmee.github.io/media/posts/log-center-arch/arch-kafka.png" alt="初步架构" width="700" />
+    
+    
+    <figcaption>
+        <h4>容器日志系统</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p><code>Notes：在fluentd 处也可在docker最新版本中使用开源docker log driver to kafka 的插件替换。</code></p>
+
+<p>项目地址：<a href="https://github.com/MickayG/moby-kafka-logdriver">https://github.com/MickayG/moby-kafka-logdriver</a></p>
+
+<h3 id="四-原docker引擎配置修改">四、原docker引擎配置修改</h3>
+
+<p>有2种方式：</p>
+
+<p>1.Docker 容器启动时，需添加 <code>--log-driver=gelf --log-opt gelf-address=x.x.x.x</code> 参数.</p>
+
+<p>2.fluentd daemon方式：在每个docker主机上启动一个fluentd容器，之后在启动其它相关应用时，使用<code>--log-driver...</code> ，该日志记录驱动程序将尝试查找本地Fluentd容器监听TCP端口24224上的连接。</p>
+
+<h3 id="五-需关注的功能">五、需关注的功能</h3>
+
+<ol>
+<li>过滤特殊敏感字段</li>
+<li>debug日志多行方式如何收集？</li>
+</ol>
+
+<h3 id="参考">参考</h3>
+
+<ul>
+<li><a href="http://docs.fluentd.org/v0.12/articles/parser_multiline">http://docs.fluentd.org/v0.12/articles/parser_multiline</a></li>
+<li><a href="https://github.com/tomohisaota/fluent-plugin-tail-multiline">https://github.com/tomohisaota/fluent-plugin-tail-multiline</a></li>
+<li><a href="http://docs.fluentd.org/v0.12/articles/docker-logging">http://docs.fluentd.org/v0.12/articles/docker-logging</a></li>
+</ul></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://aliasmee.github.io/tags/%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86"><span class="tag">容器日志收集</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/docker%E6%97%A5%E5%BF%97"><span class="tag">Docker日志</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>593</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     
   </section>
   <footer class="site-footer">

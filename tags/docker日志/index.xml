@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>容器日志收集 on aliasmee&#39;s blog </title>
-    <link>https://aliasmee.github.io/tags/%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/</link>
-    <description>Recent content in 容器日志收集 on aliasmee&#39;s blog </description>
+    <title>Docker日志 on aliasmee&#39;s blog </title>
+    <link>https://aliasmee.github.io/tags/docker%E6%97%A5%E5%BF%97/</link>
+    <description>Recent content in Docker日志 on aliasmee&#39;s blog </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
     <lastBuildDate>Fri, 28 Jul 2017 19:06:58 +0800</lastBuildDate>
     
-	<atom:link href="https://aliasmee.github.io/tags/%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://aliasmee.github.io/tags/docker%E6%97%A5%E5%BF%97/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,17 +19,6 @@
       
       <guid>https://aliasmee.github.io/post/log-center-arch/</guid>
       <description>&lt;p&gt;最近做了一下公司容器集群日志的收集方案架构&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Graylog 日志系统架构</title>
-      <link>https://aliasmee.github.io/post/graylog-log-system-architecture/</link>
-      <pubDate>Fri, 28 Jul 2017 18:27:52 +0800</pubDate>
-      
-      <guid>https://aliasmee.github.io/post/graylog-log-system-architecture/</guid>
-      <description>&lt;p&gt;一说起日志系统，大家一定想到了ELK（efk）那一套，，其实还有一个叫Graylog的&amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

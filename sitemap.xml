@@ -93,6 +93,11 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/post/log-center-arch/</loc>
+    <lastmod>2017-07-28T19:06:58+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/post/graylog-log-system-architecture/</loc>
     <lastmod>2017-07-28T18:27:52+08:00</lastmod>
   </url>
@@ -164,6 +169,12 @@
   <url>
     <loc>https://aliasmee.github.io/tags/docker/</loc>
     <lastmod>2018-06-21T06:53:15+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/docker%E6%97%A5%E5%BF%97/</loc>
+    <lastmod>2017-07-28T19:06:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -427,7 +438,7 @@
   
   <url>
     <loc>https://aliasmee.github.io/tags/%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/</loc>
-    <lastmod>2017-07-28T18:27:52+08:00</lastmod>
+    <lastmod>2017-07-28T19:06:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   

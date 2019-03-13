@@ -183,6 +183,17 @@
     </item>
     
     <item>
+      <title>基于Grarylog的容器日志收集方案</title>
+      <link>https://aliasmee.github.io/post/log-center-arch/</link>
+      <pubDate>Fri, 28 Jul 2017 19:06:58 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/log-center-arch/</guid>
+      <description>&lt;p&gt;最近做了一下公司容器集群日志的收集方案架构&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Graylog 日志系统架构</title>
       <link>https://aliasmee.github.io/post/graylog-log-system-architecture/</link>
       <pubDate>Fri, 28 Jul 2017 18:27:52 +0800</pubDate>

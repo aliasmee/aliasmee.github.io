@@ -103,6 +103,15 @@
     </item>
     
     <item>
+      <title>Docker日志</title>
+      <link>https://aliasmee.github.io/tags/docker%E6%97%A5%E5%BF%97/</link>
+      <pubDate>Fri, 28 Jul 2017 19:06:58 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/docker%E6%97%A5%E5%BF%97/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Elasticsearch</title>
       <link>https://aliasmee.github.io/tags/elasticsearch/</link>
       <pubDate>Tue, 14 Aug 2018 07:02:28 +0800</pubDate>
@@ -465,7 +474,7 @@
     <item>
       <title>容器日志收集</title>
       <link>https://aliasmee.github.io/tags/%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/</link>
-      <pubDate>Fri, 28 Jul 2017 18:27:52 +0800</pubDate>
+      <pubDate>Fri, 28 Jul 2017 19:06:58 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/%E5%AE%B9%E5%99%A8%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/</guid>
       <description></description>
