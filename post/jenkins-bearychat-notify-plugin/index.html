@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="这段时间在测试kubernetes的CI、CD，使用了业内很出名的工具&amp;ndash;Jenkins。之前有接触过，但都是在自己 玩，以及公司很小的项目中使用过。jenkins 可谓是持续集成和持续交付工具中的佼佼者。 而且前段时间jenkins 官方还发布了JenkinsX(受苹果启发么？哈哈)。本文主要介绍如何 使用Bearychat 与 Jenkins集成。后续会分享整个持续集成、部署架构。
 
 " />
-    <meta name="twitter:image" content="http://aliasmee.github.io/img/avatar.jpg" />
+    <meta name="twitter:image" content="https://aliasmee.github.io/img/avatar.jpg" />
   
 
   
@@ -37,8 +37,8 @@
   <meta property="og:description" content="这段时间在测试kubernetes的CI、CD，使用了业内很出名的工具&amp;ndash;Jenkins。之前有接触过，但都是在自己 玩，以及公司很小的项目中使用过。jenkins 可谓是持续集成和持续交付工具中的佼佼者。 而且前段时间jenkins 官方还发布了JenkinsX(受苹果启发么？哈哈)。本文主要介绍如何 使用Bearychat 与 Jenkins集成。后续会分享整个持续集成、部署架构。
 
 " />
-  <meta property="og:url" content="http://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/" />
-  <meta property="og:image" content="http://aliasmee.github.io/img/avatar.jpg" />
+  <meta property="og:url" content="https://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/" />
+  <meta property="og:image" content="https://aliasmee.github.io/img/avatar.jpg" />
 
 
 
@@ -46,8 +46,8 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="http://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/" />
-<link rel="alternative" href="http://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+<link rel="canonical" href="https://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/" />
+<link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
 
 
 <meta name="renderer" content="webkit" />
@@ -72,18 +72,18 @@
 <meta name='msapplication-navbutton-color' content="#5fbf5e" />
 <meta name="msapplication-TileColor" content="#5fbf5e" />
 <meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
-<link rel="icon" href="http://aliasmee.github.io/img/favicon.ico" />
-<link rel="icon" type="image/png" sizes="16x16" href="http://aliasmee.github.io/img/favicon-16x16.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="http://aliasmee.github.io/img/favicon-32x32.png" />
-<link rel="icon" sizes="192x192" href="http://aliasmee.github.io/img/touch-icon-android.png" />
-<link rel="apple-touch-icon" href="http://aliasmee.github.io/img/touch-icon-apple.png" />
-<link rel="mask-icon" href="http://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+<link rel="icon" href="https://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
 
 
 
 <link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
 
-<link rel="stylesheet" href="http://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+<link rel="stylesheet" href="https://aliasmee.github.io/css/bundle.ff02473a9a.css" />
 
 
   
@@ -118,7 +118,7 @@
     
     
   <header class="site-header">
-  <img class="avatar" src="http://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  <img class="avatar" src="https://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
   
   <h2 class="title">aliasmee&#39;s blog </h2>
   
@@ -139,7 +139,7 @@
             
               is-active
             ">
-            <a href="http://aliasmee.github.io/">文字</a>
+            <a href="https://aliasmee.github.io/">文字</a>
           </li>
       
         <li class="menu-item
@@ -153,14 +153,14 @@
             
             
             ">
-            <a href="http://aliasmee.github.io/tags/">Tags</a>
+            <a href="https://aliasmee.github.io/tags/">Tags</a>
           </li>
       
         <li class="menu-item
             
             
             ">
-            <a href="http://aliasmee.github.io/about/">About</a>
+            <a href="https://aliasmee.github.io/about/">About</a>
           </li>
       
     </ul>
@@ -210,7 +210,7 @@
       
 
       <li class="social-item">
-        <a href="http://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+        <a href="https://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
       </li>
 
       <li class="social-item">
@@ -224,7 +224,7 @@
       
 
       <li class="social-item">
-        <a href="http://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+        <a href="https://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
       </li>
 
     </ul>
@@ -323,14 +323,14 @@ notify 的消息格式：</p>
 
 <p>附上一张消息通知的截图.</p>
 
-<p><img src="http://aliasmee.github.io/media/posts/jenkins-bearychat-notify-plugin/01.jpg" width="70%" title="hello world"></p></article>
+<p><img src="https://aliasmee.github.io/media/posts/jenkins-bearychat-notify-plugin/01.jpg" width="70%" title="hello world"></p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
         
-          <li><a href="http://aliasmee.github.io/tags/jenkins"><span class="tag">Jenkins</span></a></li>
+          <li><a href="https://aliasmee.github.io/tags/jenkins"><span class="tag">Jenkins</span></a></li>
         
-          <li><a href="http://aliasmee.github.io/tags/bearychat"><span class="tag">Bearychat</span></a></li>
+          <li><a href="https://aliasmee.github.io/tags/bearychat"><span class="tag">Bearychat</span></a></li>
         
       </ul>
       
@@ -394,7 +394,7 @@ notify 的消息格式：</p>
   });
 </script>
 
-<script src="http://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+<script src="https://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
 
 
 <script>

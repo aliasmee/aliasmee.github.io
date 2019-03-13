@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jenkins on aliasmee&#39;s blog </title>
-    <link>http://aliasmee.github.io/tags/jenkins/</link>
+    <link>https://aliasmee.github.io/tags/jenkins/</link>
     <description>Recent content in Jenkins on aliasmee&#39;s blog </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
     <lastBuildDate>Sat, 11 Aug 2018 14:14:07 +0800</lastBuildDate>
     
-	<atom:link href="http://aliasmee.github.io/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://aliasmee.github.io/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>安装Jenkins及使用Nginx反向代理Jenkins配置</title>
-      <link>http://aliasmee.github.io/post/install-configuration-jenkins/</link>
+      <link>https://aliasmee.github.io/post/install-configuration-jenkins/</link>
       <pubDate>Sat, 11 Aug 2018 14:14:07 +0800</pubDate>
       
-      <guid>http://aliasmee.github.io/post/install-configuration-jenkins/</guid>
+      <guid>https://aliasmee.github.io/post/install-configuration-jenkins/</guid>
       <description>&lt;p&gt;Jenkins安装完成后，还要做哪些工作呢？如何结合nginx来更好的对外提供服务呢？本文记录了从安装jenkins到正常运行的一些工作。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -25,10 +25,10 @@
     
     <item>
       <title>Jenkins Bearychat Notify Plugin</title>
-      <link>http://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/</link>
+      <link>https://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/</link>
       <pubDate>Tue, 05 Jun 2018 22:55:51 +0800</pubDate>
       
-      <guid>http://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/</guid>
+      <guid>https://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/</guid>
       <description>&lt;p&gt;这段时间在测试kubernetes的CI、CD，使用了业内很出名的工具&amp;ndash;Jenkins。之前有接触过，但都是在自己
 玩，以及公司很小的项目中使用过。jenkins 可谓是持续集成和持续交付工具中的佼佼者。
 而且前段时间jenkins 官方还发布了JenkinsX(受苹果启发么？哈哈)。本文主要介绍如何
