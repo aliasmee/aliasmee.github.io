@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>如何建立一条私有云与公有云之间的虚拟专线</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="公司有多云环境，想要一条专线？或者公司其它跨物理地区办公，想要实现可以访问彼此内网？那么本文应该很适合你。
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="如何建立一条私有云与公有云之间的虚拟专线" />
+    <meta name="twitter:description" content="公司有多云环境，想要一条专线？或者公司其它跨物理地区办公，想要实现可以访问彼此内网？那么本文应该很适合你。
+
+" />
+    <meta name="twitter:image" content="http://aliasmee.github.io/media/posts/build-a-site-to-site-vpn/cover.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="如何建立一条私有云与公有云之间的虚拟专线" />
+  <meta property="og:description" content="公司有多云环境，想要一条专线？或者公司其它跨物理地区办公，想要实现可以访问彼此内网？那么本文应该很适合你。
+
+" />
+  <meta property="og:url" content="http://aliasmee.github.io/post/build-a-site-to-site-vpn/" />
+  <meta property="og:image" content="http://aliasmee.github.io/media/posts/build-a-site-to-site-vpn/cover.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="http://aliasmee.github.io/post/build-a-site-to-site-vpn/" />
+<link rel="alternative" href="http://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="http://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="http://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="http://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="http://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="http://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="http://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="http://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="http://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">~ Stay Hungry,Stay Foolish. ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="http://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="http://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="http://aliasmee.github.io/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="http://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="http://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">如何建立一条私有云与公有云之间的虚拟专线</h1>
+      <p class="post-meta">@aliasmee · Mar 7, 2019 · 3 min read</p>
+    </header>
+    <article class="post-content"><p>公司有多云环境，想要一条专线？或者公司其它跨物理地区办公，想要实现可以访问彼此内网？那么本文应该很适合你。</p>
+
+<p></p>
+
+<h3 id="概述">概述</h3>
+
+<blockquote>
+<p>专线，传统意义上的理解，就是拉一条专属线路，连接位于不同物理地区的设施。在网络中，有网络专线，需要向运营商申请购买。
+  价格不菲。</p>
+</blockquote>
+
+<p><em>现状：由于目前大多数互联网公司的服务器集群多位于公有云之上，不管是在GCP、AWS、AlibabaCloud，还有一部分企业有自己的机房，
+自己来维护管理云服务器。想象一下，如果你使用了多个公有云服务，或者一部分设施在云上，一部分在私有机房，如何打通这两处或者说
+多地之间的网络呢？</em></p>
+
+<p><code>解决方案</code>：</p>
+
+<ul>
+<li>申请物理专线；</li>
+<li>购买云服务商提供的VPN网关服务。</li>
+<li>自建</li>
+</ul>
+
+<p>下面就说下如何自己建立条虚拟专线网络。</p>
+
+<h3 id="要求">要求</h3>
+
+<ul>
+<li>公有云 1台有外网IP的云主机（简称 A地区）</li>
+<li>私有云内部 1台有外网IP的主机（简称 B地区）</li>
+<li>系统centos/ubuntu,理论上支持所以linux发行版（raspberry pi上我试验过也可以哈）</li>
+<li>网络防火墙之间需放行端口 UDP500 UDP4500</li>
+</ul>
+
+<h3 id="网络拓扑图">网络拓扑图</h3>
+
+<p>A／B两地之间的网络结构：
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/build-a-site-to-site-vpn/net-topology.png" alt="网络拓扑" width="1000" />
+    
+    
+    <figcaption>
+        <h4>虚拟专线拓扑图</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<p><em><code>Tips：如上图，vpn主机是在两台 router之后，实际情况有一端是router内核本身支持（ipsec协议）、另一端是nat后的自建主机的。</code></em></p>
+
+<h3 id="安装">安装</h3>
+
+<p>以下步骤划分为A、B安装，同一软件（strongSwan），不同配置。</p>
+
+<h4 id="a地区主机安装配置">A地区主机安装配置</h4>
+
+<p>1.安装 strongSwan软件，可参考本站相关文章<a href="aliasmee.github.com">如何使用Ansible快速建立一个基于strongSwan的VPN服务
+</a></p>
+
+<p>2.修改配置文件 ipsec.conf, 内容如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">config setup
+  uniqueids <span style="color:#f92672">=</span> no
+<span style="color:#75715e">#  charondebug=&#34;all&#34;
+</span><span style="color:#75715e"></span>  charondebug<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ike 2, knl 3, cfg 2&#34;</span>
+
+conn a-to-b
+  keyexchange<span style="color:#f92672">=</span>ikev1
+  authby<span style="color:#f92672">=</span>secret
+  type<span style="color:#f92672">=</span>tunnel
+  left<span style="color:#f92672">=</span>%defaultroute
+  leftid<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>.1.1.1
+  right<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>.2.2.2
+  leftsubnet<span style="color:#f92672">=</span><span style="color:#ae81ff">172</span>.16.0.0/16
+  rightsubnet<span style="color:#f92672">=</span><span style="color:#ae81ff">172</span>.18.0.0/16
+  ike<span style="color:#f92672">=</span>aes128-sha1-modp2048!
+  esp<span style="color:#f92672">=</span>aes128-sha1-modp2048!
+  keyingtries<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+  ikelifetime<span style="color:#f92672">=</span>1h
+  lifetime<span style="color:#f92672">=</span>8h
+  dpddelay<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>
+  dpdtimeout<span style="color:#f92672">=</span><span style="color:#ae81ff">120</span>
+  dpdaction<span style="color:#f92672">=</span>restart
+  auto<span style="color:#f92672">=</span>route</code></pre></div>
+<p>针对几个配置选项注解下，详细可参考官网文档，或者本站其它相关文章：
+* right：对端路由器Public IP
+* rightsubnet：对端路由器后面的网段（又称兴趣流）
+* leftsubnet：本端的网段
+* type：隧道类型</p>
+
+<p>3.修改密钥认证文件/etc/ipsec.secret，在文件末尾添加一条secret记录</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">%any <span style="color:#ae81ff">2</span>.2.2.2 : PSK <span style="color:#e6db74">&#34;thisisatunnelpAsswWD&#34;</span></code></pre></div>
+<p>4.重启服务</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ipsec restart</code></pre></div>
+<h4 id="b地区主机安装配置">B地区主机安装配置</h4>
+
+<p>1.安装 strongSwan软件，可参考本站相关文章<a href="aliasmee.github.com">如何使用Ansible快速建立一个基于strongSwan的VPN服务
+</a></p>
+
+<p>2.修改配置文件 /etc/ipsec.conf（默认yum安装路径）, 内容如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">config setup
+  uniqueids <span style="color:#f92672">=</span> no
+
+conn b-to-a
+  keyexchange<span style="color:#f92672">=</span>ikev1
+  authby<span style="color:#f92672">=</span>secret
+	left<span style="color:#f92672">=</span>%any
+	right<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>.2.2.2
+	leftsubnet<span style="color:#f92672">=</span><span style="color:#ae81ff">172</span>.18.0.0/16
+	rightsubnet<span style="color:#f92672">=</span><span style="color:#ae81ff">172</span>.16.0.0/16
+	ike<span style="color:#f92672">=</span>aes128-sha1-modp2048!
+	ikelifetime<span style="color:#f92672">=</span>28800s
+	esp<span style="color:#f92672">=</span>aes128-sha1-modp2048!
+	keylife<span style="color:#f92672">=</span>3600s
+	rekeymargin<span style="color:#f92672">=</span>540s
+	type<span style="color:#f92672">=</span>tunnel
+	compress<span style="color:#f92672">=</span>no
+	keyingtries<span style="color:#f92672">=</span>%forever
+  auto<span style="color:#f92672">=</span>route</code></pre></div>
+<p>3.修改密钥认证文件/etc/ipsec.secret，在文件末尾添加一条secret记录</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">%any <span style="color:#ae81ff">1</span>.1.1.1 : PSK <span style="color:#e6db74">&#34;thisisatunnelpAsswWD&#34;</span></code></pre></div>
+<p>4.重启服务</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ipsec restart</code></pre></div>
+<h4 id="ab两地联调检查测试">AB两地联调检查测试</h4>
+
+<p>1.A地 使用ipsec 查看连接情况</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">a-to-b<span style="color:#f92672">[</span><span style="color:#ae81ff">65499</span><span style="color:#f92672">]</span>: ESTABLISHED <span style="color:#ae81ff">25</span> minutes ago, <span style="color:#ae81ff">1</span>.1.1.1<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span>.1.1.1<span style="color:#f92672">]</span>...2.2.2.2<span style="color:#f92672">[</span><span style="color:#ae81ff">2</span>.2.2.2<span style="color:#f92672">]</span>
+a-to-b<span style="color:#f92672">{</span><span style="color:#ae81ff">1</span><span style="color:#f92672">}</span>:  INSTALLED, TUNNEL, ESP in UDP SPIs: cfc0bd72_i c69f89fd_o
+a-to-b<span style="color:#f92672">{</span><span style="color:#ae81ff">1</span><span style="color:#f92672">}</span>:   <span style="color:#ae81ff">172</span>.16.0.0/16 <span style="color:#f92672">===</span> <span style="color:#ae81ff">172</span>.18.0.0/16</code></pre></div>
+<p>2.B地 连接状态</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Security Associations <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span> up, <span style="color:#ae81ff">0</span> connecting<span style="color:#f92672">)</span>:
+ali-to-office<span style="color:#f92672">[</span><span style="color:#ae81ff">255</span><span style="color:#f92672">]</span>: ESTABLISHED <span style="color:#ae81ff">25</span> minutes ago, <span style="color:#ae81ff">172</span>.18.1.222<span style="color:#f92672">[</span><span style="color:#ae81ff">2</span>.2.2.2<span style="color:#f92672">]</span>...1.1.1.1<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span>.1.1.1<span style="color:#f92672">]</span>
+ali-to-office<span style="color:#f92672">{</span><span style="color:#ae81ff">315</span><span style="color:#f92672">}</span>:  INSTALLED, TUNNEL, reqid <span style="color:#ae81ff">1</span>, ESP in UDP SPIs: c69f89fd_i cfc0bd72_o
+ali-to-office<span style="color:#f92672">{</span><span style="color:#ae81ff">315</span><span style="color:#f92672">}</span>:   <span style="color:#ae81ff">172</span>.18.0.0/16 <span style="color:#f92672">===</span> <span style="color:#ae81ff">172</span>.16.0.0/16</code></pre></div>
+<p>3.A地 ping B地区主机</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ping 172.18.1.164
+</span><span style="color:#75715e"></span>PING <span style="color:#ae81ff">172</span>.18.1.164 <span style="color:#f92672">(</span><span style="color:#ae81ff">172</span>.18.1.164<span style="color:#f92672">)</span> <span style="color:#ae81ff">56</span><span style="color:#f92672">(</span><span style="color:#ae81ff">84</span><span style="color:#f92672">)</span> bytes of data.
+<span style="color:#ae81ff">64</span> bytes from <span style="color:#ae81ff">172</span>.18.1.164: icmp_req<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">63</span> time<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>.44 ms
+<span style="color:#ae81ff">64</span> bytes from <span style="color:#ae81ff">172</span>.18.1.164: icmp_req<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">63</span> time<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>.36 ms</code></pre></div>
+<h1 id="traceroute-172-18-1-164">traceroute 172.18.1.164</h1>
+
+<p>traceroute to 172.18.1.164 (172.18.1.164), 30 hops max, 38 byte packets
+ 1  172.18.1.222 (172.18.1.222)  6.270 ms  6.163 ms  6.065 ms
+ 2  172.18.1.164 (172.18.1.164)  6.398 ms  6.253 ms  6.421 ms</p>
+
+<p>4.B地 ping A地区主机</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ping <span style="color:#ae81ff">172</span>.16.193.21
+PING <span style="color:#ae81ff">172</span>.16.193.21 <span style="color:#f92672">(</span><span style="color:#ae81ff">172</span>.16.193.21<span style="color:#f92672">)</span> <span style="color:#ae81ff">56</span><span style="color:#f92672">(</span><span style="color:#ae81ff">84</span><span style="color:#f92672">)</span> bytes of data.
+<span style="color:#ae81ff">64</span> bytes from <span style="color:#ae81ff">172</span>.16.193.21: icmp_seq<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">63</span> time<span style="color:#f92672">=</span><span style="color:#ae81ff">9</span>.73 ms</code></pre></div>
+<h4 id="其它配置">其它配置</h4>
+
+<p>如果你不是使用推荐的方式安装strongSwan，请参考下面的其它配置。</p>
+
+<p>A地防火墙配置1： <code>iptables配置(新增rules)</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">22</span> -j ACCEPT
+iptables -A INPUT -i eth0 -p esp -j ACCEPT
+iptables -A INPUT -i eth0 -p ah -j ACCEPT
+iptables -A INPUT -i eth0 -p udp -m udp --sport <span style="color:#ae81ff">500</span> --dport <span style="color:#ae81ff">500</span> -j ACCEPT
+iptables -A INPUT -i eth0 -p udp -m udp --sport <span style="color:#ae81ff">4500</span> --dport <span style="color:#ae81ff">4500</span> -j ACCEPT
+iptables -A INPUT -j REJECT --reject-with icmp-host-prohibited
+
+iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -s <span style="color:#ae81ff">172</span>.18.0.0/16 -j ACCEPT
+iptables -A FORWARD -j REJECT --reject-with icmp-host-prohibited
+
+iptables -A POSTROUTING -t nat -s <span style="color:#ae81ff">172</span>.18.0.0/16 -d <span style="color:#ae81ff">172</span>.16.0.0/16 -j MASQUERADE</code></pre></div>
+<p>B地防火墙配置2： <code>iptables配置(新增rules)</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">22</span> -j ACCEPT
+iptables -A INPUT -i eth0 -p esp -j ACCEPT
+iptables -A INPUT -i eth0 -p ah -j ACCEPT
+iptables -A INPUT -i eth0 -p udp -m udp --sport <span style="color:#ae81ff">500</span> --dport <span style="color:#ae81ff">500</span> -j ACCEPT
+iptables -A INPUT -i eth0 -p udp -m udp --sport <span style="color:#ae81ff">4500</span> --dport <span style="color:#ae81ff">4500</span> -j ACCEPT
+iptables -A INPUT -j REJECT --reject-with icmp-host-prohibited
+
+iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -s <span style="color:#ae81ff">172</span>.16.192.0/23 -d <span style="color:#ae81ff">172</span>.18.0.0/16 -j ACCEPT
+iptables -A FORWARD -j REJECT --reject-with icmp-host-prohibited
+
+iptables -A POSTROUTING -t nat -s <span style="color:#ae81ff">172</span>.16.0.0/16 -d <span style="color:#ae81ff">172</span>.18.0.0/16 -j MASQUERADE</code></pre></div>
+<hr />
+
+<p>系统内核网络转发设置：A／B都要设置！</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sysctl -w net.ipv4.ip_no_pmtu_disc<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+sysctl -w net.ipv4.ip_forward<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span></code></pre></div>
+<hr />
+
+<h3 id="中途遇到的问题列表">中途遇到的问题列表</h3>
+
+<ul>
+<li>问题1. 两端成功建立了连接，B地 可以ping通A地主机，但A却无法ping通B提示: <code>Destination Host Prohibite</code>，另外在B地抓包，却看到了A地主机发来的icmp包，却没有reply的包。怀疑是防火墙问题。</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># tcpdump -nni eth0 icmp
+</span><span style="color:#75715e"></span>tcpdump: verbose output suppressed, use -v or -vv <span style="color:#66d9ef">for</span> full protocol decode
+listening on eth0, link-type EN10MB <span style="color:#f92672">(</span>Ethernet<span style="color:#f92672">)</span>, capture size <span style="color:#ae81ff">262144</span> bytes
+<span style="color:#ae81ff">17</span>:46:17.149502 IP <span style="color:#ae81ff">172</span>.16.193.21 &gt; <span style="color:#ae81ff">172</span>.18.1.164: ICMP echo request, id <span style="color:#ae81ff">31323</span>, seq <span style="color:#ae81ff">84</span>, length <span style="color:#ae81ff">64</span>
+<span style="color:#ae81ff">17</span>:46:19.155821 IP <span style="color:#ae81ff">172</span>.16.193.21 &gt; <span style="color:#ae81ff">172</span>.18.1.164: ICMP echo request, id <span style="color:#ae81ff">31323</span>, seq <span style="color:#ae81ff">86</span>, length <span style="color:#ae81ff">64</span></code></pre></div>
+<p>尝试修改B地VPN主机上，把A地区的内网网段加入filter里并设置允许forward。即上面iptables配置里倒数第2条规则。最后两边都通了。完美😄</p>
+
+<h3 id="总结">总结</h3>
+
+<p>调试过程中，尽量日志要详细一点！！！ 建议先看服务器日志，再看客户端日志。</p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="http://aliasmee.github.io/tags/%E9%9A%A7%E9%81%93"><span class="tag">隧道</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/%E4%B8%93%E7%BA%BF"><span class="tag">专线</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/%E7%BD%91%E7%BB%9C"><span class="tag">网络</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/%E8%BF%9E%E6%8E%A5%E6%B7%B7%E5%90%88%E4%BA%91"><span class="tag">连接混合云</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/vpn%E7%BD%91%E5%85%B3"><span class="tag">VPN网关</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2019 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="http://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

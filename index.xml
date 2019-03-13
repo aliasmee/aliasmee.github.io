@@ -2,31 +2,86 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>aliasmee&#39;s blog </title>
-    <link>https://aliasmee.github.io/</link>
+    <link>http://aliasmee.github.io/</link>
     <description>Recent content on aliasmee&#39;s blog </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
     <lastBuildDate>Fri, 01 Jun 2018 11:46:40 +0800</lastBuildDate>
     
-	<atom:link href="https://aliasmee.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://aliasmee.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>https://aliasmee.github.io/about/</link>
+      <link>http://aliasmee.github.io/about/</link>
       <pubDate>Fri, 01 Jun 2018 11:46:40 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/about/</guid>
+      <guid>http://aliasmee.github.io/about/</guid>
       <description>Just Do It.</description>
     </item>
     
     <item>
+      <title>如何建立一条私有云与公有云之间的虚拟专线</title>
+      <link>http://aliasmee.github.io/post/build-a-site-to-site-vpn/</link>
+      <pubDate>Thu, 07 Mar 2019 12:55:21 +0800</pubDate>
+      
+      <guid>http://aliasmee.github.io/post/build-a-site-to-site-vpn/</guid>
+      <description>&lt;p&gt;公司有多云环境，想要一条专线？或者公司其它跨物理地区办公，想要实现可以访问彼此内网？那么本文应该很适合你。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用ansible简单安装openldap服务</title>
+      <link>http://aliasmee.github.io/post/quickly-and-simple-install-openldap-server-with-ansible/</link>
+      <pubDate>Wed, 06 Mar 2019 12:58:00 +0800</pubDate>
+      
+      <guid>http://aliasmee.github.io/post/quickly-and-simple-install-openldap-server-with-ansible/</guid>
+      <description>&lt;p&gt;简单快速安装openldap server.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用Ansible快速安装 Freeradius</title>
+      <link>http://aliasmee.github.io/post/quickly-install-freeradius-with-ansible/</link>
+      <pubDate>Wed, 06 Mar 2019 12:57:04 +0800</pubDate>
+      
+      <guid>http://aliasmee.github.io/post/quickly-install-freeradius-with-ansible/</guid>
+      <description>&lt;p&gt;简单快速安装freeradius,默认与ldap相结合&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>如何使用Ansible快速建立一个基于strongSwan的VPN服务</title>
+      <link>http://aliasmee.github.io/post/how-to-quickly-build-a-strongswan-based-vpn-service-using-ansible/</link>
+      <pubDate>Sat, 02 Mar 2019 19:20:48 +0800</pubDate>
+      
+      <guid>http://aliasmee.github.io/post/how-to-quickly-build-a-strongswan-based-vpn-service-using-ansible/</guid>
+      <description>&lt;p&gt;不管是日常工作，还是平常学习，都会接触到一些vpn服务，但是我们如果想搭一个属于自己的vpn，该怎么做呢？
+本篇文章教你如何快速的安装一个虚拟专用网络。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Why Do We Need Kubernetes</title>
+      <link>http://aliasmee.github.io/why-do-we-need-kubernetes/</link>
+      <pubDate>Thu, 01 Nov 2018 20:30:20 +0800</pubDate>
+      
+      <guid>http://aliasmee.github.io/why-do-we-need-kubernetes/</guid>
+      <description>&lt;p&gt;序言:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>笔记-gcloud 客户端安装及使用</title>
-      <link>https://aliasmee.github.io/post/gcloud-usage/</link>
+      <link>http://aliasmee.github.io/post/gcloud-usage/</link>
       <pubDate>Wed, 05 Sep 2018 06:37:19 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/gcloud-usage/</guid>
+      <guid>http://aliasmee.github.io/post/gcloud-usage/</guid>
       <description>&lt;p&gt;记录下怎么在电脑上安装gcloud，及后续使用啊。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -34,10 +89,10 @@
     
     <item>
       <title>elasticsearch 索引出现值冲突，客户端报400错误</title>
-      <link>https://aliasmee.github.io/post/resolve-a-conflict-on-elasticsearch/</link>
+      <link>http://aliasmee.github.io/post/resolve-a-conflict-on-elasticsearch/</link>
       <pubDate>Tue, 14 Aug 2018 07:02:28 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/resolve-a-conflict-on-elasticsearch/</guid>
+      <guid>http://aliasmee.github.io/post/resolve-a-conflict-on-elasticsearch/</guid>
       <description>&lt;p&gt;解决elasticsearch索引里面的值的类型冲突，导致新提交的值与预期的key 类型不一致.引发了日志会丢失的情况。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -45,10 +100,10 @@
     
     <item>
       <title>安装Jenkins及使用Nginx反向代理Jenkins配置</title>
-      <link>https://aliasmee.github.io/post/install-configuration-jenkins/</link>
+      <link>http://aliasmee.github.io/post/install-configuration-jenkins/</link>
       <pubDate>Sat, 11 Aug 2018 14:14:07 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/install-configuration-jenkins/</guid>
+      <guid>http://aliasmee.github.io/post/install-configuration-jenkins/</guid>
       <description>&lt;p&gt;Jenkins安装完成后，还要做哪些工作呢？如何结合nginx来更好的对外提供服务呢？本文记录了从安装jenkins到正常运行的一些工作。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -56,10 +111,10 @@
     
     <item>
       <title>在kubernetes中，让某个node成为专属节点</title>
-      <link>https://aliasmee.github.io/post/let-node-choose-pod-on-kubernetes/</link>
+      <link>http://aliasmee.github.io/post/let-node-choose-pod-on-kubernetes/</link>
       <pubDate>Mon, 09 Jul 2018 18:35:47 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/let-node-choose-pod-on-kubernetes/</guid>
+      <guid>http://aliasmee.github.io/post/let-node-choose-pod-on-kubernetes/</guid>
       <description>&lt;p&gt;如何让node 去选择谁能部署到自身上面？看了下现有的&lt;code&gt;Node Selectors&lt;/code&gt;、&lt;code&gt;Node Affinity&lt;/code&gt;、&lt;code&gt;Node Taints&lt;/code&gt;, 经过比对，发现&lt;code&gt;Node Taints&lt;/code&gt; 更适合这种情况，下面是分享一下具体的内容.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -67,10 +122,10 @@
     
     <item>
       <title>为什么我的网站响应速度时快时慢？</title>
-      <link>https://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/</link>
+      <link>http://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/</link>
       <pubDate>Sun, 24 Jun 2018 21:48:11 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/</guid>
+      <guid>http://aliasmee.github.io/post/is-my-website-response-time-so-why-slow/</guid>
       <description>&lt;p&gt;平常工作生活中，不知你有没有遇到这种情况，有时访问网站异常的快，有时却要等待10多秒才会有响应，
 这种情况下，我们一般不会太多的停留在网站，因为影响了用户体验。今天就分享记录下，我工作中遇到的
 一个问题。&lt;/p&gt;
@@ -80,10 +135,10 @@
     
     <item>
       <title>我的新玩伴-树莓派2</title>
-      <link>https://aliasmee.github.io/post/play-with-raspberry-pi-2/</link>
+      <link>http://aliasmee.github.io/post/play-with-raspberry-pi-2/</link>
       <pubDate>Sun, 24 Jun 2018 08:20:08 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/play-with-raspberry-pi-2/</guid>
+      <guid>http://aliasmee.github.io/post/play-with-raspberry-pi-2/</guid>
       <description>&lt;p&gt;接着上篇的，本篇介绍了桌面版本的安装，并设置vnc ，用于远程桌面连接。另外给大家看自己动手给树莓派盖的屋子。哈哈&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -91,10 +146,10 @@
     
     <item>
       <title>我的新玩伴-树莓派</title>
-      <link>https://aliasmee.github.io/post/play-with-raspberry-pi/</link>
+      <link>http://aliasmee.github.io/post/play-with-raspberry-pi/</link>
       <pubDate>Thu, 21 Jun 2018 06:53:15 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/play-with-raspberry-pi/</guid>
+      <guid>http://aliasmee.github.io/post/play-with-raspberry-pi/</guid>
       <description>&lt;p&gt;经过了一番思考,我终于鼓足勇气买下了raspberry pi，哈哈。不是据说很多人的树莓派都在吃灰么？我怕买来后，我的pi 也逃不过这样的命运。不过还是下单了
 谁让它那么有吸引力呢。😄. 这篇文章介绍了从购买到连上Wi-Fi 正常运行，无需屏幕和键盘等外设.&lt;/p&gt;
 
@@ -103,10 +158,10 @@
     
     <item>
       <title>关于Nginx proxy_connect_timeout 的问题</title>
-      <link>https://aliasmee.github.io/post/questions-about-proxy-connect-timeout-on-nginx/</link>
+      <link>http://aliasmee.github.io/post/questions-about-proxy-connect-timeout-on-nginx/</link>
       <pubDate>Tue, 19 Jun 2018 19:02:23 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/questions-about-proxy-connect-timeout-on-nginx/</guid>
+      <guid>http://aliasmee.github.io/post/questions-about-proxy-connect-timeout-on-nginx/</guid>
       <description>&lt;p&gt;你是如何理解&lt;code&gt;proxy_connect_timeout&lt;/code&gt;、&lt;code&gt;proxy_read_timeout&lt;/code&gt;和&lt;code&gt;proxy_send_timeout&lt;/code&gt;
 的，这几个参数在nginx 作为proxy时，与后端的 real server通信连接起到什么作用？&lt;/p&gt;
 
@@ -115,19 +170,19 @@
     
     <item>
       <title>Links</title>
-      <link>https://aliasmee.github.io/links/</link>
+      <link>http://aliasmee.github.io/links/</link>
       <pubDate>Wed, 06 Jun 2018 21:33:39 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/links/</guid>
+      <guid>http://aliasmee.github.io/links/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Jenkins Bearychat Notify Plugin</title>
-      <link>https://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/</link>
+      <link>http://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/</link>
       <pubDate>Tue, 05 Jun 2018 22:55:51 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/</guid>
+      <guid>http://aliasmee.github.io/post/jenkins-bearychat-notify-plugin/</guid>
       <description>&lt;p&gt;这段时间在测试kubernetes的CI、CD，使用了业内很出名的工具&amp;ndash;Jenkins。之前有接触过，但都是在自己
 玩，以及公司很小的项目中使用过。jenkins 可谓是持续集成和持续交付工具中的佼佼者。
 而且前段时间jenkins 官方还发布了JenkinsX(受苹果启发么？哈哈)。本文主要介绍如何
@@ -138,19 +193,19 @@
     
     <item>
       <title>Hello World</title>
-      <link>https://aliasmee.github.io/post/helloworld/</link>
+      <link>http://aliasmee.github.io/post/helloworld/</link>
       <pubDate>Fri, 01 Jun 2018 11:48:17 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/helloworld/</guid>
+      <guid>http://aliasmee.github.io/post/helloworld/</guid>
       <description>&lt;p&gt;hi,这里以后就是我的新博客了哈，不写文章已经快有一年的时间了，最近我又要开始记录一些日常的东西了，为什么是又？哈哈，最近发现自己的脑子不够用啦。总是丢三落四的，记忆力不好了，大概是老了吧。😭&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>利用开源软件strongSwan实现支持IKEv2的企业级IPsec VPN，并结合FreeRadius实现AAA协议(上篇)</title>
-      <link>https://aliasmee.github.io/post/ikev2-vpn-part1/</link>
+      <link>http://aliasmee.github.io/post/ikev2-vpn-part1/</link>
       <pubDate>Fri, 09 Dec 2016 15:56:00 +0800</pubDate>
       
-      <guid>https://aliasmee.github.io/post/ikev2-vpn-part1/</guid>
+      <guid>http://aliasmee.github.io/post/ikev2-vpn-part1/</guid>
       <description>&lt;p&gt;序言:&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>使用Ansible快速安装 Freeradius</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="简单快速安装freeradius,默认与ldap相结合
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="使用Ansible快速安装 Freeradius" />
+    <meta name="twitter:description" content="简单快速安装freeradius,默认与ldap相结合
+
+" />
+    <meta name="twitter:image" content="http://aliasmee.github.io/media/posts/quickly-install-freeradius-with-ansible/cover.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="使用Ansible快速安装 Freeradius" />
+  <meta property="og:description" content="简单快速安装freeradius,默认与ldap相结合
+
+" />
+  <meta property="og:url" content="http://aliasmee.github.io/post/quickly-install-freeradius-with-ansible/" />
+  <meta property="og:image" content="http://aliasmee.github.io/media/posts/quickly-install-freeradius-with-ansible/cover.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="http://aliasmee.github.io/post/quickly-install-freeradius-with-ansible/" />
+<link rel="alternative" href="http://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="http://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="http://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="http://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="http://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="http://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="http://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="http://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="http://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">~ Stay Hungry,Stay Foolish. ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="http://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="http://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="http://aliasmee.github.io/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="http://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="http://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">使用Ansible快速安装 Freeradius</h1>
+      <p class="post-meta">@aliasmee · Mar 6, 2019 · 1 min read</p>
+    </header>
+    <article class="post-content"><p>简单快速安装freeradius,默认与ldap相结合</p>
+
+<p></p>
+
+<h3 id="概述">概述</h3>
+
+<blockquote>
+<p>远程用户拨入验证服务（RADIUS, Remote Authentication Dial In User Service）是一个AAA协议，意思就是同时兼顾验证（authentication）、授权（authorization）及计帐（accounting）三种服务的一种网络传输协议（protocol），通常用于网络访问、或流动IP服务，适用于局域网及漫游服务。</p>
+</blockquote>
+
+<p>本文主要内容是使用ansible 来快速安装freeradius服务，以及配置radius后端使用的ldap作为认证源.</p>
+
+<h3 id="要求">要求</h3>
+
+<ul>
+<li>工具列表
+
+<ul>
+<li>centos7.x</li>
+<li>ansible 2.4+</li>
+<li>[aliasmee-freeradius-roles]()</li>
+<li><a href="https://github.com/aliasmee/ansible-role-openldap">openldap server</a></li>
+</ul></li>
+</ul>
+
+<h3 id="安装">安装</h3>
+
+<ol>
+<li>新建主yml文件 install_freeradius.yml，内容如下：</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">---
+- hosts: my-vpn
+  remote_user: root
+  roles:
+    - ansible-role-openldap</code></pre></div>
+<p>2.根据自己的环境，适当修改配置文件 vars/main.yml，具体可参考该项目说明。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">---
+<span style="color:#75715e"># vars file for aliasmee.freeradius</span>
+auth_backend: ldap
+
+<span style="color:#75715e"># # Radius secret info</span>
+radius_secret: 123456lllooo.ltd
+radius_client_network: <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">0.0</span>/<span style="color:#ae81ff">16</span>
+radius_test_user: alice
+radius_test_pass: alice123
+<span style="color:#75715e"># Combine ldap /etc/raddb/mods-available/ldap</span>
+
+ldap_server_ip: <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">8.8</span>
+ldap_server_port: <span style="color:#ae81ff">389</span>
+ldap_user_dn: cn=Manager,dc=example,dc=com
+ldap_user_pass: iamaPassDw24iH
+ldap_base_dn: dc=example,dc=com
+
+<span style="color:#75715e"># config radius eap to GTC /etc/raddb/mods-available/eap</span>
+ldap_eap_type: gtc    <span style="color:#75715e"># default: md5</span>
+ldap_eap_type_cisco: <span style="color:#e6db74">&#34;{{ ldap_eap_type }}&#34;</span>   <span style="color:#75715e"># default: mschapv2</span>
+
+<span style="color:#75715e"># config inner-tunnel  /etc/raddb/sites-available/inner-tunnel</span>
+auth_type: ldap</code></pre></div>
+<p>3.执行安装命令</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ansible-playbook install_freeradius.yml</code></pre></div>
+<h3 id="总结">总结</h3>
+
+<p>本篇安装的freeradius主要是为了让strongswan登陆 支持ldap 而部署的。所以有些地方配置不太灵活，如果在某些配置上碰到一些问题，可以留言一起探讨下哈。</p>
+
+<h3 id="参考">参考</h3>
+
+<ul>
+<li><a href="https://confluence.diamond.ac.uk/display/PAAUTH/Using+LDAP+as+authentication+source">freeradius 配置ldap模块</a></li>
+<li><a href="http://freeradius.1045715.n5.nabble.com/Filter-OpenLDAP-users-account-upon-Freeradius-3-0-10-NAS-Port-Id-td5738169.html">filter ldap用户</a></li>
+</ul></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="http://aliasmee.github.io/tags/radius"><span class="tag">Radius</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/aaa"><span class="tag">AAA</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/vpn-%E5%AE%A1%E8%AE%A1"><span class="tag">VPN 审计</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/radius-ldap"><span class="tag">Radius Ldap</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/strongswan-ldap"><span class="tag">Strongswan, Ldap</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2019 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="http://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>
