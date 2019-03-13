@@ -212,6 +212,17 @@
     </item>
     
     <item>
+      <title>Graylog 日志系统架构</title>
+      <link>https://aliasmee.github.io/post/graylog-log-system-architecture/</link>
+      <pubDate>Fri, 28 Jul 2017 18:27:52 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/graylog-log-system-architecture/</guid>
+      <description>&lt;p&gt;一说起日志系统，大家一定想到了ELK（efk）那一套，，其实还有一个叫Graylog的&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>利用开源软件strongSwan实现支持IKEv2的企业级IPsec VPN，并结合FreeRadius实现AAA协议(上篇)</title>
       <link>https://aliasmee.github.io/post/ikev2-vpn-part1/</link>
       <pubDate>Fri, 09 Dec 2016 15:56:00 +0800</pubDate>

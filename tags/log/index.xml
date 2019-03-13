@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Log on aliasmee&#39;s blog </title>
+    <link>https://aliasmee.github.io/tags/log/</link>
+    <description>Recent content in Log on aliasmee&#39;s blog </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Fri, 28 Jul 2017 18:27:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://aliasmee.github.io/tags/log/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Graylog 日志系统架构</title>
+      <link>https://aliasmee.github.io/post/graylog-log-system-architecture/</link>
+      <pubDate>Fri, 28 Jul 2017 18:27:52 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/graylog-log-system-architecture/</guid>
+      <description>&lt;p&gt;一说起日志系统，大家一定想到了ELK（efk）那一套，，其实还有一个叫Graylog的&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
