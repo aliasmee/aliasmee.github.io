@@ -212,6 +212,17 @@
     </item>
     
     <item>
+      <title>Kafka 消息队列系统</title>
+      <link>https://aliasmee.github.io/post/kafka-message-queue-system/</link>
+      <pubDate>Wed, 13 Sep 2017 19:35:20 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/kafka-message-queue-system/</guid>
+      <description>&lt;p&gt;kafka学习笔记&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>基于Grarylog的容器日志收集方案</title>
       <link>https://aliasmee.github.io/post/log-center-arch/</link>
       <pubDate>Fri, 28 Jul 2017 19:06:58 +0800</pubDate>
