@@ -5,11 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>
-  Tag → https
-  
-   | aliasmee blog (飞走不可)
-</title>
+  <title>常见的ssl 证书类型</title>
 
   
   
@@ -20,21 +16,29 @@
 
   
   <meta name="author" content="aliasmee" />
-  <meta name="description" content="Simple,Hard,Life" />
+  <meta name="description" content="常见的ssl证书的类型及示例.
+
+" />
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@aliasmeee" />
-  <meta name="twitter:title" content="aliasmee blog (飞走不可)" />
-  <meta name="twitter:description" content="Simple,Hard,Life" />
-  <meta name="twitter:image" content="https://aliasmee.github.io/img/avatar.jpg" />
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="常见的ssl 证书类型" />
+    <meta name="twitter:description" content="常见的ssl证书的类型及示例.
+
+" />
+    <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/ssl-certificate-common-type/cover.png" />
+  
 
   
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="aliasmee blog (飞走不可)" />
-  <meta property="og:description" content="Simple,Hard,Life" />
-  <meta property="og:url" content="https://aliasmee.github.io/tags/https/" />
-  <meta property="og:image" content="https://aliasmee.github.io/img/avatar.jpg" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="常见的ssl 证书类型" />
+  <meta property="og:description" content="常见的ssl证书的类型及示例.
+
+" />
+  <meta property="og:url" content="https://aliasmee.github.io/post/ssl-certificate-common-type/" />
+  <meta property="og:image" content="https://aliasmee.github.io/media/posts/ssl-certificate-common-type/cover.png" />
 
 
 
@@ -42,7 +46,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://aliasmee.github.io/tags/https/" />
+<link rel="canonical" href="https://aliasmee.github.io/post/ssl-certificate-common-type/" />
 <link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
 
 
@@ -106,6 +110,10 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
     </div>
     
     
@@ -128,6 +136,8 @@
         <li class="menu-item
             
             
+            
+              is-active
             ">
             <a href="https://aliasmee.github.io/">文字</a>
           </li>
@@ -221,48 +231,148 @@
   </nav>
 </header>
 
-  <section class="main post-list">
-    <header class="list-header offscreen">
-      <h2 class="list-label">Posts List</h2>
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">常见的ssl 证书类型</h1>
+      <p class="post-meta">@aliasmee · Mar 13, 2019 · 1 min read</p>
     </header>
-    
-    
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://aliasmee.github.io/post/ssl-certificate-common-type/" class="post-link">常见的ssl 证书类型</a></h3>
-    <p class="post-meta">@aliasmee · Mar 13, 2019 · 1 min read</p>
-  </header>
-  
-    <img class="post-cover" src="https://aliasmee.github.io/media/posts/ssl-certificate-common-type/cover.png" alt="常见的ssl 证书类型">
-  
-  <p class="post-summary">常见的ssl证书的类型及示例.
+    <article class="post-content"><p>常见的ssl证书的类型及示例.</p>
 
+<p></p>
+
+<h3 id="证书类型">证书类型</h3>
+
+<ul>
+<li>单域名ssl 证书</li>
+<li>通配符 多域名ssl证书</li>
+<li>扩展验证 单域名ssl 证书</li>
+<li>扩展验证 多域名ssl证书</li>
+<li>多域名（UCC/SAN）ssl 证书</li>
+</ul>
+
+<h4 id="单域名ssl-证书">单域名ssl 证书</h4>
+
+<p>只能单独加密一个子域名，如www.example.com：
+
+<figure>
+    
+        <img src="https://aliasmee.github.io/media/posts/ssl-certificate-common-type/single-domain.png" width="700" />
+    
+    
+    <figcaption>
+        <h4>单域名证书</h4>
+        
+    </figcaption>
+    
+</figure>
 </p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://aliasmee.github.io/post/ssl-certificate-common-type/">Read More →</a>
-  </footer>
-</article>
 
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="https://aliasmee.github.io/post/install-configuration-jenkins/" class="post-link">安装Jenkins及使用Nginx反向代理Jenkins配置</a></h3>
-    <p class="post-meta">@aliasmee · Aug 11, 2018 · 1 min read</p>
-  </header>
-  
-    <img class="post-cover" src="https://aliasmee.github.io/media/posts/install-configuration-jenkins/cover.jpg" alt="安装Jenkins及使用Nginx反向代理Jenkins配置">
-  
-  <p class="post-summary">Jenkins安装完成后，还要做哪些工作呢？如何结合nginx来更好的对外提供服务呢？本文记录了从安装jenkins到正常运行的一些工作。
+<h4 id="通配符-wildcard-ssl-证书">通配符（Wildcard） ssl 证书</h4>
 
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="https://aliasmee.github.io/post/install-configuration-jenkins/">Read More →</a>
-  </footer>
-</article>
+<p>使用1个ssl 保护主域和无限子域，如：
 
-      
+<figure>
     
+        <img src="https://aliasmee.github.io/media/posts/ssl-certificate-common-type/wc-domain.png" width="700" />
+    
+    
+    <figcaption>
+        <h4>通配符证书</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<table border="1" rowspan="1">
+　<tr>
+  　<td>mail.domain.com</td>
+  　<td>openchat.domain.com</td>
+　</tr>
+　<tr>
+  　<td>forums.domain.com</td>
+  　<td>goto.domain.com</td>
+　</tr>
+  <tr>
+    <td>login.domain.com</td>
+    <td>anything.domain.com</td>
+  </tr>
+</table>
+
+<h4 id="扩展验证-ev-extended-validation-ssl-证书">扩展验证 EV （Extended Validation）ssl 证书</h4>
+
+<p>通过在浏览器界面中突出显示公司名称为您的客户提供额外的安全性，因此他们知道这是您的网站 - 而不是冒名顶替者。
+
+<figure>
+    
+        <img src="https://aliasmee.github.io/media/posts/ssl-certificate-common-type/ev.png" width="700" />
+    
+    
+    <figcaption>
+        <h4>EV认证证书</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<h4 id="扩展验证-ev-多域名-extended-validation-ssl-证书">扩展验证 EV 多域名 （Extended Validation）ssl 证书</h4>
+
+<p>和多域名证书一样，多了一项EV功能，如下：
+<table border="1" sellspacing="0" rowspan="1">
+　<tr>
+  　<td>mail.domain.com</td>
+  　<td>openchat.domain.com</td>
+　</tr>
+　<tr>
+  　<td>login.example.com</td>
+  　<td>buy.example.com</td>
+　</tr>
+</table></p>
+
+<h3 id="参考">参考</h3>
+
+<p><a href="https://zh.wikipedia.org/wiki/%E6%A0%B9%E8%AF%81%E4%B9%A6">根证书</a></p>
+
+<p><a href="https://zh.wikipedia.org/wiki/Let%27s_Encrypt">let&rsquo;s encrypt 组织</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://aliasmee.github.io/tags/ssl"><span class="tag">Ssl</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/%E8%AF%81%E4%B9%A6%E7%B1%BB%E5%9E%8B"><span class="tag">证书类型</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/https"><span class="tag">Https</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
     
   </section>
   <footer class="site-footer">

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Https on aliasmee&#39;s blog </title>
-    <link>https://aliasmee.github.io/tags/https/</link>
-    <description>Recent content in Https on aliasmee&#39;s blog </description>
+    <title>Ssl on aliasmee&#39;s blog </title>
+    <link>https://aliasmee.github.io/tags/ssl/</link>
+    <description>Recent content in Ssl on aliasmee&#39;s blog </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
     <lastBuildDate>Wed, 13 Mar 2019 17:28:30 +0800</lastBuildDate>
     
-	<atom:link href="https://aliasmee.github.io/tags/https/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://aliasmee.github.io/tags/ssl/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,17 +19,6 @@
       
       <guid>https://aliasmee.github.io/post/ssl-certificate-common-type/</guid>
       <description>&lt;p&gt;常见的ssl证书的类型及示例.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>安装Jenkins及使用Nginx反向代理Jenkins配置</title>
-      <link>https://aliasmee.github.io/post/install-configuration-jenkins/</link>
-      <pubDate>Sat, 11 Aug 2018 14:14:07 +0800</pubDate>
-      
-      <guid>https://aliasmee.github.io/post/install-configuration-jenkins/</guid>
-      <description>&lt;p&gt;Jenkins安装完成后，还要做哪些工作呢？如何结合nginx来更好的对外提供服务呢？本文记录了从安装jenkins到正常运行的一些工作。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

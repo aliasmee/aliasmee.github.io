@@ -22,6 +22,17 @@
     </item>
     
     <item>
+      <title>常见的ssl 证书类型</title>
+      <link>https://aliasmee.github.io/post/ssl-certificate-common-type/</link>
+      <pubDate>Wed, 13 Mar 2019 17:28:30 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/ssl-certificate-common-type/</guid>
+      <description>&lt;p&gt;常见的ssl证书的类型及示例.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>如何建立一条私有云与公有云之间的虚拟专线</title>
       <link>https://aliasmee.github.io/post/build-a-site-to-site-vpn/</link>
       <pubDate>Thu, 07 Mar 2019 12:55:21 +0800</pubDate>
