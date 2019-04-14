@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>连接混合云 on aliasmee&#39;s blog </title>
-    <link>http://aliasmee.github.io/tags/%E8%BF%9E%E6%8E%A5%E6%B7%B7%E5%90%88%E4%BA%91/</link>
+    <link>https://aliasmee.github.io/tags/%E8%BF%9E%E6%8E%A5%E6%B7%B7%E5%90%88%E4%BA%91/</link>
     <description>Recent content in 连接混合云 on aliasmee&#39;s blog </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
     <lastBuildDate>Thu, 07 Mar 2019 12:55:21 +0800</lastBuildDate>
     
-	<atom:link href="http://aliasmee.github.io/tags/%E8%BF%9E%E6%8E%A5%E6%B7%B7%E5%90%88%E4%BA%91/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://aliasmee.github.io/tags/%E8%BF%9E%E6%8E%A5%E6%B7%B7%E5%90%88%E4%BA%91/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>如何建立一条私有云与公有云之间的虚拟专线</title>
-      <link>http://aliasmee.github.io/post/build-a-site-to-site-vpn/</link>
+      <link>https://aliasmee.github.io/post/build-a-site-to-site-vpn/</link>
       <pubDate>Thu, 07 Mar 2019 12:55:21 +0800</pubDate>
       
-      <guid>http://aliasmee.github.io/post/build-a-site-to-site-vpn/</guid>
+      <guid>https://aliasmee.github.io/post/build-a-site-to-site-vpn/</guid>
       <description>&lt;p&gt;公司有多云环境，想要一条专线？或者公司其它跨物理地区办公，想要实现可以访问彼此内网？那么本文应该很适合你。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
