@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Gitlab-ci and Helm CI/CD Kubernetes集群实践</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="kubernetes 结合gitlab、helm自动化部署实践，也许能给其他人一些帮助。
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="Gitlab-ci and Helm CI/CD Kubernetes集群实践" />
+    <meta name="twitter:description" content="kubernetes 结合gitlab、helm自动化部署实践，也许能给其他人一些帮助。
+
+" />
+    <meta name="twitter:image" content="http://aliasmee.github.io/media/posts/gitlab-ci-combined-with-helm-automated-deploy-app-to-kubernetes-practice/conver.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Gitlab-ci and Helm CI/CD Kubernetes集群实践" />
+  <meta property="og:description" content="kubernetes 结合gitlab、helm自动化部署实践，也许能给其他人一些帮助。
+
+" />
+  <meta property="og:url" content="http://aliasmee.github.io/post/gitlab-ci-combined-with-helm-automated-deploy-app-to-kubernetes-practice/" />
+  <meta property="og:image" content="http://aliasmee.github.io/media/posts/gitlab-ci-combined-with-helm-automated-deploy-app-to-kubernetes-practice/conver.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="http://aliasmee.github.io/post/gitlab-ci-combined-with-helm-automated-deploy-app-to-kubernetes-practice/" />
+<link rel="alternative" href="http://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="http://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="http://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="http://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="http://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="http://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="http://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="http://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="http://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">~ Stay Hungry,Stay Foolish. ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="http://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="http://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="http://aliasmee.github.io/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="http://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="http://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Gitlab-ci and Helm CI/CD Kubernetes集群实践</h1>
+      <p class="post-meta">@aliasmee · Apr 13, 2019 · 4 min read</p>
+    </header>
+    <article class="post-content"><p>kubernetes 结合gitlab、helm自动化部署实践，也许能给其他人一些帮助。</p>
+
+<p></p>
+
+<h1 id="大纲">大纲</h1>
+
+<ul>
+<li>基础准备工作
+
+<ul>
+<li>Kubernetes cluster</li>
+<li>Helm</li>
+<li>Helm repository（Optional）</li>
+<li>Nginx-Ingress-Conroller</li>
+<li>Docker Registry</li>
+<li>Gitlab-ce Service</li>
+<li>DNS</li>
+<li>Demo Service</li>
+<li>Helm Charts</li>
+</ul></li>
+</ul>
+
+<p>对于想要在Gitlab上实施CICD到kubernetes的朋友，可能需要了解一下gitlab、k8s、helm、nginx-ingress相关技术
+的概念和知识。</p>
+
+<h3 id="kubernetes-cluster-已有k8s集群的可以跳过本节">Kubernetes Cluster（已有k8s集群的可以跳过本节）</h3>
+
+<p>对于K8s集群的安装部署，本篇文章使用的是GKE，当然你也可以选择其它公有云提供的k8s的产品。例如AWS的EKS，
+Microsoft的AKS。另外国内的有Alibaba的 容器服务kubernetes版，国内的公有云现在貌似基本都有k8s
+服务，包括专业做CDN的某牛云。说明kubernetes早已成为容器编排领域的事实标准。</p>
+
+<h5 id="创建集群">创建集群</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gcloud beta container --project <span style="color:#e6db74">&#34;hi42-top&#34;</span> clusters create <span style="color:#e6db74">&#34;demo-k8s&#34;</span> --zone <span style="color:#e6db74">&#34;us-east1-b&#34;</span> --no-enable-basic-auth --cluster-version <span style="color:#e6db74">&#34;1.12.6-gke.10&#34;</span> --machine-type <span style="color:#e6db74">&#34;g1-small&#34;</span> --image-type <span style="color:#e6db74">&#34;COS&#34;</span> --disk-type <span style="color:#e6db74">&#34;pd-standard&#34;</span> --disk-size <span style="color:#e6db74">&#34;30&#34;</span> --num-nodes <span style="color:#e6db74">&#34;2&#34;</span> --enable-cloud-logging --enable-cloud-monitoring --no-enable-ip-alias --network <span style="color:#e6db74">&#34;hi42-vpc&#34;</span> --subnetwork <span style="color:#e6db74">&#34;hi42-east&#34;</span> --addons HorizontalPodAutoscaling --enable-autoupgrade --enable-autorepair</code></pre></div>
+<h5 id="验证集群部署">验证集群部署</h5>
+
+<p>查看刚刚创建的 k8s cluster</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud container clusters list
+NAME      LOCATION    MASTER_VERSION  MASTER_IP      MACHINE_TYPE  NODE_VERSION   NUM_NODES  STATUS
+demo-k8s  us-east1-b  <span style="color:#ae81ff">1</span>.12.6-gke.10   <span style="color:#ae81ff">35</span>.196.230.33  g1-small      <span style="color:#ae81ff">1</span>.12.6-gke.10  <span style="color:#ae81ff">2</span>          RUNNING</code></pre></div>
+<p>安装kubectl command
+根据你客户端选择合适的<a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-using-curl">kubectl发行版</a></p>
+
+<p>使用gcloud自带命令，自动配置本地的kubectl客户端</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ gcloud container clusters get-credentials demo-k8s</code></pre></div>
+<p><em>Tips： 这一步gcloud客户端会下载kubeconfig,把内容导入并合并到kubeconfig默认文件 ~/.kube/config</em></p>
+
+<p>确认下当前使用的集群配置是我们刚刚新建的集群</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl config current-context
+gke_hi42-top_us-east1-b_demo-k8s</code></pre></div>
+<p><em>Notes：默认config文件里可能会有很多集群配置。如果当前显示的不是我们想要的集群，可以使用<code>kubectl config</code>
+进行设置，切换到正确的集群配置。</em></p>
+
+<p>部署个demo程序验证一下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl run hello-server --image gcr.io/google-samples/hello-app:1.0 --port <span style="color:#ae81ff">8080</span></code></pre></div>
+<p>创建一个类型为LoadBalance的Service，目的是将刚刚创建的服务暴露到集群外部，可外部访问。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f - <span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">kind: Service
+</span><span style="color:#e6db74">apiVersion: v1
+</span><span style="color:#e6db74">metadata:
+</span><span style="color:#e6db74">  name: hello-server
+</span><span style="color:#e6db74">  namespace: default
+</span><span style="color:#e6db74">  labels:
+</span><span style="color:#e6db74">    run: hello-server
+</span><span style="color:#e6db74">  annotations:
+</span><span style="color:#e6db74">    cloud.google.com/load-balancer-type: &#34;Internal&#34;
+</span><span style="color:#e6db74">spec:
+</span><span style="color:#e6db74">  selector:
+</span><span style="color:#e6db74">    run: hello-server
+</span><span style="color:#e6db74">  ports:
+</span><span style="color:#e6db74">  - protocol: TCP
+</span><span style="color:#e6db74">    port: 80
+</span><span style="color:#e6db74">    targetPort: 8080
+</span><span style="color:#e6db74">  type: LoadBalancer
+</span><span style="color:#e6db74">EOF</span></code></pre></div>
+<p><em>Notes：cloud.google.com/load-balancer-type: &ldquo;Internal&rdquo; 表示内网LB</em></p>
+
+<blockquote>
+<p>Tips：在k8s集群内部暴露服务到外部，我们有多种选择:Nodeport、LoadBalancer、Ingress。</p>
+</blockquote>
+
+<p>查看刚刚创建的Service 资源</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl get svc
+NAME           TYPE           CLUSTER-IP     EXTERNAL-IP   PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>        AGE
+hello-server   LoadBalancer   <span style="color:#ae81ff">10</span>.19.254.53   <span style="color:#ae81ff">10</span>.11.0.18    <span style="color:#ae81ff">80</span>:30105/TCP   7m
+kubernetes     ClusterIP      <span style="color:#ae81ff">10</span>.19.240.1    &lt;none&gt;        <span style="color:#ae81ff">443</span>/TCP        38m</code></pre></div>
+<p>名为hello-server 的 svc已经就绪，外部IP是<code>10.11.0.8</code>,下面使用curl访问该服务。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl <span style="color:#ae81ff">10</span>.11.0.18
+Hello, world!
+Version: <span style="color:#ae81ff">1</span>.0.0
+Hostname: hello-server-5cdf4854df-lf76k</code></pre></div>
+<p><em>Notes: 我的网络已经和gcp 建立了隧道，所以两地内网是互通的，可以直接访问VPC内部IP。当然没有
+条件的话，你也可以选择ssh登陆gcp上的k8s Node节点上，直接访问该IP。</em></p>
+
+<h3 id="gitlab-ce-setup-1">Gitlab CE Setup (1)</h3>
+
+<p>Gitlab这一节只介绍一些安装配置方法，因为gitlab配置项目涉及的细节有点多。</p>
+
+<h5 id="gitlab-安装">Gitlab 安装</h5>
+
+<p>见Gitlab-安装文档：<a href="https://about.gitlab.com/install/#centos-7">https://about.gitlab.com/install/#centos-7</a></p>
+
+<h5 id="gitlab-常规配置">Gitlab 常规配置</h5>
+
+<ul>
+<li>https</li>
+<li>自动备份</li>
+<li>LDAP</li>
+<li>&hellip;</li>
+</ul>
+
+<h5 id="gitlab-runner-配置">Gitlab runner 配置</h5>
+
+<p>Gitlab Runner 是根据.gitlab-ci.yaml文件定义的job来跑pipeline的。并且根据注册的runner的执行者不同，
+可选择在shell、docker、kubernetes等环境中运行job指令内容。
+见：<a href="https://docs.gitlab.com/runner/executors/README.html">runner executor</a></p>
+
+<ul>
+<li>安装gitlab runner</li>
+</ul>
+
+<blockquote>
+<p>参考官方runner<a href="https://docs.gitlab.com/runner/install/linux-repository.html">安装文档</a></p>
+</blockquote>
+
+<ul>
+<li>注册runner到gitlab server</li>
+</ul>
+
+<p>添加shell runner（当然也可以选择docker executor）</p>
+
+<blockquote>
+<p>参考runner<a href="[][https://docs.gitlab.com/runner/register/index.html]">注册文档</a>：</p>
+</blockquote>
+
+<p><em><code>Warning</code>:另外我们需要在该runner上安装<a href="https://docs.docker.com/install/">Docker-ce</a></em></p>
+
+<h5 id="配置runner使用kubectl-helm">配置Runner使用kubectl &amp; helm</h5>
+
+<p>*Warning: 这里我直接使用runner所在主机以shell executor跑pipeline，所以这里直接将kubeconfig
+放到了系统上。完整文件位置在gitlab-runner用户的家目录:/home/gitlab-runner/.kube/config *</p>
+
+<p>获取kubeconfig文件：
+&gt;参考<a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubernetes cheatsheet</a></p>
+
+<pre><code>$ kubectl config view --flatten=true &gt; /tmp/demo-k8s.kubeconfig
+</code></pre>
+
+<p>将该文件demo-k8s.kubeconfig拷贝到runner家目录 /home/gitlab-runner/.kube/config</p>
+
+<p><em>Notes: 注意config是文件名，不是目录</em></p>
+
+<p>验证kubectl与集群连接是否正常：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gitlab-runner@gitlab-slave:~$ kubectl cluster-info
+Kubernetes master is running at https://35.196.230.33
+Heapster is running at https://35.196.230.33/api/v1/namespaces/kube-system/services/heapster/proxy
+KubeDNS is running at https://35.196.230.33/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+Metrics-server is running at https://35.196.230.33/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
+
+To further debug and diagnose cluster problems, use <span style="color:#e6db74">&#39;kubectl cluster-info dump&#39;</span>.
+gitlab-runner@gitlab-slave:~$ kubectl get po
+NAME                            READY   STATUS    RESTARTS   AGE
+hello-server-5cdf4854df-lf76k   <span style="color:#ae81ff">1</span>/1     Running   <span style="color:#ae81ff">0</span>          130m</code></pre></div>
+<p>下一步便是安装在runner主机上安装helm。</p>
+
+<h3 id="helm-setup">Helm Setup</h3>
+
+<p>给Helm 来个简短的介绍？
+Helm是kubernetes里面的包管理工具。把它想象成Linux中的yum、apt。它将
+一个服务部署所需要的k8s资源（deployment、secret、configmap、service、ingress&hellip;）都打包在一个
+Chart中，另外Chart可单独存储在本地。也可以存储到远程git仓库中，或搭建个WebServer可供http下载chart
+就行。
+Helm 分为client端 和 server端，Server 端（Tiller）部署在k8s集群中，根据helm客户端提交
+的chart解析成相应k8s资源的yaml文件，在k8s上创建对应类型的资源。</p>
+
+<h5 id="安装helm">安装helm</h5>
+
+<p><em>Warning：helm client不是安装在本机，而且安装在gitlab-runner所在主机上。</em></p>
+
+<p>下载 helm客户端</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash</code></pre></div>
+<p>HELM init with tiller （RBAC）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl apply -f - <span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">apiVersion: v1
+</span><span style="color:#e6db74">kind: ServiceAccount
+</span><span style="color:#e6db74">metadata:
+</span><span style="color:#e6db74">  name: tiller
+</span><span style="color:#e6db74">  namespace: kube-system
+</span><span style="color:#e6db74">---
+</span><span style="color:#e6db74">apiVersion: rbac.authorization.k8s.io/v1
+</span><span style="color:#e6db74">kind: ClusterRoleBinding
+</span><span style="color:#e6db74">metadata:
+</span><span style="color:#e6db74">  name: tiller
+</span><span style="color:#e6db74">roleRef:
+</span><span style="color:#e6db74">  apiGroup: rbac.authorization.k8s.io
+</span><span style="color:#e6db74">  kind: ClusterRole
+</span><span style="color:#e6db74">  name: cluster-admin
+</span><span style="color:#e6db74">subjects:
+</span><span style="color:#e6db74">  - kind: ServiceAccount
+</span><span style="color:#e6db74">    name: tiller
+</span><span style="color:#e6db74">    namespace: kube-system
+</span><span style="color:#e6db74">EOF</span></code></pre></div>
+<p>初始化并安装helm tiller</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ helm init --service-account tiller --history-max <span style="color:#ae81ff">200</span>
+...
+Happy Helming!</code></pre></div>
+<p>看到以上输出，表示tiller已经正确部署到kube-system下。有兴趣的可以查看下pod在kube-system namespace下。</p>
+
+<h3 id="ingress-controller-setup">Ingress-controller setup</h3>
+
+<h5 id="安装ingress-controller">安装ingress controller</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install --name<span style="color:#f92672">=</span>nginx-ingress-intranet --namespace<span style="color:#f92672">=</span>ingress-controller <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--set controller.ingressClass<span style="color:#f92672">=</span>nginx-ingress-intranet <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--set controller.service.annotations.<span style="color:#e6db74">&#34;cloud\.google\.com/load-balancer-type&#34;</span><span style="color:#f92672">=</span>Internal <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--set rbac.create<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>stable/nginx-ingress</code></pre></div>
+<h5 id="验证-ingress-controller">验证 ingress controller</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get svc -n ingress-controller
+NAME                                     TYPE           CLUSTER-IP      EXTERNAL-IP   PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>                      AGE
+nginx-ingress-intranet-controller        LoadBalancer   <span style="color:#ae81ff">10</span>.19.246.51    <span style="color:#ae81ff">10</span>.11.0.19    <span style="color:#ae81ff">80</span>:31604/TCP,443:30083/TCP   39m
+nginx-ingress-intranet-default-backend   ClusterIP      <span style="color:#ae81ff">10</span>.19.253.220   &lt;none&gt;        <span style="color:#ae81ff">80</span>/TCP                       39m</code></pre></div>
+<p>从上面可以看出已经成功创建lb，注意这里的外部IP是VPC内网IP。我们curl一下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl <span style="color:#ae81ff">10</span>.11.0.19
+default backend - <span style="color:#ae81ff">404</span></code></pre></div>
+<p>由于集群里面现在还没有Ingress资源被创建。所以默认将请求转发到default-backend这个服务，当然，
+你也可以根据自己需要修改default-backend服务镜像，定制404页面。</p>
+
+<h5 id="创建-ssl-secret">创建 SSL Secret</h5>
+
+<p>如果你有证书的话，可以以这种方式创建Secret资源，供后面的Ingress资源使用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ kubectl create secret tls demo-hi42-top --key demo.hi42.top.key --cert fullchain.cer
+secret <span style="color:#e6db74">&#34;demo-hi42-top&#34;</span> created</code></pre></div>
+<h3 id="dns-配置">DNS 配置</h3>
+
+<h5 id="配置dns泛域名解析">配置DNS泛域名解析</h5>
+
+<p>上一节我们创建了Ingress controller，现在需要将某域名系统下的所有服务配置指向该IP</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-DNS" data-lang="DNS">*.demo.hi42.top  A 10.11.0.19</code></pre></div>
+<h3 id="docker-registry">Docker Registry</h3>
+
+<h5 id="docker-hub-optional-private-docker-reg">Docker hub （Optional private docker reg）</h5>
+
+<p>这里选择了docker hub，省去了搭建私有仓库的步骤。当然也可以选择gcp的 container registry。
+需要提供2个变量给后面gitlab-ci使用，docker login 用户名和密码。</p>
+
+<h3 id="demo-service">Demo Service</h3>
+
+<h5 id="demo-code">Demo code</h5>
+
+<p>用go写了简单的web server。两个二哈，两个猫咪。
+代码：见 <a href="https://github.com/aliasmee/gitlab-cicd-helm-demo">minions</a></p>
+
+<h3 id="helm-charts-准备">Helm Charts 准备</h3>
+
+<h5 id="创建-monions-chart">创建 monions chart</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir charts <span style="color:#f92672">&amp;&amp;</span> cd charts/ <span style="color:#f92672">&amp;&amp;</span> helm create minions</code></pre></div>
+<p>当前项目根目录charts/minions，简单起见，我们只对文件内容做了一点点修改（包含修改readiness url），
+另外我们在pipeline里面deploy job时会定义。进行动态 set。</p>
+
+<h3 id="gitlab-ce-setup-1-1">Gitlab CE Setup (1)</h3>
+
+<h5 id="gitlab-project-settings">Gitlab project settings</h5>
+
+<p>Project开启CI/CD，并设置环境变量。添加2变量：</p>
+
+<ul>
+<li>CI_REGISTRY_PASSWORD</li>
+<li>CI_REGISTRY_USER</li>
+</ul>
+
+<h5 id="添加gitlab-runner-到docker用户组">添加gitlab-runner 到docker用户组</h5>
+
+<p>由于我们直接使用gitlab runner shell作为executor，所以需要将gitlab-runner用户加到docker
+组中。在gitlab-runner 主机上执行。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ usermod -aG docker gitlab-runner</code></pre></div>
+<h3 id="gitlab-pipeline-示例">Gitlab-PIPELINE 示例</h3>
+
+<h5 id="gitlab-ci-yml-完整内容">.gitlab-ci.yml 完整内容</h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">stages:
+  - build
+  - test
+  - release
+  - deploy
+
+variables:
+  <span style="color:#75715e"># CI_DEBUG_TRACE: &#34;true&#34;</span>
+  DOCKER_DRIVER: overlay2
+
+  <span style="color:#75715e"># application domain name</span>
+  QA_DOMAIN_NAME: minions.demo.hi42.top
+  PROD_DOMAIN_NAME: minions.hi42.top
+  CHART_PATH: ./charts/minions
+  INGRESS_CLASS_NAME: nginx-ingress-intranet
+
+  CI_REGISTRY: docker.io
+  CONTAINER_PROJECT: hanyifeng/minions
+  CONTAINER_IMAGE: $CI_REGISTRY/$CONTAINER_PROJECT
+  CONTAINER_TAG: $CI_COMMIT_SHORT_SHA
+  <span style="color:#75715e"># variables 好像不支持这样嵌套赋值。。。Ref:https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#gitlab-runner-internal-variable-expansion-mechanism</span>
+  <span style="color:#75715e"># CONTAINER_BUILT_IMAGE: &#34;$CONTAINER_IMAGE:$CONTAINER_TAG&#34;</span>
+  <span style="color:#75715e"># CONTAINER_RELEASE_IMAGE: &#34;$CONTAINER_IMAGE:latest&#34;</span>
+
+  <span style="color:#75715e"># Kubernetes config</span>
+  STAGE_NAMESPACE: qa
+  PROD_NAMESPACE: production
+  STAGE_RELEASE_NAME: minions-qa
+  PROD_RELEASE_NAME: minions-product
+
+before_script:
+  - echo <span style="color:#e6db74">&#34;Hello Minions&#34;</span>
+
+build:
+  stage: build
+  script:
+    - docker login -u ${CI_REGISTRY_USER} -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - echo <span style="color:#e6db74">&#34;Building image...&#34;</span>
+    - docker build --pull -t $CONTAINER_IMAGE:$CONTAINER_TAG .
+    - echo <span style="color:#e6db74">&#34;Pushing to ${CI_REGISTRY}...&#34;</span>
+    - docker push $CONTAINER_IMAGE:$CONTAINER_TAG
+  tags:
+    - shell
+
+
+test1:
+  stage: test
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - echo <span style="color:#e6db74">&#34;do unit test&#34;</span>
+    - docker pull $CONTAINER_IMAGE:$CONTAINER_TAG
+  tags:
+    - shell
+
+release-image:
+  stage: release
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker pull $CONTAINER_IMAGE:$CONTAINER_TAG
+    - docker tag $CONTAINER_IMAGE:$CONTAINER_TAG $CONTAINER_IMAGE:latest
+    - docker push $CONTAINER_IMAGE:latest
+  tags:
+    - shell
+
+deploy_qa:
+  stage: deploy
+  script:
+    - helm upgrade --install
+      --set image.repository=$CONTAINER_IMAGE
+      --set image.tag=$CONTAINER_TAG
+      --set image.pullPolicy=Always
+      --set ingress.enabled=<span style="color:#66d9ef">true</span>
+      --set ingress.annotations.<span style="color:#e6db74">&#34;kubernetes\.io/ingress\.class&#34;</span>=$INGRESS_CLASS_NAME
+      --set ingress.hosts[<span style="color:#ae81ff">0</span>]=$QA_DOMAIN_NAME
+      --set ingress.enabled=<span style="color:#66d9ef">true</span> --set ingress.tls[<span style="color:#ae81ff">0</span>].hosts[<span style="color:#ae81ff">0</span>]=$QA_DOMAIN_NAME
+      --set ingress.tls[<span style="color:#ae81ff">0</span>].secretName=demo-hi42-top
+      --set service.port=<span style="color:#e6db74">&#34;8080&#34;</span>
+      --wait
+      --namespace=$STAGE_NAMESPACE
+      $STAGE_RELEASE_NAME $CHART_PATH
+  environment:
+    name: staging
+    url: $QA_DOMAIN_NAME
+  tags:
+    - shell</code></pre></div>
+<p><em>Warning：由于这里加了ssl，所以需要引用证书，我们之前创建的secret是在default namespace里，
+所以需要重新在qa环境下创建一个secret证书。</em></p>
+
+<pre><code>$ kubectl create secret tls demo-hi42-top --key demo.hi42.top.key --cert fullchain.cer -n qa
+</code></pre>
+
+<h5 id="验证部署状态">验证部署状态</h5>
+
+<p>可以在gitlab pipeline上，找到最新的构建，并查看部署状态。这里以一个GIF进行演示。
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/gitlab-ci-combined-with-helm-automated-deploy-app-to-kubernetes-practice/dog-demo.gif" alt="demo-test1-dog" width="450" />
+    
+    
+    <figcaption>
+        <h4>傻二哈测试</h4>
+        
+    </figcaption>
+    
+</figure>
+</p>
+
+<p>可以尝试修改main.go，将dog.gif，改为cat.gif，重新提交代码到git仓库。之后部署成功后，你将看到两只可爱的小猫咪。。。</p>
+
+
+<figure>
+    
+        <img src="http://aliasmee.github.io/media/posts/gitlab-ci-combined-with-helm-automated-deploy-app-to-kubernetes-practice/cat-demo.png" alt="demo-test1-dog" width="450" />
+    
+    
+    <figcaption>
+        <h4>猫</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>Done。</p>
+
+<h3 id="总结">总结</h3>
+
+<p>跟之前在使用的Jenkins相比，gitlab-ci和代码管理结合的更完美。但是有些地方还是挺坑的，可能是对gitlab-ci
+比较陌生。慢慢的熟悉之后再来发表评论。</p>
+
+<p>其实不管是使用jenkins或者gitlab ci，又或者其他工具也好。原理基本上都差不多，就是使用定义方式上有些不同而已。
+后面就是根据项目继续完善优化pipeline。如数据库迁移job，pr review等。</p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="http://aliasmee.github.io/tags/gitlab"><span class="tag">Gitlab</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/kubernetes"><span class="tag">Kubernetes</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/helm"><span class="tag">Helm</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/ci"><span class="tag">Ci</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/cd"><span class="tag">Cd</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/gitlab-ci"><span class="tag">Gitlab-Ci</span></a></li>
+        
+          <li><a href="http://aliasmee.github.io/tags/k8s"><span class="tag">K8s</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2019 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="http://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>
