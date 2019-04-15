@@ -321,6 +321,12 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/tags/kubernetes-helm/</loc>
+    <lastmod>2019-04-13T11:51:48+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/tags/ldap/</loc>
     <lastmod>2019-03-06T12:58:00+08:00</lastmod>
     <priority>0</priority>
