@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Helm 实践小技巧</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="helm相关的一些实践操作，db migrate、私有helm repo。持续更新&amp;hellip;
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="Helm 实践小技巧" />
+    <meta name="twitter:description" content="helm相关的一些实践操作，db migrate、私有helm repo。持续更新&amp;hellip;
+
+" />
+    <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/helm-practical-tips/cover.jpeg" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Helm 实践小技巧" />
+  <meta property="og:description" content="helm相关的一些实践操作，db migrate、私有helm repo。持续更新&amp;hellip;
+
+" />
+  <meta property="og:url" content="https://aliasmee.github.io/post/helm-practical-tips/" />
+  <meta property="og:image" content="https://aliasmee.github.io/media/posts/helm-practical-tips/cover.jpeg" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://aliasmee.github.io/post/helm-practical-tips/" />
+<link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">~ Stay Hungry,Stay Foolish. ~</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/about/">About</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Helm 实践小技巧</h1>
+      <p class="post-meta">@aliasmee · Apr 20, 2019 · 2 min read</p>
+    </header>
+    <article class="post-content"><p>helm相关的一些实践操作，db migrate、私有helm repo。持续更新&hellip;</p>
+
+<p></p>
+
+<h3 id="主要内容">主要内容</h3>
+
+<ul>
+<li>使用helm进行数据库迁移</li>
+<li>调节helm hook 优先级</li>
+<li>构建一个自己的helm仓库</li>
+</ul>
+
+<h4 id="如何使用helm进行数据库迁移">如何使用helm进行数据库迁移</h4>
+
+<blockquote>
+<p>在我们将新版本的服务部署到k8s上面时，有的服务会有对数据库进行migrate的操作。这时我们就需要在
+部署服务之前，提前运行数据库的修改指令。</p>
+</blockquote>
+
+<h5 id="方法1-使用kubectl">方法1：使用kubectl</h5>
+
+<p>主要思路是我们可以在CICD工具上，使用kubectl在集群创建一个一次性的pod。运行它时引用该服务在集群里
+创建好的secret资源文件，运行的command是我们要执行的db migrate命令。</p>
+
+<p>下面是我们之前在使用Jenkins时的用法，部分相关片断。</p>
+
+<p><code>kubeDBMigrate</code>定义的片断：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy"><span style="color:#75715e">#!groovy</span>
+
+<span style="color:#75715e">/* Usage example:
+</span><span style="color:#75715e">runMigrate(imageFullName: &#34;registry.xxx.com/hi42/pipeline-test:staging-344ea60&#34;, namespace: &#34;devops&#34;, command: &#39;&#34;sleep&#34;,&#34;30&#34;&#39;, configMap: &#34;fluentd-test-config&#34;)
+</span><span style="color:#75715e">*/</span>
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">call</span><span style="color:#f92672">(</span>Map migrateConfig <span style="color:#f92672">=</span> <span style="color:#f92672">[:])</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>migrateConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">context</span> <span style="color:#f92672">&amp;&amp;</span> migrateConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">config</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        defaultContext <span style="color:#f92672">=</span> migrateConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">context</span>
+        defaultConfig <span style="color:#f92672">=</span> migrateConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">config</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        defaultContext <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;kubernetes-admin@kubernetes&#34;</span>
+        defaultConfig <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/home/user_name/.kube/jenkins-k8s-config&#34;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">// pod name(Optional,default value &#39;db-migrate&#39;)
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>migrateConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">taskName</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        podName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;db-migrate&#34;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        podName <span style="color:#f92672">=</span> migrateConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">taskName</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">// Default&#39;s envfrom is Secret
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>migrateConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">envFrom</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      jsonContent <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;{&#34;spec&#34;: {&#34;containers&#34;: [{&#34;image&#34;: &#34;$migrateConfig.imageFullName&#34;, &#34;command&#34;: [$migrateConfig.command], &#34;name&#34;: &#34;$podName&#34;, &#34;envFrom&#34;: [{&#34;secretRef&#34;: {&#34;name&#34;: &#34;$migrateConfig.configMap&#34;}}]}]}}&#34;&#34;&#34;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> <span style="color:#f92672">(</span>migrateConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">envFrom</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;configmap&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      jsonContent <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;{&#34;spec&#34;: {&#34;containers&#34;: [{&#34;image&#34;: &#34;$migrateConfig.imageFullName&#34;, &#34;command&#34;: [$migrateConfig.command], &#34;name&#34;: &#34;$podName&#34;, &#34;envFrom&#34;: [{&#34;configMapRef&#34;: {&#34;name&#34;: &#34;$migrateConfig.configMap&#34;}}]}]}}&#34;&#34;&#34;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">// start a pod exec db migrate command
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">def</span> runMigrateCmd <span style="color:#f92672">=</span> <span style="color:#f92672">[</span>
+        <span style="color:#e6db74">&#34;kubectl run&#34;</span><span style="color:#f92672">,</span>
+        <span style="color:#e6db74">&#34;$podName&#34;</span><span style="color:#f92672">,</span>
+        <span style="color:#e6db74">&#34;--image=$migrateConfig.imageFullName&#34;</span><span style="color:#f92672">,</span>
+        <span style="color:#e6db74">&#34;--attach=true --rm=true --restart=Never&#34;</span><span style="color:#f92672">,</span>
+        <span style="color:#e6db74">&#34;--namespace $migrateConfig.namespace&#34;</span><span style="color:#f92672">,</span>
+        <span style="color:#e6db74">&#34;--context=$defaultContext&#34;</span><span style="color:#f92672">,</span>
+        <span style="color:#e6db74">&#34;--kubeconfig=$defaultConfig&#34;</span><span style="color:#f92672">,</span>
+        <span style="color:#e6db74">&#34;--overrides=&#39;$jsonContent&#39;&#34;</span>
+    <span style="color:#f92672">]</span>
+    sh<span style="color:#f92672">(</span>runMigrateCmd<span style="color:#f92672">.</span><span style="color:#a6e22e">join</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">))</span></code></pre></div>
+<p><code>Jenkinsfile</code>文件中调用<code>kubeDBMigrate</code>的片断：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">stage<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Deploy to Production&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  waitForApprove<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Deploy to Production?&#34;</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">)</span>
+  node<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;${buildAgent}&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    kubeDBMigrate<span style="color:#f92672">(</span>imageFullName: <span style="color:#e6db74">&#34;${imageName}:${imageTag}&#34;</span><span style="color:#f92672">,</span> namespace: <span style="color:#e6db74">&#34;${namespace}&#34;</span><span style="color:#f92672">,</span> command: <span style="color:#e6db74">&#39;&#34;bundle&#34;, &#34;exec&#34;, &#34;rails&#34;, &#34;db:migrate&#34;&#39;</span><span style="color:#f92672">,</span> configMap: <span style="color:#e6db74">&#34;${prodConfigMap}&#34;</span><span style="color:#f92672">,</span> envFrom: <span style="color:#e6db74">&#34;configmap&#34;</span><span style="color:#f92672">)</span>
+
+    PRODUCT_DEPLOY_CONTAINER<span style="color:#f92672">.</span><span style="color:#a6e22e">each</span> <span style="color:#f92672">{</span> key<span style="color:#f92672">,</span> value <span style="color:#f92672">-&gt;</span>
+      kubeDeployToServer<span style="color:#f92672">(</span>namespace: <span style="color:#e6db74">&#34;${namespace}&#34;</span><span style="color:#f92672">,</span> deploymentName: key<span style="color:#f92672">,</span> imageFullName: <span style="color:#e6db74">&#34;${imageName}:${imageTag}&#34;</span><span style="color:#f92672">,</span> containerName: value<span style="color:#f92672">)</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>在Jenkinsfile中，一旦某个命令执行失败，那么整个流水线将会失败。通过上面jenkinsfile中的片断，
+可以看出我们是在deploy production服务之前运行了 db migrate 指令。</p>
+
+<p><em>TIPS: &ndash;restart 可选 [Always, OnFailure, Never]，根据值的不同，创建相对应的资源类型，[Deployment, Job, Pod]</em></p>
+
+<h5 id="方法2-使用-helm-hook-https-github-com-helm-helm-blob-master-docs-charts-hooks-md">方法2：使用<a href="https://github.com/helm/helm/blob/master/docs/charts_hooks.md">Helm Hook</a></h5>
+
+<p>根据helm官方文档介绍，使用helm hook的作用可以在helm install 集群之前或之后创建加载的资源（这里的资源是指helm所支持的所有类型）。</p>
+
+<ul>
+<li><p>正常的helm instal 执行流程：</p>
+
+<ol>
+<li>helm客户端运行 helm install foo</li>
+<li>chart 被加载到Tiller中</li>
+<li>经过一些验证，Tiller将根据动态的内容生成foo 的yaml文件。</li>
+<li>Tiller将生成的yaml资源加载到Kubernetes中</li>
+<li>Tiller将版本名称（和其他数据）返回给helm客户端</li>
+<li>helm客户端退出</li>
+</ol></li>
+
+<li><p>添加了hook之后的Chart 执行流程：</p>
+
+<ol>
+<li>helm客户端运行 helm install foo</li>
+<li>chart 被加载到Tiller中</li>
+<li>经过一些验证，Tiller将根据动态的内容生成foo 的yaml文件。</li>
+<li>Tiller准备执行pre-install hook（将hook资源加载到Kubernetes中）</li>
+<li>Tiller按权重（hook-weight）对Hook进行排序（默认情况下权重为0)</li>
+<li>然后Tiller首先加载最低权重的hook（从负到正）</li>
+<li>Tiller会一直等hook “Ready”（CRD除外）</li>
+<li>Tiller将生成的资源加载到Kubernetes中。请注意，如果设置了&ndash;wait标志，Tiller将等待所有资源都处于就绪状态，并且在准备就绪状态之前不会运行post-install hook</li>
+<li>Tiller执行post-install hook（加载hook资源）</li>
+<li>Tiller等到hook “Ready”</li>
+<li>Tiller将版本名称（和其他数据）返回给客户端</li>
+<li>helm客户端退出</li>
+</ol></li>
+</ul>
+
+<p>我们这里使用了带hook的job资源，去处理最开始的问题. 即在使用helm部署新版本的服务之前，先执行数据库migrate
+操作。</p>
+
+<p>如果要想把一个资源变成hook类型的，只要在annotations添加helm.sh/hook 就行了，如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migrate-{{ .Chart.Name }}-{{ .Values.migrateJobNameSuffix }}
+  annotations:
+    <span style="color:#e6db74">&#34;helm.sh/hook&#34;</span>: pre-install,pre-upgrade
+    <span style="color:#e6db74">&#34;helm.sh/hook-delete-policy&#34;</span>: hook-succeeded
+spec:
+  activeDeadlineSeconds: <span style="color:#ae81ff">3600</span>
+  template:
+    spec:
+      restartPolicy: Never
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets <span style="color:#e6db74">| indent 8 }}
+</span><span style="color:#e6db74">      {{- end }}
+</span><span style="color:#e6db74">      containers:
+</span><span style="color:#e6db74">      - name: db-migrate
+</span><span style="color:#e6db74">        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+</span><span style="color:#e6db74">        envFrom:
+</span><span style="color:#e6db74">        - secretRef:
+</span><span style="color:#e6db74">            name: {{ .Chart.Name }}-migrate-job-{{ .Values.migrateJobNameSuffix }}
+</span><span style="color:#e6db74">        command:
+</span><span style="color:#e6db74">        - rake
+</span><span style="color:#e6db74">        - db:migrate</span></code></pre></div>
+<p><code>&quot;helm.sh/hook&quot;: pre-install,pre-upgrade: 表示在更新或安装chart之前执行的操作</code></p>
+
+<p><code>&quot;helm.sh/hook-delete-policy&quot;: hook-succeeded：删除策略是在 资源执行成功之后</code></p>
+
+<h4 id="调整hook的优先级">调整hook的优先级</h4>
+
+<p>接着上一节，在第一次使用hook执行db migrate之后，发现正常Chart里的 secret资源无法被hook里的资源引用到，
+这样的话，就得在首次安装这个Chart之前，手动创建一个secret供job使用。后来想了想，可以根据hook-weight
+在定义一个高优先级的hook资源，这样后面的带hook 的job就可以引用到了。如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Chart.Name }}-migrate-job-{{ .Values.migrateJobNameSuffix }}
+  annotations:
+    <span style="color:#e6db74">&#34;helm.sh/hook&#34;</span>: pre-install,pre-upgrade
+    <span style="color:#e6db74">&#34;helm.sh/hook-delete-policy&#34;</span>: hook-succeeded,hook-failed
+    <span style="color:#e6db74">&#34;helm.sh/hook-weight&#34;</span>: <span style="color:#e6db74">&#34;-88&#34;</span>
+type: Opaque
+data:
+  DB_PORT: {{ .Values.pgPort <span style="color:#e6db74">| toString | b64enc }}</span></code></pre></div>
+<p><code>helm.sh/hook-weight: 只要该值小于job的权重（默认值0）即可</code></p>
+
+<p><em>TIPS：这里提一下secret里的一个小知识，就是templates 的secret资源里面的字段值要是string类型的，
+像port 数字会自动判断为int，所以需要使用<code>toString</code>方法给转换成string。</em></p>
+
+<h4 id="搭建一个自己的helm仓库">搭建一个自己的helm仓库</h4>
+
+<p>项目多了之后，需要一个集中存储Chart的地方。Helm repository的支持方式很简单，有个index.html，
+可提供web下载的就行了。</p>
+
+<p>主要思路是：</p>
+
+<p>helm dependency -&gt; helm package -&gt; helm repo index -&gt; Web Server(nginx)</p>
+
+<p>用python根据上面的思路自己写了个简单粗糙的项目：
+<a href="https://github.com/aliasmee/helm-private-repository">helm-private-repository</a></p>
+
+<p><em>另外还有一个比较好的helm 仓库项目推荐给大家：<a href="https://chartmuseum.com/">chartmuseum</a></em></p>
+
+<h4 id="参考">参考</h4>
+
+<p><a href="https://cloudnativedevopsblog.com/posts/database-migrations/">database-migrations</a></p>
+
+<p><a href="https://www.reddit.com/r/kubernetes/comments/8m4ws0/noob_where_to_run_database_migrations/">Where to run database migrations</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://aliasmee.github.io/tags/helm"><span class="tag">Helm</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/helm-hook"><span class="tag">Helm Hook</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/helm-migrate-job"><span class="tag">Helm Migrate Job</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/jenkinsfile"><span class="tag">Jenkinsfile</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/groovy"><span class="tag">Groovy</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/jenkins-migrate"><span class="tag">Jenkins Migrate</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2019 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

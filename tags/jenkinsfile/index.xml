@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Helm on aliasmee&#39;s blog </title>
-    <link>https://aliasmee.github.io/tags/helm/</link>
-    <description>Recent content in Helm on aliasmee&#39;s blog </description>
+    <title>Jenkinsfile on aliasmee&#39;s blog </title>
+    <link>https://aliasmee.github.io/tags/jenkinsfile/</link>
+    <description>Recent content in Jenkinsfile on aliasmee&#39;s blog </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
     <lastBuildDate>Sat, 20 Apr 2019 10:25:30 +0800</lastBuildDate>
     
-	<atom:link href="https://aliasmee.github.io/tags/helm/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://aliasmee.github.io/tags/jenkinsfile/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,17 +19,6 @@
       
       <guid>https://aliasmee.github.io/post/helm-practical-tips/</guid>
       <description>&lt;p&gt;helm相关的一些实践操作，db migrate、私有helm repo。持续更新&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Gitlab-ci and Helm CI/CD Kubernetes集群实践</title>
-      <link>https://aliasmee.github.io/post/gitlab-ci-combined-with-helm-automated-deploy-app-to-kubernetes-practice/</link>
-      <pubDate>Sat, 13 Apr 2019 11:51:48 +0800</pubDate>
-      
-      <guid>https://aliasmee.github.io/post/gitlab-ci-combined-with-helm-automated-deploy-app-to-kubernetes-practice/</guid>
-      <description>&lt;p&gt;kubernetes 结合gitlab、helm自动化部署实践，也许能给其他人一些帮助。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

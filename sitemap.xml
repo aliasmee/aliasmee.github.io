@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/post/helm-practical-tips/</loc>
+    <lastmod>2019-04-20T10:25:30+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/post/gitlab-ci-combined-with-helm-automated-deploy-app-to-kubernetes-practice/</loc>
     <lastmod>2019-04-13T11:51:48+08:00</lastmod>
   </url>
@@ -255,8 +260,26 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/tags/groovy/</loc>
+    <lastmod>2019-04-20T10:25:30+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/tags/helm/</loc>
-    <lastmod>2019-04-13T11:51:48+08:00</lastmod>
+    <lastmod>2019-04-20T10:25:30+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/helm-hook/</loc>
+    <lastmod>2019-04-20T10:25:30+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/helm-migrate-job/</loc>
+    <lastmod>2019-04-20T10:25:30+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -293,6 +316,18 @@
   <url>
     <loc>https://aliasmee.github.io/tags/jenkins/</loc>
     <lastmod>2018-08-11T14:14:07+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/jenkins-migrate/</loc>
+    <lastmod>2019-04-20T10:25:30+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/jenkinsfile/</loc>
+    <lastmod>2019-04-20T10:25:30+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -370,7 +405,7 @@
   
   <url>
     <loc>https://aliasmee.github.io/post/</loc>
-    <lastmod>2019-04-13T11:51:48+08:00</lastmod>
+    <lastmod>2019-04-20T10:25:30+08:00</lastmod>
     <priority>0</priority>
   </url>
   

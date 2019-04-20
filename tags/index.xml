@@ -211,11 +211,38 @@
     </item>
     
     <item>
+      <title>Groovy</title>
+      <link>https://aliasmee.github.io/tags/groovy/</link>
+      <pubDate>Sat, 20 Apr 2019 10:25:30 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/groovy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Helm</title>
       <link>https://aliasmee.github.io/tags/helm/</link>
-      <pubDate>Sat, 13 Apr 2019 11:51:48 +0800</pubDate>
+      <pubDate>Sat, 20 Apr 2019 10:25:30 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/helm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Helm Hook</title>
+      <link>https://aliasmee.github.io/tags/helm-hook/</link>
+      <pubDate>Sat, 20 Apr 2019 10:25:30 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/helm-hook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Helm Migrate Job</title>
+      <link>https://aliasmee.github.io/tags/helm-migrate-job/</link>
+      <pubDate>Sat, 20 Apr 2019 10:25:30 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/helm-migrate-job/</guid>
       <description></description>
     </item>
     
@@ -270,6 +297,24 @@
       <pubDate>Sat, 11 Aug 2018 14:14:07 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/jenkins/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jenkins Migrate</title>
+      <link>https://aliasmee.github.io/tags/jenkins-migrate/</link>
+      <pubDate>Sat, 20 Apr 2019 10:25:30 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/jenkins-migrate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jenkinsfile</title>
+      <link>https://aliasmee.github.io/tags/jenkinsfile/</link>
+      <pubDate>Sat, 20 Apr 2019 10:25:30 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/jenkinsfile/</guid>
       <description></description>
     </item>
     
