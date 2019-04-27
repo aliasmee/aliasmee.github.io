@@ -122,7 +122,7 @@
   
   <h2 class="title">aliasmee&#39;s blog </h2>
   
-  <p class="subtitle">~ Stay Hungry,Stay Foolish. ~</p>
+  <p class="subtitle">DevOps | Kubernetes | Docker | Cloud | CICD </p>
   <button class="menu-toggle" type="button">
     <span class="icon icon-menu"></span>
   </button>
@@ -160,7 +160,7 @@
             
             
             ">
-            <a href="https://aliasmee.github.io/about/">About</a>
+            <a href="https://aliasmee.github.io/about/">About Me</a>
           </li>
       
     </ul>
@@ -234,7 +234,7 @@
   <section class="main post-detail">
     <header class="post-header">
       <h1 class="post-title">Helm 实践小技巧</h1>
-      <p class="post-meta">@aliasmee · Apr 20, 2019 · 2 min read</p>
+      <p class="post-meta">@aliasmee · Apr 20, 2019 · 3 min read</p>
     </header>
     <article class="post-content"><p>helm相关的一些实践操作，db migrate、私有helm repo。持续更新&hellip;</p>
 
@@ -422,6 +422,17 @@ data:
 <a href="https://github.com/aliasmee/helm-private-repository">helm-private-repository</a></p>
 
 <p><em>另外还有一个比较好的helm 仓库项目推荐给大家：<a href="https://chartmuseum.com/">chartmuseum</a></em></p>
+
+<h4 id="helm-template中资源引用value-值会强制转换为int">Helm template中资源引用value 值会强制转换为int</h4>
+
+<p>最近在项目中遇到一个问题：helm chart中有些资源文件里，定义了一些变量，变量值是从&ndash;set时获得的，
+但是到了实际helm解析的时候，将该值转换了int，k8s会报错，说资源名字不符合规范。即使在资源的定义变量后面
+加上toString 也不好使。</p>
+
+<p>具体案例：gitlab的 commit-short-hash。当遇到8位是纯数字(49113771)的时候，helm就转换成
+这种格式<code>4.9113771e+07</code>. 导致无法创建资源，流水线失败。错误如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Error: Job.batch <span style="color:#e6db74">&#34;db-migrate-xxxx-4.9113771e+07&#34;</span> is invalid: <span style="color:#f92672">[</span>metadata.name: Invalid value: <span style="color:#e6db74">&#34;db-migrate-xxxx-4.9113771e+07&#34;</span>: a DNS-1123 subdomain must consist of lower <span style="color:#66d9ef">case</span> alphanumeric characters, <span style="color:#e6db74">&#39;-&#39;</span> or <span style="color:#e6db74">&#39;.&#39;</span>, and must start and end with an alphanumeric character <span style="color:#f92672">(</span>e.g. <span style="color:#e6db74">&#39;example.com&#39;</span>, regex used <span style="color:#66d9ef">for</span> validation is <span style="color:#e6db74">&#39;[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*&#39;</span><span style="color:#f92672">)</span>,</code></pre></div>
+<p>解决的方式：在设置该变量值时，将<code>--set</code> 替换成 <code>--set-strings</code>.</p>
 
 <h4 id="参考">参考</h4>
 
