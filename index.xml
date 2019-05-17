@@ -31,6 +31,17 @@ Contact Way ? 你可以找到的！（GitHub）
     </item>
     
     <item>
+      <title>Helm 3 来了</title>
+      <link>https://aliasmee.github.io/post/helm-3-is-coming/</link>
+      <pubDate>Fri, 17 May 2019 11:52:13 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/helm-3-is-coming/</guid>
+      <description>&lt;p&gt;从18年初开始使用helm，也看到过helm3版本的一些规划路线图，对里面的一些功能比较期待。就在昨天helm项目发布了helm3-alpha.1版本，现在迫不及待想要试试新功能，哈哈&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Helm 实践小技巧</title>
       <link>https://aliasmee.github.io/post/helm-practical-tips/</link>
       <pubDate>Sat, 20 Apr 2019 10:25:30 +0800</pubDate>

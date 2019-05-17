@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kubernetes Helm on aliasmee&#39;s blog </title>
-    <link>https://aliasmee.github.io/tags/kubernetes-helm/</link>
-    <description>Recent content in Kubernetes Helm on aliasmee&#39;s blog </description>
+    <title>Helm3 on aliasmee&#39;s blog </title>
+    <link>https://aliasmee.github.io/tags/helm3/</link>
+    <description>Recent content in Helm3 on aliasmee&#39;s blog </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
     <lastBuildDate>Fri, 17 May 2019 11:52:13 +0800</lastBuildDate>
     
-	<atom:link href="https://aliasmee.github.io/tags/kubernetes-helm/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://aliasmee.github.io/tags/helm3/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,17 +19,6 @@
       
       <guid>https://aliasmee.github.io/post/helm-3-is-coming/</guid>
       <description>&lt;p&gt;从18年初开始使用helm，也看到过helm3版本的一些规划路线图，对里面的一些功能比较期待。就在昨天helm项目发布了helm3-alpha.1版本，现在迫不及待想要试试新功能，哈哈&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Gitlab-ci and Helm CI/CD Kubernetes集群实践</title>
-      <link>https://aliasmee.github.io/post/gitlab-ci-combined-with-helm-automated-deploy-app-to-kubernetes-practice/</link>
-      <pubDate>Sat, 13 Apr 2019 11:51:48 +0800</pubDate>
-      
-      <guid>https://aliasmee.github.io/post/gitlab-ci-combined-with-helm-automated-deploy-app-to-kubernetes-practice/</guid>
-      <description>&lt;p&gt;kubernetes 结合gitlab、helm自动化部署实践，也许能给其他人一些帮助。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

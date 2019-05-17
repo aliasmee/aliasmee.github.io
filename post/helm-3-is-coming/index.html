@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Helm 3 来了</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="从18年初开始使用helm，也看到过helm3版本的一些规划路线图，对里面的一些功能比较期待。就在昨天helm项目发布了helm3-alpha.1版本，现在迫不及待想要试试新功能，哈哈&amp;hellip;
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="Helm 3 来了" />
+    <meta name="twitter:description" content="从18年初开始使用helm，也看到过helm3版本的一些规划路线图，对里面的一些功能比较期待。就在昨天helm项目发布了helm3-alpha.1版本，现在迫不及待想要试试新功能，哈哈&amp;hellip;
+
+" />
+    <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/helm-3-is-coming/cover.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Helm 3 来了" />
+  <meta property="og:description" content="从18年初开始使用helm，也看到过helm3版本的一些规划路线图，对里面的一些功能比较期待。就在昨天helm项目发布了helm3-alpha.1版本，现在迫不及待想要试试新功能，哈哈&amp;hellip;
+
+" />
+  <meta property="og:url" content="https://aliasmee.github.io/post/helm-3-is-coming/" />
+  <meta property="og:image" content="https://aliasmee.github.io/media/posts/helm-3-is-coming/cover.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://aliasmee.github.io/post/helm-3-is-coming/" />
+<link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">DevOps | Kubernetes | Docker | Cloud | CICD </p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/about/">About Me</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Helm 3 来了</h1>
+      <p class="post-meta">@aliasmee · May 17, 2019 · 2 min read</p>
+    </header>
+    <article class="post-content"><p>从18年初开始使用helm，也看到过helm3版本的一些规划路线图，对里面的一些功能比较期待。就在昨天helm项目发布了helm3-alpha.1版本，现在迫不及待想要试试新功能，哈哈&hellip;</p>
+
+<p></p>
+
+<h3 id="新功能总览">新功能总览</h3>
+
+<ul>
+<li>移除Tiller 组件</li>
+<li>Release name 可缩小至Namespace范围（意味着release name 可重复）。</li>
+<li>默认关闭随机生成release name，需要显示启用选项 <code>--generate-name</code></li>
+<li>移除 helm serve 提供本地repository 功能</li>
+<li>将requirements.yaml的内容移到Chart.yaml文件中</li>
+<li>支持 helm push 到远端 chart repository，支持登陆认证</li>
+<li>支持 Chart Library（keeping charts DRY.）</li>
+<li>简化内置模版里面的对象</li>
+<li>使用JSONSchema验证chart的Values</li>
+</ul>
+
+<p>其它是一些终端命令的重命名:</p>
+
+<ul>
+<li><p>helm delete -&gt; helm uninstall (&ndash;purge 默认就已经启用，所以如果需要显示保留，在卸载时需添加&ndash;keep-history)</p></li>
+
+<li><p>helm inspect -&gt; helm show</p></li>
+
+<li><p>helm fetch -&gt; helm pull</p></li>
+</ul>
+
+<h4 id="移除tiller">移除Tiller</h4>
+
+<p>这个改动应该是最大的吧，直接去除了一个服务端组件，从此只有helm这个客户端来和kubernetes集群进行交互操作。
+所以从之前的交互流程：
+helm client &ndash;gRPC&ndash;&gt; helm server (Tiller) &ndash;&gt; kubernetes api (install chart)</p>
+
+<p>变成：
+helm client &ndash;gRPC&ndash;&gt; kubernetes api(install chart)</p>
+
+<p>因为helm 是使用了kubeconfig来与 kubernetes集群通信，所以如 helm 3的changelog中说的，管理员可以进行更细粒度的权限控制。
+还有release 也会在集群中进行记录。只不过是随着release chart在同一Namespace中。</p>
+
+<h4 id="release-name-范围缩小至namespace">Release name 范围缩小至Namespace</h4>
+
+<p>在helm2，release name 是全局的，意味着即使安装某个chart到不同的Namespace，release name名字也不能一样。这个缺陷应该困扰了很多helm用户。</p>
+
+<p>在helm3之前，Chart Release 记录都和Tiller服务一起，在一个Namespace中。现在由于移除了Tiller组件，每个chart的Release记录与它部署到哪个namespace一样，存在同一个Namespace中。这样就可以在不同Namespace中使用同一个Release name。</p>
+
+<p><code>NOTES: 在Helm 2 之前，Release 信息以ConfigMap存储在tiller 部署的Namespace中。Helm 3是以Secret资源来存储Release信息的。</code></p>
+
+<h3 id="动手做一做">动手做一做</h3>
+
+<h4 id="安装helm3">安装helm3</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo wget https://get.helm.sh/helm-v3.0.0-alpha.1-linux-amd64.tar.gz <span style="color:#f92672">&amp;&amp;</span> tar -xvf helm-v3.0.0-alpha.1-linux-amd64.tar.gz
+sudo cp linux-amd64/helm /usr/local/bin/</code></pre></div>
+<h4 id="初始化helm">初始化helm</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm init</code></pre></div>
+<h4 id="不指定release-name安装一个chart">不指定Release name安装一个chart</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ helm install stable/nginx
+Error: must either provide a name or specify --generate-name</code></pre></div>
+<p>So，下面是正确方式:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install stable/traefik --generate-name</code></pre></div>
+<h4 id="在不同namespace中使用同一个release-name-安装chart">在不同Namespace中使用同一个Release name 安装chart</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install traefik-test -n default stable/traefik</code></pre></div>
+<p>使用kubectl切换到默认namespace为目标部署namespace中，这里官方文档暂时没有更新。</p>
+
+<p>格式：<code>kubectl config set-context CONTENT_NAME --namespace NAMESPACE</code>,如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config set-context gke_hi42-top_us-east1-b_my-test --namespace qa</code></pre></div>
+<p>如果不自行使用kubectl切换，那么会报以下错误提示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Error: cannot re-use a name that is still in use</code></pre></div>
+<p>上面的错误提示不太明显，应该在加上一条：“请手动使用kubectl切换到目标Namespace”。</p>
+
+<p>不过还是觉得在使用 <code>-n NAMESPACE</code>之后，应该由helm 内部来实现切换context，而不是让用户来执行kubectl config。</p>
+
+<p>使用 traefik-test 作为Release name继续安装Chart到qa namespace中：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install traefik-test -n qa stable/traefik</code></pre></div>
+<h4 id="查看已安装的chart">查看已安装的chart</h4>
+
+<p>现在我们可以列出所有安装的chart release:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm list --all-namespaces
+NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART
+traefik-test            default         <span style="color:#ae81ff">1</span>               <span style="color:#ae81ff">2019</span>-05-16 <span style="color:#ae81ff">19</span>:20:07.537745555 +0800 +08 deployed        traefik-1.68.2
+traefik-test            qa              <span style="color:#ae81ff">1</span>               <span style="color:#ae81ff">2019</span>-05-16 <span style="color:#ae81ff">19</span>:47:31.145192715 +0800 +08 deployed        traefik-1.68.2
+traefik-1558005396      default         <span style="color:#ae81ff">1</span>               <span style="color:#ae81ff">2019</span>-05-16 <span style="color:#ae81ff">19</span>:16:40.235417243 +0800 +08 deployed        traefik-1.68.2</code></pre></div>
+<p>从上面的输出可以看到，NAMESPACE那一列也由最后一列提到了第二列。方便观测。</p>
+
+<p><code>NOTES: --all 选项只会列出当前kube context文件中定义namesapce中部署的release</code></p>
+
+<h3 id="小总结">小总结</h3>
+
+<p>helm 3 的一些功能可谓是从很早之前就开始计划，现在终于来了。解决了很多使用上的不便。虽然现在依然有些不完善之处，考虑到HELM 在CNCF还是孵化状态，希望后面能越来越好，也期待早日&rdquo;毕业&rdquo;。</p>
+
+<p>参考：<a href="https://v3.helm.sh/docs/faq/">helm v3 docs</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://aliasmee.github.io/tags/helm"><span class="tag">Helm</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/helm3"><span class="tag">Helm3</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/kubernetes-helm"><span class="tag">Kubernetes Helm</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2019 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

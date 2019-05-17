@@ -5,7 +5,11 @@
   <meta charset="utf-8" />
 
   
-  <title>我的新玩伴-树莓派2</title>
+  <title>
+  Tag → helm3
+  
+   | aliasmee blog (飞走不可)
+</title>
 
   
   
@@ -16,29 +20,21 @@
 
   
   <meta name="author" content="aliasmee" />
-  <meta name="description" content="接着上篇的，本篇介绍了桌面版本的安装，并设置vnc ，用于远程桌面连接。另外给大家看自己动手给树莓派盖的屋子。哈哈
-
-" />
+  <meta name="description" content="Simple,Hard,Life" />
 
   
-  
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@aliasmeee" />
-    <meta name="twitter:title" content="我的新玩伴-树莓派2" />
-    <meta name="twitter:description" content="接着上篇的，本篇介绍了桌面版本的安装，并设置vnc ，用于远程桌面连接。另外给大家看自己动手给树莓派盖的屋子。哈哈
-
-" />
-    <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/play-with-raspberry-pi-2/house1.png" />
-  
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@aliasmeee" />
+  <meta name="twitter:title" content="aliasmee blog (飞走不可)" />
+  <meta name="twitter:description" content="Simple,Hard,Life" />
+  <meta name="twitter:image" content="https://aliasmee.github.io/img/avatar.jpg" />
 
   
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="我的新玩伴-树莓派2" />
-  <meta property="og:description" content="接着上篇的，本篇介绍了桌面版本的安装，并设置vnc ，用于远程桌面连接。另外给大家看自己动手给树莓派盖的屋子。哈哈
-
-" />
-  <meta property="og:url" content="https://aliasmee.github.io/post/play-with-raspberry-pi-2/" />
-  <meta property="og:image" content="https://aliasmee.github.io/media/posts/play-with-raspberry-pi-2/house1.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="aliasmee blog (飞走不可)" />
+  <meta property="og:description" content="Simple,Hard,Life" />
+  <meta property="og:url" content="https://aliasmee.github.io/tags/helm3/" />
+  <meta property="og:image" content="https://aliasmee.github.io/img/avatar.jpg" />
 
 
 
@@ -46,7 +42,7 @@
 <meta name="generator" content="Hugo 0.41" />
 
 
-<link rel="canonical" href="https://aliasmee.github.io/post/play-with-raspberry-pi-2/" />
+<link rel="canonical" href="https://aliasmee.github.io/tags/helm3/" />
 <link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
 
 
@@ -110,10 +106,6 @@
     <div class="suspension">
       <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
       
-        
-        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
-        
-      
     </div>
     
     
@@ -136,8 +128,6 @@
         <li class="menu-item
             
             
-            
-              is-active
             ">
             <a href="https://aliasmee.github.io/">文字</a>
           </li>
@@ -231,123 +221,31 @@
   </nav>
 </header>
 
-  <section class="main post-detail">
-    <header class="post-header">
-      <h1 class="post-title">我的新玩伴-树莓派2</h1>
-      <p class="post-meta">@aliasmee · Jun 24, 2018 · 1 min read</p>
+  <section class="main post-list">
+    <header class="list-header offscreen">
+      <h2 class="list-label">Posts List</h2>
     </header>
-    <article class="post-content"><p>接着上篇的，本篇介绍了桌面版本的安装，并设置vnc ，用于远程桌面连接。另外给大家看自己动手给树莓派盖的屋子。哈哈</p>
-
-<p></p>
-
-<h3 id="安装vnc">安装VNC</h3>
-
-<p>确认vncserver 已经安装：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install realvnc-vnc-server realvnc-vnc-viewer</code></pre></div>
-<p>启动并创建自启动文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">systemctl start vncserver-x11-serviced
-
-systemctl enable vncserver-x11-serviced</code></pre></div>
-<h3 id="设置vnc认证">设置vnc认证</h3>
-
-<p>修改配置文件/root/.vnc/config.d/vncserver-x11，将systemauth 修改为vncauth
-<code>Authentication=VncAuth</code></p>
-
-<p>运行以下指令，根据提示设置一个vnc登录认证密码:</p>
-
-<p><code>vncpasswd -service</code></p>
-
-<h3 id="验证">验证</h3>
-
-<p>ios手机下载VNC Viewer 软件，输入树莓派的主机IP地址，在输入上一步设置的密码。
-如下图：
-
-<figure>
-    
-        <img src="https://aliasmee.github.io/media/posts/play-with-raspberry-pi-2/raspberry_vnc.png" alt="手机连接vnc效果图" width="450" />
     
     
-    <figcaption>
-        <h4>手机连接vnc效果图</h4>
-        
-    </figcaption>
-    
-</figure>
+      
+        <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="https://aliasmee.github.io/post/helm-3-is-coming/" class="post-link">Helm 3 来了</a></h3>
+    <p class="post-meta">@aliasmee · May 17, 2019 · 2 min read</p>
+  </header>
+  
+    <img class="post-cover" src="https://aliasmee.github.io/media/posts/helm-3-is-coming/cover.png" alt="Helm 3 来了">
+  
+  <p class="post-summary">从18年初开始使用helm，也看到过helm3版本的一些规划路线图，对里面的一些功能比较期待。就在昨天helm项目发布了helm3-alpha.1版本，现在迫不及待想要试试新功能，哈哈…
+
 </p>
+  <footer class="post-footer">
+    <a class="read-more" href="https://aliasmee.github.io/post/helm-3-is-coming/">Read More →</a>
+  </footer>
+</article>
 
-<h3 id="pi-s-house-展示">Pi&rsquo;s House 展示</h3>
-
-<p>花了大半天时间，费尽了脑子，盖成了这个样子。。。某宝9.9淘来的。
-
-<figure>
-    
-        <img src="https://aliasmee.github.io/media/posts/play-with-raspberry-pi-2/house.png" alt="Big House" width="450" />
-    
-    
-    <figcaption>
-        <h4>Big house </h4>
-        
-    </figcaption>
-    
-</figure>
-</p>
-
-<p>图3，仔细看，有木有很像一个猫科动物，哈哈:</p>
-
-
-<figure>
-    
-        <img src="https://aliasmee.github.io/media/posts/play-with-raspberry-pi-2/house1.png" alt="Big House 2" width="450" />
-    
-    
-    <figcaption>
-        <h4>Big house 2</h4>
-        
-    </figcaption>
-    
-</figure></article>
-    <footer class="post-footer">
       
-      <ul class="post-tags">
-        
-          <li><a href="https://aliasmee.github.io/tags/raspberry-pi"><span class="tag">Raspberry Pi</span></a></li>
-        
-          <li><a href="https://aliasmee.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE"><span class="tag">树莓派</span></a></li>
-        
-          <li><a href="https://aliasmee.github.io/tags/install-vnc-on-raspberry"><span class="tag">Install Vnc on Raspberry</span></a></li>
-        
-          <li><a href="https://aliasmee.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%BC%80%E7%AE%B1"><span class="tag">树莓派开箱</span></a></li>
-        
-          <li><a href="https://aliasmee.github.io/tags/vnc"><span class="tag">Vnc</span></a></li>
-        
-      </ul>
-      
-      <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>327</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
-      </p>
-    </footer>
     
-      <div id="disqus_thread"></div>
-<script>
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-      
     
   </section>
   <footer class="site-footer">

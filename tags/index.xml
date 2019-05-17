@@ -222,7 +222,7 @@
     <item>
       <title>Helm</title>
       <link>https://aliasmee.github.io/tags/helm/</link>
-      <pubDate>Sat, 20 Apr 2019 10:25:30 +0800</pubDate>
+      <pubDate>Fri, 17 May 2019 11:52:13 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/helm/</guid>
       <description></description>
@@ -243,6 +243,15 @@
       <pubDate>Sat, 20 Apr 2019 10:25:30 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/helm-migrate-job/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Helm3</title>
+      <link>https://aliasmee.github.io/tags/helm3/</link>
+      <pubDate>Fri, 17 May 2019 11:52:13 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/helm3/</guid>
       <description></description>
     </item>
     
@@ -357,7 +366,7 @@
     <item>
       <title>Kubernetes Helm</title>
       <link>https://aliasmee.github.io/tags/kubernetes-helm/</link>
-      <pubDate>Sat, 13 Apr 2019 11:51:48 +0800</pubDate>
+      <pubDate>Fri, 17 May 2019 11:52:13 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/kubernetes-helm/</guid>
       <description></description>

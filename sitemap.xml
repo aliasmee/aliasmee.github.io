@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/post/helm-3-is-coming/</loc>
+    <lastmod>2019-05-17T11:52:13+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/post/helm-practical-tips/</loc>
     <lastmod>2019-04-20T10:25:30+08:00</lastmod>
   </url>
@@ -267,7 +272,7 @@
   
   <url>
     <loc>https://aliasmee.github.io/tags/helm/</loc>
-    <lastmod>2019-04-20T10:25:30+08:00</lastmod>
+    <lastmod>2019-05-17T11:52:13+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -280,6 +285,12 @@
   <url>
     <loc>https://aliasmee.github.io/tags/helm-migrate-job/</loc>
     <lastmod>2019-04-20T10:25:30+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/helm3/</loc>
+    <lastmod>2019-05-17T11:52:13+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -357,7 +368,7 @@
   
   <url>
     <loc>https://aliasmee.github.io/tags/kubernetes-helm/</loc>
-    <lastmod>2019-04-13T11:51:48+08:00</lastmod>
+    <lastmod>2019-05-17T11:52:13+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -405,7 +416,7 @@
   
   <url>
     <loc>https://aliasmee.github.io/post/</loc>
-    <lastmod>2019-04-20T10:25:30+08:00</lastmod>
+    <lastmod>2019-05-17T11:52:13+08:00</lastmod>
     <priority>0</priority>
   </url>
   
