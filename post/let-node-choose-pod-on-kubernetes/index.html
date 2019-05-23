@@ -16,7 +16,7 @@
 
   
   <meta name="author" content="aliasmee" />
-  <meta name="description" content="如何让node 去选择谁能部署到自身上面？看了下现有的Node Selectors、Node Affinity、Node Taints, 经过比对，发现Node Taints 更适合这种情况，下面是分享一下具体的内容.
+  <meta name="description" content="如何让node 去&amp;rdquo;选择&amp;rdquo;只有谁（pod）能部署到自身上面？看了下现有的Node Selectors、Node Affinity、Node Taints, 经过比对，发现Node Taints 更适合这种情况，下面是分享一下具体的内容.
 
 " />
 
@@ -25,7 +25,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@aliasmeee" />
     <meta name="twitter:title" content="在kubernetes中，让某个node成为专属节点" />
-    <meta name="twitter:description" content="如何让node 去选择谁能部署到自身上面？看了下现有的Node Selectors、Node Affinity、Node Taints, 经过比对，发现Node Taints 更适合这种情况，下面是分享一下具体的内容.
+    <meta name="twitter:description" content="如何让node 去&amp;rdquo;选择&amp;rdquo;只有谁（pod）能部署到自身上面？看了下现有的Node Selectors、Node Affinity、Node Taints, 经过比对，发现Node Taints 更适合这种情况，下面是分享一下具体的内容.
 
 " />
     <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/let-node-choose-pod-on-kubernetes/cover.png" />
@@ -34,7 +34,7 @@
   
   <meta property="og:type" content="article" />
   <meta property="og:title" content="在kubernetes中，让某个node成为专属节点" />
-  <meta property="og:description" content="如何让node 去选择谁能部署到自身上面？看了下现有的Node Selectors、Node Affinity、Node Taints, 经过比对，发现Node Taints 更适合这种情况，下面是分享一下具体的内容.
+  <meta property="og:description" content="如何让node 去&amp;rdquo;选择&amp;rdquo;只有谁（pod）能部署到自身上面？看了下现有的Node Selectors、Node Affinity、Node Taints, 经过比对，发现Node Taints 更适合这种情况，下面是分享一下具体的内容.
 
 " />
   <meta property="og:url" content="https://aliasmee.github.io/post/let-node-choose-pod-on-kubernetes/" />
@@ -236,7 +236,7 @@
       <h1 class="post-title">在kubernetes中，让某个node成为专属节点</h1>
       <p class="post-meta">@aliasmee · Jul 9, 2018 · 2 min read</p>
     </header>
-    <article class="post-content"><p>如何让node 去选择谁能部署到自身上面？看了下现有的<code>Node Selectors</code>、<code>Node Affinity</code>、<code>Node Taints</code>, 经过比对，发现<code>Node Taints</code> 更适合这种情况，下面是分享一下具体的内容.</p>
+    <article class="post-content"><p>如何让node 去&rdquo;选择&rdquo;只有谁（pod）能部署到自身上面？看了下现有的<code>Node Selectors</code>、<code>Node Affinity</code>、<code>Node Taints</code>, 经过比对，发现<code>Node Taints</code> 更适合这种情况，下面是分享一下具体的内容.</p>
 
 <p></p>
 
@@ -336,7 +336,7 @@
 <p>回顾一下，有三种方式可以设置node 和pod 的调度关系。</p>
 
 <ul>
-<li>Node Selectors: 符合Pod指定带有label的主机，将会被调度。但无法避免其它Pod在上面。</li>
+<li>Node Selectors: 符合Pod指定带有label的主机，将会被调度。但无法避免其它Pod在上面。将优先分配给定义了匹配Node selectors的pod。</li>
 <li>Affinty: Node 亲和性，有Node selectors 的所有功能，语法更灵活。但一样，也无法避免其它Pod。</li>
 <li>Taint &amp; Toleration: 只有设置了 Toleration 的主机才可以被调度到上面去。主要用途是设置为专用主机，或其它专有用途的主机。</li>
 </ul>
@@ -349,7 +349,9 @@
 
 <p><a href="https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#eviction-policy">驱逐策略</a></p>
 
-<p><a href="https://embano1.github.io/post/podnodesel/">Understanding and using the Kubernetes PodNodeSelector Admission Controller</a></p></article>
+<p><a href="https://embano1.github.io/post/podnodesel/">Understanding and using the Kubernetes PodNodeSelector Admission Controller</a></p>
+
+<p><a href="https://docs.microsoft.com/zh-cn/azure/aks/operator-best-practices-advanced-scheduler">operator-best-practices-advanced-scheduler</a></p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
@@ -367,7 +369,7 @@
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>312</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>317</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     

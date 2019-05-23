@@ -29,7 +29,7 @@
       <pubDate>Mon, 09 Jul 2018 18:35:47 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/post/let-node-choose-pod-on-kubernetes/</guid>
-      <description>&lt;p&gt;如何让node 去选择谁能部署到自身上面？看了下现有的&lt;code&gt;Node Selectors&lt;/code&gt;、&lt;code&gt;Node Affinity&lt;/code&gt;、&lt;code&gt;Node Taints&lt;/code&gt;, 经过比对，发现&lt;code&gt;Node Taints&lt;/code&gt; 更适合这种情况，下面是分享一下具体的内容.&lt;/p&gt;
+      <description>&lt;p&gt;如何让node 去&amp;rdquo;选择&amp;rdquo;只有谁（pod）能部署到自身上面？看了下现有的&lt;code&gt;Node Selectors&lt;/code&gt;、&lt;code&gt;Node Affinity&lt;/code&gt;、&lt;code&gt;Node Taints&lt;/code&gt;, 经过比对，发现&lt;code&gt;Node Taints&lt;/code&gt; 更适合这种情况，下面是分享一下具体的内容.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
