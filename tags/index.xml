@@ -94,6 +94,15 @@
     </item>
     
     <item>
+      <title>Container</title>
+      <link>https://aliasmee.github.io/tags/container/</link>
+      <pubDate>Sat, 06 Jul 2019 21:57:19 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/container/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Csrf</title>
       <link>https://aliasmee.github.io/tags/csrf/</link>
       <pubDate>Sat, 11 Aug 2018 14:14:07 +0800</pubDate>
@@ -114,7 +123,7 @@
     <item>
       <title>Docker</title>
       <link>https://aliasmee.github.io/tags/docker/</link>
-      <pubDate>Thu, 21 Jun 2018 06:53:15 +0800</pubDate>
+      <pubDate>Sat, 06 Jul 2019 21:57:19 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/docker/</guid>
       <description></description>
@@ -135,6 +144,15 @@
       <pubDate>Tue, 14 Aug 2018 07:02:28 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/elasticsearch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Flannel</title>
+      <link>https://aliasmee.github.io/tags/flannel/</link>
+      <pubDate>Sat, 06 Jul 2019 21:57:19 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/flannel/</guid>
       <description></description>
     </item>
     
@@ -330,7 +348,7 @@
     <item>
       <title>K8s</title>
       <link>https://aliasmee.github.io/tags/k8s/</link>
-      <pubDate>Sat, 13 Apr 2019 11:51:48 +0800</pubDate>
+      <pubDate>Sat, 06 Jul 2019 21:57:19 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/k8s/</guid>
       <description></description>
@@ -357,7 +375,7 @@
     <item>
       <title>Kubernetes</title>
       <link>https://aliasmee.github.io/tags/kubernetes/</link>
-      <pubDate>Sat, 13 Apr 2019 11:51:48 +0800</pubDate>
+      <pubDate>Sat, 06 Jul 2019 21:57:19 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/kubernetes/</guid>
       <description></description>
@@ -369,6 +387,15 @@
       <pubDate>Fri, 17 May 2019 11:52:13 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/kubernetes-helm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetes Pods</title>
+      <link>https://aliasmee.github.io/tags/kubernetes-pods/</link>
+      <pubDate>Sat, 06 Jul 2019 21:57:19 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/kubernetes-pods/</guid>
       <description></description>
     </item>
     
@@ -432,6 +459,15 @@
       <pubDate>Wed, 06 Mar 2019 12:58:00 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/openldap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pod</title>
+      <link>https://aliasmee.github.io/tags/pod/</link>
+      <pubDate>Sat, 06 Jul 2019 21:57:19 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/pod/</guid>
       <description></description>
     </item>
     

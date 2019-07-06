@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/post/why-we-need-pod/</loc>
+    <lastmod>2019-07-06T21:57:19+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/post/helm-3-is-coming/</loc>
     <lastmod>2019-05-17T11:52:13+08:00</lastmod>
   </url>
@@ -128,6 +133,10 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/pods/</loc>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/tags/400/</loc>
     <lastmod>2018-08-14T07:02:28+08:00</lastmod>
     <priority>0</priority>
@@ -187,6 +196,12 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/tags/container/</loc>
+    <lastmod>2019-07-06T21:57:19+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/tags/csrf/</loc>
     <lastmod>2018-08-11T14:14:07+08:00</lastmod>
     <priority>0</priority>
@@ -200,7 +215,7 @@
   
   <url>
     <loc>https://aliasmee.github.io/tags/docker/</loc>
-    <lastmod>2018-06-21T06:53:15+08:00</lastmod>
+    <lastmod>2019-07-06T21:57:19+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -213,6 +228,12 @@
   <url>
     <loc>https://aliasmee.github.io/tags/elasticsearch/</loc>
     <lastmod>2018-08-14T07:02:28+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/flannel/</loc>
+    <lastmod>2019-07-06T21:57:19+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -344,7 +365,7 @@
   
   <url>
     <loc>https://aliasmee.github.io/tags/k8s/</loc>
-    <lastmod>2019-04-13T11:51:48+08:00</lastmod>
+    <lastmod>2019-07-06T21:57:19+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -362,13 +383,19 @@
   
   <url>
     <loc>https://aliasmee.github.io/tags/kubernetes/</loc>
-    <lastmod>2019-04-13T11:51:48+08:00</lastmod>
+    <lastmod>2019-07-06T21:57:19+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://aliasmee.github.io/tags/kubernetes-helm/</loc>
     <lastmod>2019-05-17T11:52:13+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/kubernetes-pods/</loc>
+    <lastmod>2019-07-06T21:57:19+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -415,8 +442,14 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/tags/pod/</loc>
+    <lastmod>2019-07-06T21:57:19+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/post/</loc>
-    <lastmod>2019-05-17T11:52:13+08:00</lastmod>
+    <lastmod>2019-07-06T21:57:19+08:00</lastmod>
     <priority>0</priority>
   </url>
   

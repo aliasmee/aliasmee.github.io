@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>为什么需要 Pod ?</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="在Kubernetes中，为什么我们需要Pod,而不是直接的一个容器? Pod是什么？如何更好的使用Pod？ " />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="为什么需要 Pod ?" />
+    <meta name="twitter:description" content="在Kubernetes中，为什么我们需要Pod,而不是直接的一个容器? Pod是什么？如何更好的使用Pod？ " />
+    <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/why-we-need-pod/pod-cover1.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="为什么需要 Pod ?" />
+  <meta property="og:description" content="在Kubernetes中，为什么我们需要Pod,而不是直接的一个容器? Pod是什么？如何更好的使用Pod？ " />
+  <meta property="og:url" content="https://aliasmee.github.io/post/why-we-need-pod/" />
+  <meta property="og:image" content="https://aliasmee.github.io/media/posts/why-we-need-pod/pod-cover1.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://aliasmee.github.io/post/why-we-need-pod/" />
+<link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">DevOps | Kubernetes | Docker | Cloud | CICD </p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/about/">About Me</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">为什么需要 Pod ?</h1>
+      <p class="post-meta">@aliasmee · Jul 6, 2019 · 2 min read</p>
+    </header>
+    <article class="post-content"><p>在Kubernetes中，为什么我们需要Pod,而不是直接的一个容器? Pod是什么？如何更好的使用Pod？
+</p>
+
+<h3 id="为什么需要pod">为什么需要Pod？</h3>
+
+<p>先抛出几个问题。</p>
+
+<ol>
+<li>为什么在kubernetes我们不直接使用一个单独的容器（container），而是用pod来封装一个或多个容器呢？</li>
+<li>为什么我们要运行多个容器呢？</li>
+<li>我们能将我们所有的应用程序都放到一个容器里面运行么？</li>
+</ol>
+
+<h3 id="pod是什么">Pod是什么？</h3>
+
+<p>先让我们来看下官方文档对Pod的定义：</p>
+
+<blockquote>
+<p><em>Pod是一个或一个以上的 容器（例如Docker容器）组成的，且具有共享存储/网络/UTS/PID的能力，以及运行容器的规范。并且在kubernetes中，Pod是最小的可被调度的原子单位。</em></p>
+</blockquote>
+
+<p>通俗来讲，Pod就是一组容器的集合，在Pod里面的容器共享网络/存储（kubernetes实现共享一组的namespace去替代每个container各自的NS，来实现这种能力），所以它们可以通过localhost进行内部的通信。虽然网络存储都是共享的，但是cpu和memory就不是。多容器之间可以有属于自己的cgroup，也就是说我们可以单独的对Pod中的容器做资源（MEM/CPU）使用的限制。</p>
+
+<p>Pod就像是我们的一个&rdquo;专有主机&rdquo;，上面除了运行我们的主应用程序之外，还可以运行一个与该应用紧密相关的进程。如日志收集工具、git文件拉取器、配置文件更新重启器等。因为在kubernetes中，一个Pod里的所有container都只会被分配到同一台主机上运行。</p>
+
+<h3 id="如何正确使用pod">如何正确使用Pod？</h3>
+
+<p>在”Kubernetes Up Running“ 这本书中讲的一个很好的例子，在这里分享一下。</p>
+
+<p>既然一个Pod可以包含多个容器，就像一个主机包含有多个进程一样，那我是不是可以将Wordpress和mysql数据库都以容器的方式放在一个Pod里面运行？大家仔细想想，这会有什么问题。
+可以从资源管理、服务可扩展等方面上进行思考下。</p>
+
+<p>也许大家已经想到了，有两个主要原因:</p>
+
+<p>第一，WordPress和它的db不是真正的共生关系。想象一下，如果WordPress 容器和 database 容器都运行在不同的机器（aka：Node节点）上，它们之间依然可以通过网络交互的方式实现正常的工作。</p>
+
+<p>第二，从服务扩容上来看，你通常不会将Wordpress和Mysql作为一个单元来一起扩容。因为我们常规只想扩容我们的前端服务（Wordpress），创建更多的wordpress容器。来接受更多的流量。</p>
+
+<p>另外这本书给我们一个很好的方法。就是我们决定在设计应用程序时，怎样来组织pod中的container?</p>
+
+<p>首先可以在脑海中仔细思考下：“这些进程容器在不同机器上是否能正常的工作运行？”。如果答案是否定的。那么将这些进程以每个进程一个容器的方式放到一个Pod中组合在一起是合适的。反之，以多个Pod运行这些容器是正确的方式。</p>
+
+<h3 id="pod的管理操作">Pod的管理操作</h3>
+
+<p>在传统运维工作中，我们是和各种服务进程打交道。到了容器集群环境中，我们就是操作Pod来对服务进行检查维护。
+这里只简单介绍下几个操作, 其中kubectl有很多命令都和docker run类似</p>
+
+<ul>
+<li>创建一个pod</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl run pod-name --image<span style="color:#f92672">=</span>docker.io/aliasmee/ikev2-alpine-vpn:latest --restart<span style="color:#f92672">=</span>Never</code></pre></div>
+<p><code>Tips: restart[Never: &quot;创建一个普通pod&quot;, Always: &quot;创建一个deployment&quot;, OnFailure: &quot;创建一个job&quot;]</code></p>
+
+<ul>
+<li><p>查看当前Namespace中的所有pod</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods</code></pre></div></li>
+
+<li><p>检查pod的详情状态(ImagePullError、CannotCreate、etc..排查)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl describe pod pod-name</code></pre></div></li>
+
+<li><p>访问pod中的服务(假设pod-name容器监听在80端口)
+本地开发访问：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward pod-name <span style="color:#ae81ff">8080</span>:80</code></pre></div>
+<p><code>Tips: 此时本地可以打开浏览器或终端，访问http://127.0.0.1:8080</code></p></li>
+
+<li><p>集群Service访问：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl expose pod pod-name --port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span> --name pod-fronted</code></pre></div></li>
+</ul>
+
+<p><code>Tips: Service Type [ClusterIP, NodePort, LoadBalancer]</code></p>
+
+<ul>
+<li>查看pod的log
+<code>bash
+kubectl logs -f pod-name 
+</code></li>
+</ul>
+
+<p><code>Tips: -f 替换成 -n number 将显示特定number数量行的日志，
+另外--previous可以显示之前容器的日志，如果该容器在出现问题不停重启的情况下。</code></p>
+
+<ul>
+<li>进入容器内部</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl exec -it pod-name</code></pre></div>
+<p>Tips: 如果该pod有多个容器的话，可以使用-c container 指定进入的目标容器。</p>
+
+<ul>
+<li>复制文件
+<code>bash
+kubectl cp pod-name:/path/to/file /tmp/localpath/file
+</code></li>
+</ul>
+
+<h3 id="pod的资源分配">Pod的资源分配</h3>
+
+<p>在pod里面，我们可以针对常规的两种资源对容器做使用限制，它们分别是Memory、Cpu。因为我们知道，主机上的资源是有限的，我们要尽可能要确保主机资源能够有效的发挥最大作用。并保证每个运行在该主机上的容器都能合理的得到相应资源，得以正常运行，不能因为某些容器内部异常（如内存泄漏）的问题，导致整个主机资源耗尽，其它容器无法正常被调度，甚至主机上的服务都无响应。</p>
+
+<p>因此，为了确保计算和内存资源被合理的使用，我们需要对我们的服务做深入的分析，规划它们的资源使用。</p>
+
+<p>kubernetes提供了两种模式来让我们设置，一种是request，另一种是limits。前面也说了，我们pod中的每个容器都有单独的cgroup。所以我们根据需要针对每个容器都要做限制。</p>
+
+<p>如下所示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">resource:
+  requests:
+    cpu: <span style="color:#e6db74">&#34;200m&#34;</span>
+    memory: <span style="color:#e6db74">&#34;500Mi&#34;</span>
+  limmits:
+    cpu: <span style="color:#e6db74">&#34;2000m&#34;</span>
+    memory: <span style="color:#e6db74">&#34;2Gi&#34;</span></code></pre></div>
+<p>简单对上面的一段代码解释：
+    requests: 它是一种硬性要求，就是这个容器必须调度到能满足要求的Node节点上。Kubernetes schedule 在调度时，会检查Node上的资源，判断是否可以被调度。即如果满足200m CPU、500M的内存，那么该容器就有可能调度到该节点上。反之则不会。
+    limits: limits 限制了该容器在运行时可以使用的最大资源值。即如果该容器使用了2G的内存，理论上kubelet 会终止该容器。并重新启动。Tips：oom会根据一个算法，为每个进程打出一个分数，杀死分数最高的（印象里oom机制是这样的）。</p>
+
+<h3 id="pod-存储-volume">Pod 存储（Volume）</h3>
+
+<ul>
+<li><p>用途：</p>
+
+<ol>
+<li>同一pod中不同容器之间的同步共享卷</li>
+<li>Cache缓存一些请求的应用数据，方便下次用户存取</li>
+<li>持久化数据，如db</li>
+<li>挂载主机文件系统，如跟随主机时区、主机信息、日志收集</li>
+</ol></li>
+
+<li><p>为什么需要持久数据？</p></li>
+</ul>
+
+<p>有无状态的应用，那么自然就有有状态的应用。如我们的web前端，nginx都是无状态的。这些应用本省就很好维护，而且方便横向扩展。但对于一些应用，比如database、redis等需要保存服务状态的应用，因为容器本身的生命周期就很短，我们需要保证在该容器被删除、重启，即使被调度到另外一台主机上的情况下，该应用的数据可以接着之前的状态继续对外提供服务。</p>
+
+<p>kubernetes 提供了很多种类型的volumes，常用的有empteDir（可以用内存作为存储tmpfs）、hostPath、Cloud provider EBS、NFS、GlusterFS、PVC（动态申请卷）。</p>
+
+<h3 id="pod-网络">Pod 网络</h3>
+
+<p>Pod与Pod之间的通信，可以理解成不同VM之间的通信。因为每个Pod有自己唯一的IP地址、端口空间。实现Pod网络互通的方式有L2/L3以及Overlay。
+实际上，Kubernetes没有实现这些网络平面的工作，但它定义了一种规范CNI（Container Network Interface）插件。目前有多种解决方案。如Flannel、Weavenet、Calico。</p>
+
+<p>由于本篇主要说的是Pod。所以这里简单的说下flannel.</p>
+
+<p>首先，Node节点上除了有自己的物理地址（称为host network），还有flannel运行的cni桥接网络。另外还有docker0. 每个Node节点在加入集群之后会通过etcd分配获得1个小子网。这些子网中的IP是预留给每个Pod提供的。也就是说每个Pod在创建时，会从中分配获得一个有效的IP地址。
+下面通过文字大致说下一个包的流向。</p>
+
+<ol>
+<li><p>当运行在NodeA节点（<code>192.168.1.2/32</code>）上的PodA（<code>10.0.0.2/32</code>）想要访问 PodB（<code>10.0.1.3/32</code>）80端口时，PodB运行在NodeB节点上（<code>192.168.1.3/32</code>）。PodA 对NodeA说：“主人，我这有个数据包，请帮我送到<code>10.0.1.3/32</code> 这个位置上。谢谢。”</p></li>
+
+<li><p>这时NodeA上的flannel程序会从etcd中查询：“请问，你把<code>10.0.1.0/24</code>这个子网分配到哪个Node节点上了？”，etcd会回复：“<code>10.0.1.0/24</code>子网在NodeB节点上”。这时NodeA将PodA发出的包扔给NodeB：“hi，Man，你有一封数据包。请注意查收”。</p></li>
+
+<li><p>当NodeB接收了这个从NodeA发来的数据包时，解开包发现，这个包的真实目的地是送往<code>10.0.1.3/32</code>的。这时NodeB会查询自己的路由表，看到通往<code>10.0.1.0/24</code>路由都发送给flannel0 bridge上，这时包继续流向该桥接网卡上：“hi，PodB，有你的数据包，是<code>10.0.0.2/32</code> 发来的。你赶紧收一下。”</p></li>
+
+<li><p>这时PodA收到这个包后，根据请求的参数，然后返回相应的数据给<code>10.0.0.2/32</code>&hellip;.</p></li>
+</ol>
+
+<h3 id="pod-生命周期">Pod 生命周期</h3>
+
+<p>Pod在集群中可能有以下几种状态：</p>
+
+<ul>
+<li><p>Pending待处理：Pod 已创建完毕并已被集群接受，但它的一个或多个容器尚未运行。此阶段包括 Pod 被安排到节点以及下载映像所花费的时间。</p></li>
+
+<li><p>Running正在运行：Pod 已绑定到节点，并且所有容器均已创建完毕。至少有一个容器正在运行、正在启动或正在重新启动。</p></li>
+
+<li><p>Successed成功：Pod 中的所有容器都已成功终止。已终止的 Pod 不会重新启动。</p></li>
+
+<li><p>Failed失败：Pod 中的所有容器都已终止，并且至少有一个容器是由于故障而终止。如果某容器以非零状态退出，则表示该容器发生“故障”。</p></li>
+
+<li><p>未知：无法确定 Pod 的状态。</p></li>
+</ul>
+
+<p>Pod的生命是短暂的。</p>
+
+<h1 id="pod-调度">Pod 调度</h1>
+
+<p>这里再说下pod的调度。</p>
+
+<p>通常，我们在创建pod时，schedule将会根据要求的资源，选择一台满足的Node节点，而这个选择是随机的。而这种调度将完全交给kubernetes集群。</p>
+
+<p>考虑下面的情况。假设我们在集群上部署了ML应用，该应用在运行中，需要大量的GPU资源，或者另外一种类型的应用，如database应用，为了更好的提高读写，加大处理效率，需要选择SSD来做数据存储。</p>
+
+<p>以上举出的两种情况，在现实程序世界中，我们肯定会经常遇到的。</p>
+
+<p>为了解决上述的要求，kubernetes提供了几种pod的调度方式。基本上是依靠Label来实现的。如，我们在带有GPU资源的Node节点上，打上label hardwardType=GPU；在带有SSD资源的Node节点上，打上label diskType=SSD。这样我们在调度pod时，就可以根据label来select这些专有Node节点。
+kubernetes提供了几种方式：</p>
+
+<ul>
+<li>NodeSelector</li>
+<li>Affinity</li>
+<li>PodAffinity</li>
+<li>Taint &amp; toleration</li>
+</ul>
+
+<p>第一种NodeSelector 是比较简单的一种方式，只是匹配了目标labels的key/value是否符合（未来将会被遗弃）</p>
+
+<p>第二种Affinity 相对Nodeselector来说，表达式语法更强大，可匹配的操作条件模式增多。</p>
+
+<p>第三种PodAffinity 又叫pod亲和性，这个是让一些pod和另外的服务的pod总是调度在同一台Node节点上。比如web服务和redis实例。</p>
+
+<p>前几种都是保证会调度到该相应匹配的节点上。而第四种Taint（污点），它可以让一台Node节点成为某服务的专属节点。前提是这个服务必须能Toleration（容忍）这个污点。</p>
+
+<p>即没有特殊表明容忍该污点的Pod将从不会被调度该Node节点上。这个的用途经常给一些专属的服务使用，例如们为了保证运行生产服务的Pod尽可能和其它环境的pod隔离，想让生产pod部署到专有节点上。这时我们就可以采用Taint来实现这个需求。</p>
+
+<h3 id="pod的健康就绪检查">Pod的健康就绪检查</h3>
+
+<p>在kubernetes中，我们的服务一旦部署到集群中，k8s相当于一个大管家，它将会照顾好我们的应用服务。并会根据我们服务需要的资源，确保被调度到满足要求的Node节点上。且会定时的检测，一旦发现该服务pod所在的节点出现故障，k8s将会把pod重新调度到其它可用的节点上。努力保证服务的稳定、可靠性。极大的减少了运维人员的工作时间。</p>
+
+<p><code>Tips: Pod 本身不会自我修复，比如自动迁移到其他Node节点运行，而是由上层的Deployment/ReplicaSets控制器来实现。</code></p>
+
+<p>这是容器外部的调度，k8s会替我们照看好我们的进程。但我们服务本身也要做好可用性的探测检查，也要保证容器在启动时，我们的应用服务也能正常快速的启动，并且在长期运行过程中，也要保持健康稳定的运行。</p>
+
+<p>下面就说一下k8s为我们提供的服务健康检测的方式.</p>
+
+<p>容器的健康检查目前分为两种类型：
+一是Liveness存活检查、二是Readiness准备就绪检查</p>
+
+<ul>
+<li><p>Liveness Probe（容器运行中的定期检查）</p>
+
+<ol>
+<li>http probe: 针对服务的url路径进行http探测，此种方式相比后面两种，极为可靠（推荐，前提是web应用）</li>
+<li>tcp socket： 端口存活性检测（考虑进程假死的情况）</li>
+<li>command： 通过执行命令的返回退出码来判断。0为探测成功。反之亦失败。</li>
+</ol></li>
+
+<li><p>Readiness Probe (容器每次启动时的检查)
+同上。</p></li>
+</ul>
+
+<p>两种类型各有千秋，Liveness检查确保我们的服务在长期不停机运行中，可以稳定的提供服务，一旦检查失败次数达到我们预设的值后，该容器将会被重启。如果该容器加了Readiness检查，那么在重启后，将会根据检查条件，判断是否已准备就绪。这里需要注意的是，如果该容器在启动时，readiness没有通过，那么它将不会被加入到前面的负载均衡的池子中（endpoints）。这可以很好的避免该服务启动不正常而却被负载均衡识别成正常服务，返回给客户端错误的相应。</p>
+
+<p><code>Tips: 如果我们容器内的服务启动相对慢一些，比如运行时需要加载生成一些资源。我们的Readniess可能要考虑设置下延迟检测时间（initialDelaySecond)</code></p>
+
+<h3 id="pod-vs-container">Pod VS Container</h3>
+
+<p>试比较Kubernetes中的Pod和Docker中的container：</p>
+
+<p>Pod：</p>
+
+<ol>
+<li>多container共享网络、存储</li>
+<li>像在“专用主机”上运行多应用，而不必把多应用全塞到一个container中</li>
+<li>方便监控，我们可以对pod中的多个容器单独设置不同的健康检查，记录日志及分析</li>
+<li>不用担心单个容器内多进程，其某个进程崩溃导致整个容器挂掉的情况</li>
+</ol>
+
+<p>Container：</p>
+
+<ol>
+<li>容器设计理念是一个容器只运行一个主进程（其产生的子进程不算）</li>
+<li>单个容器，与其它container是&rdquo;完全隔离&rdquo;的</li>
+<li>常规情况下，无法与其它容器共享网络、存储。只能通过expose的端口进行相互访问
+<br /></li>
+</ol>
+
+<p><code>Tips：Pod中的多container就不是完全隔离了.</code></p>
+
+<blockquote>
+<p>在虚拟化的领域里，最基本的可调度的单元对象是VM.</p>
+
+<p>在容器化的领域里，最基本的可调度的单元对象是container</p>
+
+<p>在kubernetes的领域里，最基本的可调度单位是Pod。</p>
+</blockquote>
+
+<h3 id="总结">总结</h3>
+
+<p>按照容器的设计理念，每个容器只运行单个进程。而要想实现多个container被绑定在一起进行管理的需求。我们需要一种高级别的概念来实现这个。在kubernetes中，这就是Pod。
+在Pod里面，container之间可以共享网络（IP/Port）、共享存储（<code>Volume</code>）、共享Hostname。</p>
+
+<p>另外，Pods可以理解成一个&rdquo;逻辑主机&rdquo;，它与非容器领域的物理主机或者VM有着类似的行为。在同一个Pod运行的进程就像在同一物理主机或VM上运行的进程一样。只是这些进程被单独的放到单个container内。</p>
+
+<h3 id="参考">参考：</h3>
+
+<p><a href="https://www.ianlewis.org/en/what-are-kubernetes-pods-anyway">What are kubernetes pods anyway</a></p>
+
+<p><a href="https://cloudnativelabs.github.io/post/2017-04-18-kubernetes-networking/">Kubernetes networking</a></p>
+
+<p><a href="https://itnext.io/an-illustrated-guide-to-kubernetes-networking-part-1-d1ede3322727">An illustrated guide to kubernetes networking</a></p>
+
+<p><a href="https://blog.laputa.io/kubernetes-flannel-networking-6a1cb1f8ec7c">Kubernetes flannel networking</a></p>
+
+<p><a href="https://www.oreilly.com/library/view/kubernetes-up-and/9781491935668/">Kubernetes: Up and Running</a></p>
+
+<p><a href="https://www.oreilly.com/library/view/kubernetes-in-action/9781617293726/">Kubernetes in Action</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://aliasmee.github.io/tags/kubernetes"><span class="tag">Kubernetes</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/k8s"><span class="tag">K8s</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/pod"><span class="tag">Pod</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/kubernetes-pods"><span class="tag">Kubernetes-Pods</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/container"><span class="tag">Container</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/docker"><span class="tag">Docker</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/flannel"><span class="tag">Flannel</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2019 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

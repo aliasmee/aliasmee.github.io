@@ -31,6 +31,16 @@ Contact Way ? 你可以找到的！（GitHub）
     </item>
     
     <item>
+      <title>为什么需要 Pod ?</title>
+      <link>https://aliasmee.github.io/post/why-we-need-pod/</link>
+      <pubDate>Sat, 06 Jul 2019 21:57:19 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/why-we-need-pod/</guid>
+      <description>&lt;p&gt;在Kubernetes中，为什么我们需要Pod,而不是直接的一个容器? Pod是什么？如何更好的使用Pod？
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Helm 3 来了</title>
       <link>https://aliasmee.github.io/post/helm-3-is-coming/</link>
       <pubDate>Fri, 17 May 2019 11:52:13 +0800</pubDate>
@@ -295,6 +305,19 @@ Contact Way ? 你可以找到的！（GitHub）
       <description>&lt;p&gt;序言:&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://aliasmee.github.io/pods/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://aliasmee.github.io/pods/</guid>
+      <description>Chapter 5. Pods
+在先前的章节中，我们讨论了如何容器化你的应用程序，但是部署真实世界的容器化应用时，你通常会希望将多个 相关的应用程序放到单个的原子单元中，调度到同一台主机上。
+一个典型的部署例子如 图5-1所示，这个Pod由一个处理web服务请求的容器以及一个与远程Git仓库同步文件的容器。
+最初，似乎很容易将web服务器和git同步器打包放入到一个容器中。然而在仔细检查后，分开它们的原因就变得很清楚。第一，在资源使用方面，这两个不同的容器有不同的要求。以内存为例。因为这个web服务是提供web请求的，我们想确保它总是有足够的资源去负责响应。另一方面，这个Git同步器并不是真正面向用户的,并且有&amp;rdquo;best effort&amp;rdquo;的服务质量.
+假设我们的Git同步器出现了内存泄漏，我们需要确保Git同步器不会耗尽希望用于给web服务器使用的内存，因为这会影响web服务器的性能，甚至会导致web服务器崩溃。</description>
     </item>
     
   </channel>
