@@ -318,12 +318,9 @@ kubectl logs -f pod-name
 <p>Tips: 如果该pod有多个容器的话，可以使用-c container 指定进入的目标容器。</p>
 
 <ul>
-<li>复制文件
-<code>bash
-kubectl cp pod-name:/path/to/file /tmp/localpath/file
-</code></li>
+<li>复制文件</li>
 </ul>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl cp pod-name:/path/to/file /tmp/localpath/file</code></pre></div>
 <h3 id="pod的资源分配">Pod的资源分配</h3>
 
 <p>在pod里面，我们可以针对常规的两种资源对容器做使用限制，它们分别是Memory、Cpu。因为我们知道，主机上的资源是有限的，我们要尽可能要确保主机资源能够有效的发挥最大作用。并保证每个运行在该主机上的容器都能合理的得到相应资源，得以正常运行，不能因为某些容器内部异常（如内存泄漏）的问题，导致整个主机资源耗尽，其它容器无法正常被调度，甚至主机上的服务都无响应。</p>
