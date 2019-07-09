@@ -361,7 +361,7 @@ kubectl logs -f pod-name
 
 <p>有无状态的应用，那么自然就有有状态的应用。如我们的web前端，nginx都是无状态的。这些应用本省就很好维护，而且方便横向扩展。但对于一些应用，比如database、redis等需要保存服务状态的应用，因为容器本身的生命周期就很短，我们需要保证在该容器被删除、重启，即使被调度到另外一台主机上的情况下，该应用的数据可以接着之前的状态继续对外提供服务。</p>
 
-<p>kubernetes 提供了很多种类型的volumes，常用的有empteDir（可以用内存作为存储tmpfs）、hostPath、Cloud provider EBS、NFS、GlusterFS、PVC（动态申请卷）。</p>
+<p>kubernetes 提供了很多种类型的volumes，常用的有emptyDir（可以用内存作为存储tmpfs）、hostPath、Cloud provider EBS、NFS、GlusterFS、PVC（动态申请卷）。</p>
 
 <h3 id="pod-网络">Pod 网络</h3>
 
