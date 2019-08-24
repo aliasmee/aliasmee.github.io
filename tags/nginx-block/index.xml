@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nginx Block on aliasmee&#39;s blog </title>
+    <link>https://aliasmee.github.io/tags/nginx-block/</link>
+    <description>Recent content in Nginx Block on aliasmee&#39;s blog </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Sat, 24 Aug 2019 20:14:45 +0800</lastBuildDate>
+    
+	<atom:link href="https://aliasmee.github.io/tags/nginx-block/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>如何在kubernetes中针对ingress做IP白名单访问限制</title>
+      <link>https://aliasmee.github.io/post/kubernetes-nginx-ingress-block-ip-whitelist/</link>
+      <pubDate>Sat, 24 Aug 2019 20:14:45 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/kubernetes-nginx-ingress-block-ip-whitelist/</guid>
+      <description>&lt;p&gt;在传统nginx上，如果想要对nginx 里面的虚拟主机做白名单访问控制很easy。但在kubernetes中，如何通过
+ingress resource配置文件来达到这个效果呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

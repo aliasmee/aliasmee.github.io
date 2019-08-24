@@ -292,6 +292,15 @@
     </item>
     
     <item>
+      <title>Ingress Path Whitelist</title>
+      <link>https://aliasmee.github.io/tags/ingress-path-whitelist/</link>
+      <pubDate>Sat, 24 Aug 2019 20:14:45 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/ingress-path-whitelist/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Install Docker on Raspberry</title>
       <link>https://aliasmee.github.io/tags/install-docker-on-raspberry/</link>
       <pubDate>Thu, 21 Jun 2018 06:53:15 +0800</pubDate>
@@ -306,6 +315,15 @@
       <pubDate>Sun, 24 Jun 2018 08:20:08 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/install-vnc-on-raspberry/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ip Whitelist</title>
+      <link>https://aliasmee.github.io/tags/ip-whitelist/</link>
+      <pubDate>Sat, 24 Aug 2019 20:14:45 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/ip-whitelist/</guid>
       <description></description>
     </item>
     
@@ -375,7 +393,7 @@
     <item>
       <title>Kubernetes</title>
       <link>https://aliasmee.github.io/tags/kubernetes/</link>
-      <pubDate>Sat, 06 Jul 2019 21:57:19 +0800</pubDate>
+      <pubDate>Sat, 24 Aug 2019 20:14:45 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/kubernetes/</guid>
       <description></description>
@@ -429,9 +447,36 @@
     <item>
       <title>Nginx</title>
       <link>https://aliasmee.github.io/tags/nginx/</link>
-      <pubDate>Sat, 11 Aug 2018 14:14:07 +0800</pubDate>
+      <pubDate>Sat, 24 Aug 2019 20:14:45 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nginx Block</title>
+      <link>https://aliasmee.github.io/tags/nginx-block/</link>
+      <pubDate>Sat, 24 Aug 2019 20:14:45 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/nginx-block/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nginx Ingress</title>
+      <link>https://aliasmee.github.io/tags/nginx-ingress/</link>
+      <pubDate>Sat, 24 Aug 2019 20:14:45 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/nginx-ingress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ngx_http_access_module</title>
+      <link>https://aliasmee.github.io/tags/ngx_http_access_module/</link>
+      <pubDate>Sat, 24 Aug 2019 20:14:45 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/ngx_http_access_module/</guid>
       <description></description>
     </item>
     
@@ -459,6 +504,15 @@
       <pubDate>Wed, 06 Mar 2019 12:58:00 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/openldap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Path Deny Ip</title>
+      <link>https://aliasmee.github.io/tags/path-deny-ip/</link>
+      <pubDate>Sat, 24 Aug 2019 20:14:45 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/path-deny-ip/</guid>
       <description></description>
     </item>
     

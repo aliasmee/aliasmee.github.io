@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/post/kubernetes-nginx-ingress-block-ip-whitelist/</loc>
+    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/post/why-we-need-pod/</loc>
     <lastmod>2019-07-06T21:57:19+08:00</lastmod>
   </url>
@@ -328,6 +333,12 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/tags/ingress-path-whitelist/</loc>
+    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/tags/install-docker-on-raspberry/</loc>
     <lastmod>2018-06-21T06:53:15+08:00</lastmod>
     <priority>0</priority>
@@ -336,6 +347,12 @@
   <url>
     <loc>https://aliasmee.github.io/tags/install-vnc-on-raspberry/</loc>
     <lastmod>2018-06-24T08:20:08+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/ip-whitelist/</loc>
+    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -383,7 +400,7 @@
   
   <url>
     <loc>https://aliasmee.github.io/tags/kubernetes/</loc>
-    <lastmod>2019-07-06T21:57:19+08:00</lastmod>
+    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -419,7 +436,25 @@
   
   <url>
     <loc>https://aliasmee.github.io/tags/nginx/</loc>
-    <lastmod>2018-08-11T14:14:07+08:00</lastmod>
+    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/nginx-block/</loc>
+    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/nginx-ingress/</loc>
+    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/ngx_http_access_module/</loc>
+    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -442,6 +477,12 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/tags/path-deny-ip/</loc>
+    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/tags/pod/</loc>
     <lastmod>2019-07-06T21:57:19+08:00</lastmod>
     <priority>0</priority>
@@ -449,7 +490,7 @@
   
   <url>
     <loc>https://aliasmee.github.io/post/</loc>
-    <lastmod>2019-07-06T21:57:19+08:00</lastmod>
+    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
