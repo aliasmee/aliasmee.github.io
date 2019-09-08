@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Sat, 24 Aug 2019 20:14:45 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 05 Sep 2019 22:30:21 +0800</lastBuildDate>
     
 	<atom:link href="https://aliasmee.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How to Use RBAC to Restrict User Permissions On Kubernetes</title>
+      <link>https://aliasmee.github.io/post/how-to-use-rbac-to-restrict-user-permissions/</link>
+      <pubDate>Thu, 05 Sep 2019 22:30:21 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/how-to-use-rbac-to-restrict-user-permissions/</guid>
+      <description>&lt;p&gt;kubernetes集群创建好了之后，默认kubeconfig文件中的用户相当于DB的超级管理员。权限足以摧毁整个kubernetes
+集群！但如果其它的同事也想使用kubectl工具，在命令行进行一些简单操作，作为集群admin，我们该怎样做呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>如何在kubernetes中针对ingress做IP白名单访问限制</title>

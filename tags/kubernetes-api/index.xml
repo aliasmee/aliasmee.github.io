@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubernetes Api on aliasmee&#39;s blog </title>
+    <link>https://aliasmee.github.io/tags/kubernetes-api/</link>
+    <description>Recent content in Kubernetes Api on aliasmee&#39;s blog </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Thu, 05 Sep 2019 22:30:21 +0800</lastBuildDate>
+    
+	<atom:link href="https://aliasmee.github.io/tags/kubernetes-api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to Use RBAC to Restrict User Permissions On Kubernetes</title>
+      <link>https://aliasmee.github.io/post/how-to-use-rbac-to-restrict-user-permissions/</link>
+      <pubDate>Thu, 05 Sep 2019 22:30:21 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/how-to-use-rbac-to-restrict-user-permissions/</guid>
+      <description>&lt;p&gt;kubernetes集群创建好了之后，默认kubeconfig文件中的用户相当于DB的超级管理员。权限足以摧毁整个kubernetes
+集群！但如果其它的同事也想使用kubectl工具，在命令行进行一些简单操作，作为集群admin，我们该怎样做呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

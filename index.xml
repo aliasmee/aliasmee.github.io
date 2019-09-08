@@ -18,16 +18,20 @@
       <pubDate>Fri, 01 Jun 2018 11:46:40 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/about/</guid>
-      <description>自我介绍  我是谁：@飞走不可 @aliasmee
- 主动学习能力强，低调稳重。对有些问题有种近于固执的执着。
-Skills 编程能力：能满足工作需要
-其它能力：Troubleshooting
-TechStack：Mystack
-Experience  IT技术支持、机房运维、云平台运维、网站应用运维、运维开发&amp;hellip;
- 穿过这些岗位的时间线，就如在不断的旅行，每每换个新的公司，就如来到新的景点一样。看到很多，也学到很多。
-但始终保持空杯心态。
-Contact Way ? 你可以找到的！（GitHub）
-我相信你&amp;hellip;</description>
+      <description>$ whoami @aliasmee @飞走不可 @木目$ describe `whoami` 自我驱动、主动学习能力强。总是很好的完成工作。$ ls skills 编程能力：shell、python、golang、groovy能满足工作需要 其它：Troubleshooting$ cat techstack TechStack：[Mystack](https://stackshare.io/aliasmee/my-stack)=&amp;gt; use work_experience; =&amp;gt; select id, job_title, job_month, comments from jobs_history; 1 | 游戏运维 | 3 | &amp;#34;欠薪,无奈之下离职&amp;#34; 2 | 机房运维 | 48 | &amp;#34;毫无目标，奋斗方向错了，就像大海里，没带指南针，自己划着小船游游荡荡...&amp;#34; 3 | 云平台/网站运维 | 26 | &amp;#34;遇到人生中的第一个导师。又不知在哪看到一句话：如何在1年内拥有两年工作时间，答案:加班`学习`&amp;#34; 4 | 运维开发 | 26+ | &amp;#34;如何让工作`更轻松`? Hard work OR Smart Work，我选后者.haha&amp;#34;   穿过这些不同的技术岗位，就如在不断的旅行。每次换到了一个新的公司，就如来到新的一个景点一样，看到了很多，学到了很多。 但就像旅行中大家经常说的，我们旅行不仅仅是为了到达目的地，途中的风景也甚为美丽。
+ Contact information $ echo &amp;#34;eGhhbnlpZmVuZ0BnbWFpbC5jb20K&amp;#34; | base64 -D # Mac Os $ echo &amp;#34;eGhhbnlpZmVuZ0BnbWFpbC5jb20K&amp;#34; | base64 -d # Linux Do One thing and Do it well.</description>
+    </item>
+    
+    <item>
+      <title>How to Use RBAC to Restrict User Permissions On Kubernetes</title>
+      <link>https://aliasmee.github.io/post/how-to-use-rbac-to-restrict-user-permissions/</link>
+      <pubDate>Thu, 05 Sep 2019 22:30:21 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/how-to-use-rbac-to-restrict-user-permissions/</guid>
+      <description>&lt;p&gt;kubernetes集群创建好了之后，默认kubeconfig文件中的用户相当于DB的超级管理员。权限足以摧毁整个kubernetes
+集群！但如果其它的同事也想使用kubectl工具，在命令行进行一些简单操作，作为集群admin，我们该怎样做呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>

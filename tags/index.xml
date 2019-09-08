@@ -393,9 +393,18 @@
     <item>
       <title>Kubernetes</title>
       <link>https://aliasmee.github.io/tags/kubernetes/</link>
-      <pubDate>Sat, 24 Aug 2019 20:14:45 +0800</pubDate>
+      <pubDate>Thu, 05 Sep 2019 22:30:21 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetes Api</title>
+      <link>https://aliasmee.github.io/tags/kubernetes-api/</link>
+      <pubDate>Thu, 05 Sep 2019 22:30:21 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/kubernetes-api/</guid>
       <description></description>
     </item>
     
@@ -414,6 +423,24 @@
       <pubDate>Sat, 06 Jul 2019 21:57:19 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/kubernetes-pods/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetes Rbac</title>
+      <link>https://aliasmee.github.io/tags/kubernetes-rbac/</link>
+      <pubDate>Thu, 05 Sep 2019 22:30:21 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/kubernetes-rbac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetes User</title>
+      <link>https://aliasmee.github.io/tags/kubernetes-user/</link>
+      <pubDate>Thu, 05 Sep 2019 22:30:21 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/kubernetes-user/</guid>
       <description></description>
     </item>
     
@@ -562,6 +589,15 @@
     </item>
     
     <item>
+      <title>Rbac</title>
+      <link>https://aliasmee.github.io/tags/rbac/</link>
+      <pubDate>Thu, 05 Sep 2019 22:30:21 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/rbac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Request Timeout</title>
       <link>https://aliasmee.github.io/tags/request-timeout/</link>
       <pubDate>Sun, 24 Jun 2018 21:48:11 +0800</pubDate>
@@ -576,6 +612,15 @@
       <pubDate>Sun, 24 Jun 2018 21:48:11 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/respones-slow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Securing Kubernetes</title>
+      <link>https://aliasmee.github.io/tags/securing-kubernetes/</link>
+      <pubDate>Thu, 05 Sep 2019 22:30:21 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/securing-kubernetes/</guid>
       <description></description>
     </item>
     

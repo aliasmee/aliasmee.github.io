@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/post/how-to-use-rbac-to-restrict-user-permissions/</loc>
+    <lastmod>2019-09-05T22:30:21+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/post/kubernetes-nginx-ingress-block-ip-whitelist/</loc>
     <lastmod>2019-08-24T20:14:45+08:00</lastmod>
   </url>
@@ -400,7 +405,13 @@
   
   <url>
     <loc>https://aliasmee.github.io/tags/kubernetes/</loc>
-    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
+    <lastmod>2019-09-05T22:30:21+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/kubernetes-api/</loc>
+    <lastmod>2019-09-05T22:30:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -413,6 +424,18 @@
   <url>
     <loc>https://aliasmee.github.io/tags/kubernetes-pods/</loc>
     <lastmod>2019-07-06T21:57:19+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/kubernetes-rbac/</loc>
+    <lastmod>2019-09-05T22:30:21+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/kubernetes-user/</loc>
+    <lastmod>2019-09-05T22:30:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -490,7 +513,7 @@
   
   <url>
     <loc>https://aliasmee.github.io/post/</loc>
-    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
+    <lastmod>2019-09-05T22:30:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -519,6 +542,12 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/tags/rbac/</loc>
+    <lastmod>2019-09-05T22:30:21+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/tags/request-timeout/</loc>
     <lastmod>2018-06-24T21:48:11+08:00</lastmod>
     <priority>0</priority>
@@ -527,6 +556,12 @@
   <url>
     <loc>https://aliasmee.github.io/tags/respones-slow/</loc>
     <lastmod>2018-06-24T21:48:11+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/securing-kubernetes/</loc>
+    <lastmod>2019-09-05T22:30:21+08:00</lastmod>
     <priority>0</priority>
   </url>
   
