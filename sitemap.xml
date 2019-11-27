@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/post/nginx-log-logrotate-not-work/</loc>
+    <lastmod>2019-11-26T13:49:42+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/post/how-to-use-rbac-to-restrict-user-permissions/</loc>
     <lastmod>2019-09-05T22:30:21+08:00</lastmod>
   </url>
@@ -458,8 +463,14 @@
   </url>
   
   <url>
+    <loc>https://aliasmee.github.io/tags/logrotate/</loc>
+    <lastmod>2019-11-26T13:49:42+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://aliasmee.github.io/tags/nginx/</loc>
-    <lastmod>2019-08-24T20:14:45+08:00</lastmod>
+    <lastmod>2019-11-26T13:49:42+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -472,6 +483,24 @@
   <url>
     <loc>https://aliasmee.github.io/tags/nginx-ingress/</loc>
     <lastmod>2019-08-24T20:14:45+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/nginx-log/</loc>
+    <lastmod>2019-11-26T13:49:42+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/nginx-log-selinux/</loc>
+    <lastmod>2019-11-26T13:49:42+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/nginx-selinux/</loc>
+    <lastmod>2019-11-26T13:49:42+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -513,7 +542,7 @@
   
   <url>
     <loc>https://aliasmee.github.io/post/</loc>
-    <lastmod>2019-09-05T22:30:21+08:00</lastmod>
+    <lastmod>2019-11-26T13:49:42+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -562,6 +591,18 @@
   <url>
     <loc>https://aliasmee.github.io/tags/securing-kubernetes/</loc>
     <lastmod>2019-09-05T22:30:21+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/selinux/</loc>
+    <lastmod>2019-11-26T13:49:42+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://aliasmee.github.io/tags/selinux-logrotate_t/</loc>
+    <lastmod>2019-11-26T13:49:42+08:00</lastmod>
     <priority>0</priority>
   </url>
   

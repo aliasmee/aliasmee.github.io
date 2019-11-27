@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Nginx log logrotate not work</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="为什么nginx 的日志就无法正常执行logrotate呢？nginx的logrotate配置没问题，手动的执行logrotate也没有问题，而且crond程序每天也都正常执行，包括系统本身的日志都正常轮替? 诡异&amp;hellip;&amp;hellip; " />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="Nginx log logrotate not work" />
+    <meta name="twitter:description" content="为什么nginx 的日志就无法正常执行logrotate呢？nginx的logrotate配置没问题，手动的执行logrotate也没有问题，而且crond程序每天也都正常执行，包括系统本身的日志都正常轮替? 诡异&amp;hellip;&amp;hellip; " />
+    <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/nginx-log-logrotate-not-work/cover.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Nginx log logrotate not work" />
+  <meta property="og:description" content="为什么nginx 的日志就无法正常执行logrotate呢？nginx的logrotate配置没问题，手动的执行logrotate也没有问题，而且crond程序每天也都正常执行，包括系统本身的日志都正常轮替? 诡异&amp;hellip;&amp;hellip; " />
+  <meta property="og:url" content="https://aliasmee.github.io/post/nginx-log-logrotate-not-work/" />
+  <meta property="og:image" content="https://aliasmee.github.io/media/posts/nginx-log-logrotate-not-work/cover.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://aliasmee.github.io/post/nginx-log-logrotate-not-work/" />
+<link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">DevOps | Kubernetes | Docker | Cloud | CICD </p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/about/">About Me</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Nginx log logrotate not work</h1>
+      <p class="post-meta">@aliasmee · Nov 26, 2019 · 2 min read</p>
+    </header>
+    <article class="post-content"><p>为什么nginx 的日志就无法正常执行logrotate呢？nginx的logrotate配置没问题，手动的执行logrotate也没有问题，而且crond程序每天也都正常执行，包括系统本身的日志都正常轮替? 诡异&hellip;&hellip;
+</p>
+
+<h3 id="问题">问题</h3>
+
+<p>最近遇到一个很诡异的问题，nginx 的日志使用<code>logrotate</code> 不按计划执行。多次排查，经过几天的观察也无效果。</p>
+
+<h3 id="分析">分析</h3>
+
+<p>先分成几步吧。一步一步找问题。我先列出以下几个点：</p>
+
+<ul>
+<li>logrotate 运行机制</li>
+<li>nginx logrotate配置文件</li>
+<li>手动执行</li>
+<li>selinux</li>
+</ul>
+
+<h5 id="nginx日志logrotate-轮替">Nginx日志logrotate（轮替）</h5>
+
+<p>Nginx的日志，默认使用rpm或yum安装的情况下，是自动会添加logrotate文件的，我们不用特意的配置。但在编译的nginx中，我们需要手动添加logrotate文件的，不然日志是无法切割的。</p>
+
+<h6 id="运行机制">运行机制</h6>
+
+<p>首先，系统在启动时，会自动加载运行<code>crond</code>，默认系统也已经安装了<code>logrotate</code> 程序。它会根据设置对指定的文件进行轮替切割。即 <em>crond + logrotate</em> 实现了日志的自动轮转，不用我们写脚本控制日志的轮替了。</p>
+
+<p>默认的<code>cron</code> 配置位于 <code>/etc</code>目录下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls /etc/cron*
+cron.d/       cron.daily/   cron.deny     cron.hourly/  cron.monthly/ crontab       cron.weekly/  </code></pre></div>
+<p>从上面文件夹的名字可以看出，默认的<code>cron</code> 计划可以按天、小时、周、月来执行。</p>
+
+<h6 id="logrotate配置">logrotate配置</h6>
+
+<p>默认logrotate的cron文件位于<code>/etc/cron.daily/logrotate</code> 下。即每天执行。</p>
+
+<p>可以看下文件内容：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>
+/usr/sbin/logrotate -s /var/lib/logrotate/logrotate.status /etc/logrotate.conf
+EXITVALUE<span style="color:#f92672">=</span>$?
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $EXITVALUE !<span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    /usr/bin/logger -t logrotate <span style="color:#e6db74">&#34;ALERT exited abnormally with [</span>$EXITVALUE<span style="color:#e6db74">]&#34;</span>
+<span style="color:#66d9ef">fi</span>
+exit <span style="color:#ae81ff">0</span></code></pre></div>
+<p>其中需要注意的是，上面的这个文件<code>/etc/logrotate.conf</code>，该文件是logrotate服务的主配置文件。</p>
+
+<p>我们看下该文件的内容：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># see &#34;man logrotate&#34; for details
+</span><span style="color:#75715e"># rotate log files weekly
+</span><span style="color:#75715e"></span>weekly
+
+<span style="color:#75715e"># keep 4 weeks worth of backlogs
+</span><span style="color:#75715e"></span>rotate <span style="color:#ae81ff">4</span>
+
+<span style="color:#75715e"># create new (empty) log files after rotating old ones
+</span><span style="color:#75715e"></span>create
+
+<span style="color:#75715e"># use date as a suffix of the rotated file
+</span><span style="color:#75715e"></span>dateext
+
+<span style="color:#75715e"># uncomment this if you want your log files compressed
+</span><span style="color:#75715e">#compress
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># RPM packages drop log rotation information into this directory
+</span><span style="color:#75715e"></span>include /etc/logrotate.d
+
+<span style="color:#75715e"># no packages own wtmp and btmp -- we&#39;ll rotate them here
+</span><span style="color:#75715e"></span>/var/log/wtmp <span style="color:#f92672">{</span>
+    monthly
+    create <span style="color:#ae81ff">0664</span> root utmp
+	minsize 1M
+    rotate <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">}</span>
+
+/var/log/btmp <span style="color:#f92672">{</span>
+    missingok
+    monthly
+    create <span style="color:#ae81ff">0600</span> root utmp
+    rotate <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">}</span>
+
+# system-specific logs may be also be configured here.</code></pre></div>
+<p>然后我们可以关注下 <code>include</code> 指令，这里是rpm安装包安装完后，会把自己的<code>logrotate</code>配置放入到该子目录中，是不是很像<code>nginx</code>的虚拟主机配置？</p>
+
+<p>这个文件是默认的配置，当然我们可以在子文件中，添加相关的选项覆盖默认的配置。</p>
+
+<h6 id="nginx-logrotate配置">Nginx logrotate配置</h6>
+
+<p>我们看下<code>/etc/logrotate.d/nginx</code> 的内容：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#e6db74">&#34;/data/nginx/logs/*.log&#34;</span>
+<span style="color:#f92672">{</span>
+    daily
+    rotate <span style="color:#ae81ff">7</span>
+    missingok
+    dateext
+    compress
+    delaycompress
+    sharedscripts
+    create <span style="color:#ae81ff">0640</span> nginx nginx
+    postrotate
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -f /usr/local/nginx/logs/nginx.pid <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span> kill -USR1 <span style="color:#e6db74">`</span>cat /usr/local/nginx/logs/nginx.pid<span style="color:#e6db74">`</span> ; <span style="color:#66d9ef">fi</span>
+    endscript
+<span style="color:#f92672">}</span></code></pre></div>
+<p>里面的指令网上一查就知道了，不过这里还是简单说明记录下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">daily			每日执行
+rotate			保留轮替的7份，先进先出，超过7就删除之前的文件
+missingok		忽略错误
+dateext			定义日期后缀格式，这里也可以修改默认值*dateext format -%Y-%m-%D*
+compress		是否压缩
+delaycompress	延迟压缩
+create			定义新日志文件的属性
+postrotate		轮转日志文件之后执行的脚本
+sharedscripts	如果该文件中定义了多个文件需要logrotate，那么该指令只会执行一次postrotate脚本</code></pre></div>
+<h6 id="测试验证">测试验证</h6>
+
+<p>可以通过手动执行验证logrotate配置</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">logrotate -d /etc/logrotate.conf</code></pre></div>
+<p><code>-d：</code> 开启debug模式，不会实际执行轮转文件</p>
+
+<p>在这里都是没有问题的，在第二天观察的时候，发现还是不行。然后又修修补补，各种改nginx的logrotate文件，发现还是各种不行。</p>
+
+<h6 id="检查selinux">检查selinux</h6>
+
+<p>在和朋友聊了这么诡异的问题之后，突然聊到了<code>selinux</code>, 对，就是我们在接触linux时，一般各种文档都会提示禁用<code>selinux</code>.</p>
+
+<p>检查下是否开启了<code>selinux</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># sestatus
+</span><span style="color:#75715e"></span>SELinux status:                 enabled
+SELinuxfs mount:                /sys/fs/selinux
+SELinux root directory:         /etc/selinux
+Loaded policy name:             targeted
+Current mode:                   enforcing
+Mode from config file:          enforcing
+Policy MLS status:              enabled
+Policy deny_unknown status:     allowed
+Max kernel policy version:      <span style="color:#ae81ff">31</span></code></pre></div>
+<p>果然确实是开启的状态。看下审计日志(拒绝和关联的系统调用记录到/var/log/audit/audit.log)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">grep nginx /var/log/audit/audit.log | grep logs</code></pre></div>
+<p>输出如下面的内容：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">type<span style="color:#f92672">=</span>AVC msg<span style="color:#f92672">=</span>audit<span style="color:#f92672">(</span><span style="color:#ae81ff">1574651401</span>.550:22184<span style="color:#f92672">)</span>: avc:  denied  <span style="color:#f92672">{</span> getattr <span style="color:#f92672">}</span> <span style="color:#66d9ef">for</span>  pid<span style="color:#f92672">=</span><span style="color:#ae81ff">26928</span> comm<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;logrotate&#34;</span> path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data/nginx/logs/access.log&#34;</span> dev<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sda3&#34;</span> ino<span style="color:#f92672">=</span><span style="color:#ae81ff">68228788</span> scontext<span style="color:#f92672">=</span>system_u:system_r:logrotate_t:s0-s0:c0.c1023 tcontext<span style="color:#f92672">=</span>unconfined_u:object_r:default_t:s0 tclass<span style="color:#f92672">=</span>file permissive<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+type<span style="color:#f92672">=</span>AVC msg<span style="color:#f92672">=</span>audit<span style="color:#f92672">(</span><span style="color:#ae81ff">1574651401</span>.567:22185<span style="color:#f92672">)</span>: avc:  denied  <span style="color:#f92672">{</span> getattr <span style="color:#f92672">}</span> <span style="color:#66d9ef">for</span>  pid<span style="color:#f92672">=</span><span style="color:#ae81ff">26928</span> comm<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;logrotate&#34;</span> path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/data/nginx/logs/access.log&#34;</span> dev<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sda3&#34;</span> ino<span style="color:#f92672">=</span><span style="color:#ae81ff">68228788</span> scontext<span style="color:#f92672">=</span>system_u:system_r:logrotate_t:s0-s0:c0.c1023 tcontext<span style="color:#f92672">=</span>unconfined_u:object_r:default_t:s0 tclass<span style="color:#f92672">=</span>file permissive<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span></code></pre></div>
+<p>可以把上面的时间戳复制下，通过以下命令看下具体发生的时间：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">date -d <span style="color:#e6db74">&#34;@1574651401.567&#34;</span></code></pre></div>
+<p>调试下selinux,安装<code>selinux tools 工具</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum install policycoreutils-python -y</code></pre></div>
+<p>我们使用刚安装好的selinux工具，<code>audit2allow</code> 可以从拒绝的操作的日志中生成SELinux策略允许规则。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">grep nginx /var/log/audit/audit.log | audit2allow -m nginx -a</code></pre></div>
+<p>或者直接使用以下命令，可以看到系统目前出现过的audit日志</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">audit2allow -w -a</code></pre></div>
+<p>我们这里先直接关闭<code>selinux</code>吧。验证下。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">setenforce <span style="color:#ae81ff">0</span></code></pre></div>
+<p>永久关闭<code>selinux</code>，需要修改selinux的配置文件<code>/etc/sysconfig/selinux</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed -i <span style="color:#e6db74">&#39;s/SELINUX=enforcing/SELINUX=disabled/g&#39;</span> /etc/sysconfig/selinux</code></pre></div>
+<h3 id="验证">验证</h3>
+
+<p>第二天再看下，日志已经成功轮替了，确认了下就是<code>selinux</code>的“锅”. 另外文章底部的参考链接有开启<code>selinux</code>让日志logrotate正常
+工作的方式。有需要的可以看下。</p>
+
+<h3 id="参考链接">参考链接</h3>
+
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/security-enhanced_linux/sect-security-enhanced_linux-fixing_problems-allowing_access_audit2allow">audit2allow</a></p>
+
+<p><a href="https://janecekjiri.cz/nginx-log-rotation-without-disabling-selinux/">nginx-log-rotation-without-disabling-selinux</a></p>
+
+<p><a href="https://www.getpagespeed.com/server-setup/nginx/nginx-selinux-configuration">nginx-selinux-configuration</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://aliasmee.github.io/tags/nginx"><span class="tag">Nginx</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/nginx-log"><span class="tag">Nginx Log</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/logrotate"><span class="tag">Logrotate</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/selinux"><span class="tag">Selinux</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/nginx-selinux"><span class="tag">Nginx Selinux</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/nginx-log-selinux"><span class="tag">Nginx Log Selinux</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/selinux-logrotate_t"><span class="tag">Selinux Logrotate_t</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2019 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

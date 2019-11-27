@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Thu, 05 Sep 2019 22:30:21 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 26 Nov 2019 13:49:42 +0800</lastBuildDate>
     
 	<atom:link href="https://aliasmee.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Nginx log logrotate not work</title>
+      <link>https://aliasmee.github.io/post/nginx-log-logrotate-not-work/</link>
+      <pubDate>Tue, 26 Nov 2019 13:49:42 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/nginx-log-logrotate-not-work/</guid>
+      <description>&lt;p&gt;为什么nginx 的日志就无法正常执行logrotate呢？nginx的logrotate配置没问题，手动的执行logrotate也没有问题，而且crond程序每天也都正常执行，包括系统本身的日志都正常轮替? 诡异&amp;hellip;&amp;hellip;
+&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>How to Use RBAC to Restrict User Permissions On Kubernetes</title>

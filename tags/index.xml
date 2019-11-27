@@ -472,9 +472,18 @@
     </item>
     
     <item>
+      <title>Logrotate</title>
+      <link>https://aliasmee.github.io/tags/logrotate/</link>
+      <pubDate>Tue, 26 Nov 2019 13:49:42 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/logrotate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Nginx</title>
       <link>https://aliasmee.github.io/tags/nginx/</link>
-      <pubDate>Sat, 24 Aug 2019 20:14:45 +0800</pubDate>
+      <pubDate>Tue, 26 Nov 2019 13:49:42 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/nginx/</guid>
       <description></description>
@@ -495,6 +504,33 @@
       <pubDate>Sat, 24 Aug 2019 20:14:45 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/nginx-ingress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nginx Log</title>
+      <link>https://aliasmee.github.io/tags/nginx-log/</link>
+      <pubDate>Tue, 26 Nov 2019 13:49:42 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/nginx-log/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nginx Log Selinux</title>
+      <link>https://aliasmee.github.io/tags/nginx-log-selinux/</link>
+      <pubDate>Tue, 26 Nov 2019 13:49:42 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/nginx-log-selinux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nginx Selinux</title>
+      <link>https://aliasmee.github.io/tags/nginx-selinux/</link>
+      <pubDate>Tue, 26 Nov 2019 13:49:42 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/nginx-selinux/</guid>
       <description></description>
     </item>
     
@@ -621,6 +657,24 @@
       <pubDate>Thu, 05 Sep 2019 22:30:21 +0800</pubDate>
       
       <guid>https://aliasmee.github.io/tags/securing-kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Selinux</title>
+      <link>https://aliasmee.github.io/tags/selinux/</link>
+      <pubDate>Tue, 26 Nov 2019 13:49:42 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/selinux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Selinux Logrotate_t</title>
+      <link>https://aliasmee.github.io/tags/selinux-logrotate_t/</link>
+      <pubDate>Tue, 26 Nov 2019 13:49:42 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/tags/selinux-logrotate_t/</guid>
       <description></description>
     </item>
     
