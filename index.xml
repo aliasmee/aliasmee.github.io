@@ -24,7 +24,7 @@
     </item>
     
     <item>
-      <title>解决Sectigo AddTrust External CA Root Expiring 2020 May 30导致服务请求失败的问题</title>
+      <title>一个因CA根证书过期引起的故障</title>
       <link>https://aliasmee.github.io/post/resolve-certificate-verify-failed-with-2020-may-30/</link>
       <pubDate>Mon, 01 Jun 2020 12:48:18 +0800</pubDate>
       
