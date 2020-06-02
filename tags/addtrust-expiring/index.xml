@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Addtrust Expiring on aliasmee&#39;s blog </title>
+    <link>https://aliasmee.github.io/tags/addtrust-expiring/</link>
+    <description>Recent content in Addtrust Expiring on aliasmee&#39;s blog </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+ ©该文章根据-非商业性使用-相同方式共享4.0国际许可署名创造的，如果您希望引用或复制，请提供出处！谢谢。</copyright>
+    <lastBuildDate>Mon, 01 Jun 2020 12:48:18 +0800</lastBuildDate>
+    
+	<atom:link href="https://aliasmee.github.io/tags/addtrust-expiring/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>解决Sectigo AddTrust External CA Root Expiring 2020 May 30导致服务请求失败的问题</title>
+      <link>https://aliasmee.github.io/post/resolve-certificate-verify-failed-with-2020-may-30/</link>
+      <pubDate>Mon, 01 Jun 2020 12:48:18 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/resolve-certificate-verify-failed-with-2020-may-30/</guid>
+      <description>&lt;p&gt;服务器上的应用服务对外发送的一些https请求都失败了，真相竟然是。。。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

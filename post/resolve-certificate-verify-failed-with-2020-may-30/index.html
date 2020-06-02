@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>解决Sectigo AddTrust External CA Root Expiring 2020 May 30导致服务请求失败的问题</title>
+
+  
+  
+
+
+
+
+
+  
+  <meta name="author" content="aliasmee" />
+  <meta name="description" content="服务器上的应用服务对外发送的一些https请求都失败了，真相竟然是。。。
+
+" />
+
+  
+  
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@aliasmeee" />
+    <meta name="twitter:title" content="解决Sectigo AddTrust External CA Root Expiring 2020 May 30导致服务请求失败的问题" />
+    <meta name="twitter:description" content="服务器上的应用服务对外发送的一些https请求都失败了，真相竟然是。。。
+
+" />
+    <meta name="twitter:image" content="https://aliasmee.github.io/media/posts/resolve-certificate-verify-failed-with-2020-May-30/cover.png" />
+  
+
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="解决Sectigo AddTrust External CA Root Expiring 2020 May 30导致服务请求失败的问题" />
+  <meta property="og:description" content="服务器上的应用服务对外发送的一些https请求都失败了，真相竟然是。。。
+
+" />
+  <meta property="og:url" content="https://aliasmee.github.io/post/resolve-certificate-verify-failed-with-2020-may-30/" />
+  <meta property="og:image" content="https://aliasmee.github.io/media/posts/resolve-certificate-verify-failed-with-2020-May-30/cover.png" />
+
+
+
+
+<meta name="generator" content="Hugo 0.41" />
+
+
+<link rel="canonical" href="https://aliasmee.github.io/post/resolve-certificate-verify-failed-with-2020-may-30/" />
+<link rel="alternative" href="https://aliasmee.github.io/index.xml" title="aliasmee&#39;s blog " type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+<meta name="google-site-verification" content="dOpqXJeKRrCfsEkfUcoR0Ys0_e1wZ_-sZi_zoDpoc_c" />
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="aliasmee&#39;s blog " />
+<meta name="msapplication-tooltip" content="aliasmee&#39;s blog " />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="https://aliasmee.github.io/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://aliasmee.github.io/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://aliasmee.github.io/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="https://aliasmee.github.io/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="https://aliasmee.github.io/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="https://aliasmee.github.io/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="https://aliasmee.github.io/css/bundle.ff02473a9a.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+        <a title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="https://aliasmee.github.io/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">aliasmee&#39;s blog </h2>
+  
+  <p class="subtitle">DevOps | Kubernetes | Docker | Cloud | CICD </p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+            
+            
+            
+              is-active
+            ">
+            <a href="https://aliasmee.github.io/">文字</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://github.com/aliasmee">GitHub</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/tags/">Tags</a>
+          </li>
+      
+        <li class="menu-item
+            
+            
+            ">
+            <a href="https://aliasmee.github.io/about/">About Me</a>
+          </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:name@domain.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/aliasmee" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/aliasmeee" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/img/qrcode.jpg" title="Wechat"><span class="icon icon-wechat"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//www.linkedin.com/in/linkedin_username" title="Linkedin"><span class="icon icon-linkedin"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="https://aliasmee.github.io/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">解决Sectigo AddTrust External CA Root Expiring 2020 May 30导致服务请求失败的问题</h1>
+      <p class="post-meta">@aliasmee · Jun 1, 2020 · 3 min read</p>
+    </header>
+    <article class="post-content"><p>服务器上的应用服务对外发送的一些https请求都失败了，真相竟然是。。。</p>
+
+<p></p>
+
+<h3 id="问题">问题</h3>
+
+<p><em>今天是儿童节，祝各位大盆友小盆友节日快乐haha。</em></p>
+
+<p>10点左右，同事反馈咨询线上的<code>Sentry服务器</code>现在是否正常。之后去检查Sentry服务，运行正常，但是该应用服务对接的Sentry频道已经很久没有事件进来了。</p>
+
+<p>感觉不太对劲，再去检查下<code>Sentry worker</code>专用的容器, 发现该Worker服务中中有些错误日志：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">E, <span style="color:#f92672">[</span><span style="color:#ae81ff">2020</span>-06-01T04:02:03.670850 <span style="color:#75715e">#6] ERROR -- sentry: ** [Raven] Unable to record event with remote Sentry server (Raven::Error - SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (certificate has expired)):
+</span><span style="color:#75715e"></span>/usr/local/bundle/gems/sentry-raven-2.7.3/lib/raven/transports/http.rb:34:in <span style="color:#e6db74">`</span>rescue in send_event<span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">/usr/local/bundle/gems/sentry-raven-2.7.3/lib/raven/transports/http.rb:16:in `send_event&#39;</span>
+/usr/local/bundle/gems/sentry-raven-2.7.3/lib/raven/client.rb:37:in <span style="color:#e6db74">`</span>send_event<span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">/usr/local/bundle/gems/sentry-raven-2.7.3/lib/raven/instance.rb:81:in `send_event&#39;</span>
+/app/src/worker.rb:26:in <span style="color:#e6db74">`</span>perform<span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">/usr/local/bundle/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:187:in `execute_job&#39;</span>
+/usr/local/bundle/gems/sidekiq-5.1.3/lib/sidekiq/processor.rb:169:in <span style="color:#e6db74">`</span>block <span style="color:#f92672">(</span><span style="color:#ae81ff">2</span> levels<span style="color:#f92672">)</span> in process<span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">/usr/local/bundle/gems/sidekiq-5.1.3/lib/sidekiq/middleware/chain.rb:128:in `block in invoke&#39;</span>
+/usr/local/bundle/gems/sentry-raven-2.7.3/lib/raven/integrations/sidekiq.rb:9:in <span style="color:#e6db74">`</span>call<span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">/usr/local/bundle/gems/sidekiq-5.1.3/lib/sidekiq/middleware/chain.rb:130:in `block in invoke&#39;</span>
+/usr/local/bundle/gems/sidekiq-5.1.3/lib/sidekiq/middleware/chain.rb:133:in <span style="color:#e6db74">`</span>invoke<span style="color:#960050;background-color:#1e0010">&#39;</span>
+E, <span style="color:#f92672">[</span><span style="color:#ae81ff">2020</span>-06-01T04:02:03.671130 #6<span style="color:#f92672">]</span> ERROR -- sentry: ** <span style="color:#f92672">[</span>Raven<span style="color:#f92672">]</span> Failed to submit event: &lt;no message value&gt;</code></pre></div>
+<p>奇怪？<code>sentry-worker</code>在连<code>sentry server</code> 时请求域名的证书过期了？</p>
+
+<h3 id="分析">分析</h3>
+
+<p>针对上面的错误信息，先去检查了相关调用的域名证书的有效期，发现都在有效期内。而且印象中都是年初刚更换的。所以排除了是域名证书问题。</p>
+
+<p>然后根据错误日志，尝试在自己电脑上用下<code>curl</code> 命令,巧合的很，也遇到了类似的错误.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl https://sentry.xxx.com
+curl: <span style="color:#f92672">(</span><span style="color:#ae81ff">60</span><span style="color:#f92672">)</span> SSL certificate problem: certificate has expired
+More details here: https://curl.haxx.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.</code></pre></div>
+<p>我又去找了其它一台Centos主机，发现curl返回的结果是正常的，从web端和centos客户端curl都成功的看，像是我本机电脑的curl和<code>sentry-worker</code>主机出了问题。</p>
+
+<p>之后用到网上找到使用<code>openssl</code>命令排查ssl错误的方法:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ openssl s_client -showcerts -servername sentry.xxx.com -connect sentry.xxx.com:443
+CONNECTED<span style="color:#f92672">(</span><span style="color:#ae81ff">00000003</span><span style="color:#f92672">)</span>
+depth<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> C <span style="color:#f92672">=</span> SE, O <span style="color:#f92672">=</span> AddTrust AB, OU <span style="color:#f92672">=</span> AddTrust External TTP Network, CN <span style="color:#f92672">=</span> AddTrust External CA Root
+verify error:num<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>:certificate has expired
+notAfter<span style="color:#f92672">=</span>May <span style="color:#ae81ff">30</span> <span style="color:#ae81ff">10</span>:48:38 <span style="color:#ae81ff">2020</span> GMT
+---
+Certificate chain
+ <span style="color:#ae81ff">0</span> s:/OU<span style="color:#f92672">=</span>Domain Control Validated/OU<span style="color:#f92672">=</span>GoGetSSL Wildcard SSL/CN<span style="color:#f92672">=</span>*.xxx.com
+   i:/C<span style="color:#f92672">=</span>LV/L<span style="color:#f92672">=</span>Riga/O<span style="color:#f92672">=</span>GoGetSSL/CN<span style="color:#f92672">=</span>GoGetSSL RSA DV CA
+-----BEGIN CERTIFICATE-----
+#...省略</code></pre></div>
+<p>从上面执行命令返回的内容来看，这里的CA证书<code>AddTrust External CA Root</code> 在<strong>May 30 10:48:38 2020 GMT</strong> 这个时间过期了。</p>
+
+<p>上网查了下相关的资料，发现他们官方发过一篇通告：<a href="https://support.sectigo.com/articles/Knowledge/Sectigo-AddTrust-External-CA-Root-Expiring-May-30-2020">Sectigo-AddTrust-External-CA-Root-Expiring-May-30-2020</a>.</p>
+
+<h3 id="解决方案">解决方案</h3>
+
+<p>现在算是找到为什么请求https会出现证书过期的原因了。接下来看下如何解决：</p>
+
+<ol>
+<li>修改服务器ca配置</li>
+<li>更新ca库信息</li>
+</ol>
+
+<h4 id="主机-ubuntu">主机（Ubuntu）</h4>
+
+<h5 id="修改服务器ca配置">修改服务器CA配置</h5>
+
+<p>修改服务器ca证书配置文件：<code>/etc/ca-certificates.conf</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed -i <span style="color:#e6db74">&#34;/AddTrust_External_Root.crt/d&#34;</span> /etc/ca-certificates.conf</code></pre></div>
+<h5 id="更新ca库">更新CA库</h5>
+
+<p>使用<code>update-ca-certificates</code> 该命令用以更新目录<code>/etc/ssl/certs</code>来保存SSL证书，并生成ca-certificates.crt:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo update-ca-certificates --fresh
+Clearing symlinks in /etc/ssl/certs...
+<span style="color:#66d9ef">done</span>.
+Updating certificates in /etc/ssl/certs...
+<span style="color:#ae81ff">147</span> added, <span style="color:#ae81ff">0</span> removed; <span style="color:#66d9ef">done</span>.
+Running hooks in /etc/ca-certificates/update.d...
+<span style="color:#66d9ef">done</span>.</code></pre></div>
+<h4 id="容器-docker-alpine-os">容器（Docker-Alpine OS）</h4>
+
+<p>容器同主机上的修改差不太多。修改ca配置文件，之后执行更新命令。以下以alpine系统为例：</p>
+
+<p>修改配置文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sed -i <span style="color:#e6db74">&#34;/AddTrust_External_Root.crt/d&#34;</span> /etc/ca-certificates.conf</code></pre></div>
+<p>更新ca证书链：</p>
+
+<pre><code>update-ca-certificates -f -v
+</code></pre>
+
+<p>当然上面的两条命令最好是放在Dockerfile中，你知道，在容器里做的任何修改都是不可靠的（除非挂载了共享或卷）</p>
+
+<p>Dockerfile示例，在CMD之前添加一行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">省略...
+RUN sed -i <span style="color:#e6db74">&#34;/AddTrust_External_Root.crt/d&#34;</span> /etc/ca-certificates.conf <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> update-ca-certificates -f -v</code></pre></div>
+<h4 id="macos">macOS</h4>
+
+<p>我自己电脑上的curl也是同样的问题，目前没找到好的自动修改的方式。不过找到了系统上的ca文件路径。</p>
+
+<p>先备份下文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo cp /etc/ssl/cert.pem ~/etc-ssl-cert.pem-20200601</code></pre></div>
+<p>之后，运行以下命令可以禁用掉过期的CA证书：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo sed -i <span style="color:#e6db74">&#34;/^### AddTrust/,/^-.*END/ s/^/#/g&#34;</span> /etc/ssl/cert.pem</code></pre></div>
+<p>上面是注释掉，当然你也可以直接编辑文件删除这些行。</p>
+
+<h5 id="验证">验证</h5>
+
+<p>修改更新完ca配置后，再次执行<code>curl</code> 命令去访问之前的网站：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl https://sentry.xxx.com</code></pre></div>
+<p>这次访问正常了.</p>
+
+<h3 id="其他问题">其他问题</h3>
+
+<p>当时出现问题时，还有另外一个现象，就是用<code>curl</code>访问其他网站（如，bing.com、qq.com）都是正常的. 怀疑是不是目标域名使用的证书链不一样，
+导致了只有我们业务域名出现了问题呢？</p>
+
+<h5 id="验证下猜想">验证下猜想</h5>
+
+<p>使用openssl 检查下我们业务域名证书的链</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># openssl s_client  -connect sentry.xxx.com:443
+</span><span style="color:#75715e"></span>CONNECTED<span style="color:#f92672">(</span><span style="color:#ae81ff">00000003</span><span style="color:#f92672">)</span>
+depth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> C <span style="color:#f92672">=</span> US, ST <span style="color:#f92672">=</span> New Jersey, L <span style="color:#f92672">=</span> Jersey City, O <span style="color:#f92672">=</span> The USERTRUST Network, CN <span style="color:#f92672">=</span> USERTrust RSA Certification Authority
+verify <span style="color:#66d9ef">return</span>:1
+depth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> C <span style="color:#f92672">=</span> LV, L <span style="color:#f92672">=</span> Riga, O <span style="color:#f92672">=</span> GoGetSSL, CN <span style="color:#f92672">=</span> GoGetSSL RSA DV CA
+verify <span style="color:#66d9ef">return</span>:1
+depth<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> OU <span style="color:#f92672">=</span> Domain Control Validated, OU <span style="color:#f92672">=</span> GoGetSSL Wildcard SSL, CN <span style="color:#f92672">=</span> *.xxx.com
+verify <span style="color:#66d9ef">return</span>:1
+---
+Certificate chain
+ <span style="color:#ae81ff">0</span> s:/OU<span style="color:#f92672">=</span>Domain Control Validated/OU<span style="color:#f92672">=</span>GoGetSSL Wildcard SSL/CN<span style="color:#f92672">=</span>*.xxx.com
+   i:/C<span style="color:#f92672">=</span>LV/L<span style="color:#f92672">=</span>Riga/O<span style="color:#f92672">=</span>GoGetSSL/CN<span style="color:#f92672">=</span>GoGetSSL RSA DV CA
+ <span style="color:#ae81ff">1</span> s:/C<span style="color:#f92672">=</span>LV/L<span style="color:#f92672">=</span>Riga/O<span style="color:#f92672">=</span>GoGetSSL/CN<span style="color:#f92672">=</span>GoGetSSL RSA DV CA
+   i:/C<span style="color:#f92672">=</span>US/ST<span style="color:#f92672">=</span>New Jersey/L<span style="color:#f92672">=</span>Jersey City/O<span style="color:#f92672">=</span>The USERTRUST Network/CN<span style="color:#f92672">=</span>USERTrust RSA Certification Authority
+ <span style="color:#ae81ff">2</span> s:/C<span style="color:#f92672">=</span>US/ST<span style="color:#f92672">=</span>New Jersey/L<span style="color:#f92672">=</span>Jersey City/O<span style="color:#f92672">=</span>The USERTRUST Network/CN<span style="color:#f92672">=</span>USERTrust RSA Certification Authority
+   i:/C<span style="color:#f92672">=</span>SE/O<span style="color:#f92672">=</span>AddTrust AB/OU<span style="color:#f92672">=</span>AddTrust External TTP Network/CN<span style="color:#f92672">=</span>AddTrust External CA Root
+---
+Server certificate
+省略...</code></pre></div>
+<p>在检测下上面说的其他网站<code>bing.com</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ openssl s_client  -connect cn.bing.com:443
+CONNECTED<span style="color:#f92672">(</span><span style="color:#ae81ff">00000003</span><span style="color:#f92672">)</span>
+depth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> C <span style="color:#f92672">=</span> IE, O <span style="color:#f92672">=</span> Baltimore, OU <span style="color:#f92672">=</span> CyberTrust, CN <span style="color:#f92672">=</span> Baltimore CyberTrust Root
+verify <span style="color:#66d9ef">return</span>:1
+depth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> C <span style="color:#f92672">=</span> US, ST <span style="color:#f92672">=</span> Washington, L <span style="color:#f92672">=</span> Redmond, O <span style="color:#f92672">=</span> Microsoft Corporation, OU <span style="color:#f92672">=</span> Microsoft IT, CN <span style="color:#f92672">=</span> Microsoft IT TLS CA <span style="color:#ae81ff">2</span>
+verify <span style="color:#66d9ef">return</span>:1
+depth<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> CN <span style="color:#f92672">=</span> www.bing.com
+verify <span style="color:#66d9ef">return</span>:1
+---
+Certificate chain
+ <span style="color:#ae81ff">0</span> s:/CN<span style="color:#f92672">=</span>www.bing.com
+   i:/C<span style="color:#f92672">=</span>US/ST<span style="color:#f92672">=</span>Washington/L<span style="color:#f92672">=</span>Redmond/O<span style="color:#f92672">=</span>Microsoft Corporation/OU<span style="color:#f92672">=</span>Microsoft IT/CN<span style="color:#f92672">=</span>Microsoft IT TLS CA <span style="color:#ae81ff">2</span>
+ <span style="color:#ae81ff">1</span> s:/C<span style="color:#f92672">=</span>US/ST<span style="color:#f92672">=</span>Washington/L<span style="color:#f92672">=</span>Redmond/O<span style="color:#f92672">=</span>Microsoft Corporation/OU<span style="color:#f92672">=</span>Microsoft IT/CN<span style="color:#f92672">=</span>Microsoft IT TLS CA <span style="color:#ae81ff">2</span>
+   i:/C<span style="color:#f92672">=</span>IE/O<span style="color:#f92672">=</span>Baltimore/OU<span style="color:#f92672">=</span>CyberTrust/CN<span style="color:#f92672">=</span>Baltimore CyberTrust Root
+---
+省略...</code></pre></div>
+<p>我又测试了其他几个大的站点，发现都正常。为什么唯独我们的SSL证书链中的其中一个CA(Sectigo AddTrust)过期了呢？</p>
+
+<p>去查找下相关的文章,关键词<code>sectigo gogetssl 2020 may 30</code>.</p>
+
+<p>发现第三条记录中有gogetssl发布的新闻, 标题是：<a href="https://www.gogetssl.com/news/23.html">Sectigo AddTrust External CA Root Expired May 30, 2020</a>, 感兴趣的可以点击进去看看。</p>
+
+<p>新闻大致的意思：</p>
+
+<blockquote>
+<p>由于Sectigo AddTrust外部CA根证书过期，影响了一些旧的设备或者一些老服务器，因为上面的根证书链中还存在该过期的CA证书。对于客户端（浏览器/SDK）来说，他们是不受该CA过期的问题影响。所以<strong>最大影响是在server端</strong>.
+可以通过下载最新的<code>AddTrust RSA</code> 证书替换过期的。</p>
+</blockquote>
+
+<h3 id="总结">总结</h3>
+
+<p>目前该问题的影响面广不广，这个还暂时未知，不过根据我遇到的情况来看，影响大多在服务器端的外部服务之间的调用。对web用户端来说，因为浏览器内证书链是更新的，不涉及该问题。但对于
+服务端来说，对于一些对外调用的https请求，如果对方域名证书链中涉及到该过期CA的话，可能会访问失败。</p>
+
+<p>Tips：如果你的应用程序的部署方式是直接运行在主机上的话，可以使用配置管理工具（ansible/saltstack），统一修改。如果是容器话部署的情况，可能涉及的稍微多一些，需要修改项目的<code>Dockerfile</code>,之后滚动更新该服务（当然如果你的应用不涉及到对外访问https/ssl调用，理论上可以延后更改！）。</p>
+
+<h3 id="参考">参考</h3>
+
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-sclient/index.html">应用 openssl 工具进行 SSL 故障分析</a></p>
+
+<p><a href="https://medium.com/@superseb/get-your-certificate-chain-right-4b117a9c0fce">Get your certificate chain right</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="https://aliasmee.github.io/tags/sectigo-addtrust-external-ca-root"><span class="tag">Sectigo AddTrust External CA Root</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/addtrust-expiring"><span class="tag">AddTrust Expiring</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/ca%E8%AF%81%E4%B9%A6%E8%BF%87%E6%9C%9F"><span class="tag">CA证书过期</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/2020-may-30-%E8%AF%81%E4%B9%A6%E8%BF%87%E6%9C%9F"><span class="tag">2020 May 30 证书过期</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/2020-05-30-addtrust-expiring"><span class="tag">2020-05-30 AddTrust Expiring</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/certificate-verify-failed"><span class="tag">Certificate Verify Failed</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/container-update-ca-certificates"><span class="tag">Container Update-Ca-Certificates</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/macos-curl-certificate-has-expired"><span class="tag">MacOS Curl Certificate Has Expired</span></a></li>
+        
+          <li><a href="https://aliasmee.github.io/tags/macos-ca-%E8%AF%81%E4%B9%A6%E8%BF%87%E6%9C%9F"><span class="tag">MacOS CA 证书过期</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+ ©该文章根据-非商业性使用-相同方式共享4.0国际许可署名创造的，如果您希望引用或复制，请提供出处！谢谢。
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "aliasmee" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017-2020 aliasmee&#39;s blog </p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="https://aliasmee.github.io/js/bundle.d1288006cf.js"></script>
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-120538012-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+  </body>
+</html>

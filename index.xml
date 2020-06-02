@@ -6,7 +6,8 @@
     <description>Recent content on aliasmee&#39;s blog </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.
+ ©该文章根据-非商业性使用-相同方式共享4.0国际许可署名创造的，如果您希望引用或复制，请提供出处！谢谢。</copyright>
     <lastBuildDate>Fri, 01 Jun 2018 11:46:40 +0800</lastBuildDate>
     
 	<atom:link href="https://aliasmee.github.io/index.xml" rel="self" type="application/rss+xml" />
@@ -20,6 +21,17 @@
       <guid>https://aliasmee.github.io/about/</guid>
       <description>$ whoami @aliasmee @飞走不可 @木目$ describe `whoami` 自我驱动、主动学习能力强。总是很好的完成工作。$ ls skills 编程能力：shell、python、golang、groovy能满足工作需要 其它：Troubleshooting$ cat techstack TechStack：[Mystack](https://stackshare.io/aliasmee/my-stack)=&amp;gt; use work_experience; =&amp;gt; select id, job_title, job_month, comments from jobs_history; 1 | 游戏运维 | 3 | &amp;#34;欠薪,无奈之下离职&amp;#34; 2 | 机房运维 | 48 | &amp;#34;毫无目标，奋斗方向错了，就像大海里，没带指南针，自己划着小船游游荡荡...&amp;#34; 3 | 云平台/网站运维 | 26 | &amp;#34;遇到人生中的第一个导师。又不知在哪看到一句话：如何在1年内拥有两年工作时间，答案:加班`学习`&amp;#34; 4 | 运维开发 | 26+ | &amp;#34;如何让工作`更轻松`? Hard work OR Smart Work，我选后者.haha&amp;#34;   穿过这些不同的技术岗位，就如在不断的旅行。每次换到了一个新的公司，就如来到新的一个景点一样，看到了很多，学到了很多。 但就像旅行中大家经常说的，我们旅行不仅仅是为了到达目的地，途中的风景也甚为美丽。
  Contact information $ echo &amp;#34;eGhhbnlpZmVuZ0BnbWFpbC5jb20K&amp;#34; | base64 -D # Mac Os $ echo &amp;#34;eGhhbnlpZmVuZ0BnbWFpbC5jb20K&amp;#34; | base64 -d # Linux Do One thing and Do it well.</description>
+    </item>
+    
+    <item>
+      <title>解决Sectigo AddTrust External CA Root Expiring 2020 May 30导致服务请求失败的问题</title>
+      <link>https://aliasmee.github.io/post/resolve-certificate-verify-failed-with-2020-may-30/</link>
+      <pubDate>Mon, 01 Jun 2020 12:48:18 +0800</pubDate>
+      
+      <guid>https://aliasmee.github.io/post/resolve-certificate-verify-failed-with-2020-may-30/</guid>
+      <description>&lt;p&gt;服务器上的应用服务对外发送的一些https请求都失败了，真相竟然是。。。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
