@@ -36,6 +36,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Replace online domain other than build time
+      run: grep -r "aliasmee.github.io" * | cut -d":" -f1 |sort | uniq | xargs -I {} sed -i "s/aliasmee.github.io/blog.aliasmee.com/g" {}
+
     - name: rsync www to remote web server
       uses: burnett01/rsync-deployments@4.1
       with:
