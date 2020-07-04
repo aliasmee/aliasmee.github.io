@@ -1,0 +1,48 @@
+on:
+  push:
+    tags:
+      - v*
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+env:
+  SERVER_PRIVATE_KEY: ${{ secrets.WEB_SSH_PRIVATE_KEY }}
+  SERVER_USER: ${{ secrets.WEB_SSH_USER }}
+  SERVER_HOST: ${{ secrets.WEB_SSH_HOST }}
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    # Runs a single command using the runners shell
+    - name: Run a one-line script
+      run: echo Hello, world!
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: rsync www to remote web server
+      uses: burnett01/rsync-deployments@4.1
+      with:
+        switches: -avzr --delete --exclude="CNAME" --exclude=".git/" --exclude=".github/"
+        path: .
+        remote_path: ${{ secrets.WEB_DATA_DIR }}
+        remote_host: ${{ secrets.WEB_SSH_HOST }}
+        remote_port: ${{ secrets.WEB_SSH_PORT }}
+        remote_user: ${{ secrets.WEB_SSH_USER }}
+        remote_key: ${{ secrets.WEB_SSH_PRIVATE_KEY }}
