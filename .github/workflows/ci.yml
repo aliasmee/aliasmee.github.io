@@ -40,7 +40,7 @@ jobs:
       run: grep -r "aliasmee.github.io" * | cut -d":" -f1 |sort | uniq | xargs -I {} sed -i "s/aliasmee.github.io/blog.aliasmee.com/g" {}
 
     - name: Install optipng & jpegoptim
-      run: apt-get update && apt install optipng jpegoptim -y
+      run: sudo apt-get update && sudo apt install optipng jpegoptim -y
 
     - name: Compression image size
       run: for file in `find ./media -regex '.*\.png\|.*\.jpg'`;do fileType=`file -i $file  | awk '{print substr($2, 1, length($2)-1)}'| cut -d'/' -f2`; if [[ $fileType == "png" ]]; then optipng $file;elif [[ $fileType == "jpeg" ]]; then jpegoptim $file; fi; done
